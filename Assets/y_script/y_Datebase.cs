@@ -27,7 +27,8 @@ public class y_Datebase : MonoBehaviour {
         string[] files = System.IO.Directory.GetFiles(@str, "*", System.IO.SearchOption.AllDirectories);
         for (int i = 0; i < files.Length; i++) {
             if (System.IO.Path.GetExtension(files[i]) == ".meta") continue;
-            Debug.Log(files[i]);
+            string flie_parent = System.IO.Path.GetDirectoryName(files[i]);
+            Debug.Log(System.IO.Path.GetFileNameWithoutExtension(flie_parent));
         }
 	}
 	
