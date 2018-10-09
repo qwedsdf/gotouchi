@@ -11,7 +11,8 @@ public class y_Datebase : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        
+        int a;
+
 	}
 	
 	// Update is called once per frame
