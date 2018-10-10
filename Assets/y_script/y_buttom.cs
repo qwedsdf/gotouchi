@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class y_buttom : MonoBehaviour {
-    GameObject[] buttom = new GameObject[3];
+    GameObject[] buttom = new GameObject[5];
+    int PrefectureNumber;
 
 	// Use this for initialization
 	void Start () {
@@ -23,12 +24,16 @@ public class y_buttom : MonoBehaviour {
         }
     }
 
-    public void bt_Prefecture(int PrefectureNumber)
+    public void bt_Prefecture(int lPrefectureNumber)
     {
-        Debug.Log("押したよー");
-        List<date> PrefectureDate = this.gameObject.GetComponent<y_Datebase>().GetPrefectureDate(PrefectureNumber);
+        PrefectureNumber = lPrefectureNumber;
+        List<date> PrefectureDate = this.gameObject.GetComponent<y_Datebase>().GetPrefectureDate(lPrefectureNumber);
         for (int i = 0; i < PrefectureDate.Count; i++) {
             buttom[i].GetComponent<Image>().sprite = PrefectureDate[i].Getimg();
         }
+    }
+
+    public void bt_GetChar(int num) {
+        gameObject.GetComponent<y_Datebase>().GetChar(PrefectureNumber,num);
     }
 }

@@ -54,7 +54,6 @@
      <Compile Include="Assets\y_script\y_buttom.cs" />
      <Compile Include="Assets\y_script\y_Datebase.cs" />
      <None Include="Assets\Resources\DateChar\kumamoto\ふなっしー 4\Instructions.txt" />
-     <None Include="Assets\Resources\DateChar\saga\ふなっしー 6\Instructions.txt" />
      <None Include="Assets\Resources\DateChar\kagoshima\しか\Instructions.txt" />
      <None Include="Assets\Resources\DateChar\saga\ふなっしー 3\Instructions.txt" />
      <None Include="Assets\Resources\DateChar\kumamoto\ふなっしー 3\Instructions.txt" />
