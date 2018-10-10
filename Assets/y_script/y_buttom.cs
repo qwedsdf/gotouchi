@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class y_buttom : MonoBehaviour {
     GameObject[] buttom = new GameObject[5];
@@ -35,5 +36,10 @@ public class y_buttom : MonoBehaviour {
 
     public void bt_GetChar(int num) {
         gameObject.GetComponent<y_Datebase>().GetChar(PrefectureNumber,num);
+    }
+
+    public void loadscean()
+    {
+        SceneManager.LoadScene("picture_book");
     }
 }

@@ -38,8 +38,6 @@ enum Prefecture {
 
 public class y_Datebase : MonoBehaviour {
     //キャラのデータ
-    
-
     string[] Prefecture_names = { "nagasaki", "saga", "hukuoka", "ooita", "kumamoto", "miyazaki","kagoshima" };
 
     //出身県ごとにデータを分ける
@@ -51,7 +49,7 @@ public class y_Datebase : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        int[] a = new int[50];
+        DontDestroyOnLoad(this);
         LoadDate();
         List<date> list = PrefectureDate[(int)Prefecture.Kagoshima];
         Debug.Log(list.Count);
@@ -85,8 +83,8 @@ public class y_Datebase : MonoBehaviour {
         string str = Application.dataPath + "/Resources/DateChar";
         string remove_str = Application.dataPath + "/Resources/";
         string[] files = System.IO.Directory.GetFiles(@str, "*", System.IO.SearchOption.AllDirectories);
-        date[] dt = new date[100];
-        dt[0].Setgetflg(false);
+        date dt = new date();
+        dt.Setgetflg(false);
         int count = 0 ;
         for (int i = 0; i < files.Length; i++)
         {
@@ -102,7 +100,9 @@ public class y_Datebase : MonoBehaviour {
             if (PrefectureName == "") PrefectureName = flie_parent;
             //違う都道府県のフォルダに移ったら
             else if (PrefectureName != flie_parent) {
-                PrefectureDate[SearchNumer(PrefectureName)] = DateBase;
+                List<date> tmp = new List<date>();
+                tmp = DateBase;
+                PrefectureDate[SearchNumer(PrefectureName)] = tmp;
                 List<date> list = PrefectureDate[2];
                 Debug.Log("キャラ名"+list[0].Getimg().name);
                 PrefectureName = flie_parent;
@@ -114,30 +114,32 @@ public class y_Datebase : MonoBehaviour {
                 files[i] = files[i].Replace(remove_str, "");
                 files[i] = files[i].Replace(".jpg", "");
                 //画像の名前をキャラの名前にする
-                dt[count / MAX_ITEM].Setname(System.IO.Path.GetFileNameWithoutExtension(files[i]));
-                dt[count / MAX_ITEM].Setimg(Resources.Load<Sprite>(files[i]));
+                dt.Setname(System.IO.Path.GetFileNameWithoutExtension(files[i]));
+                dt.Setimg(Resources.Load<Sprite>(files[i]));
                 count++;
             }
 
             //説明書読み込み
             else if (System.IO.Path.GetExtension(files[i]) == ".txt")
             {
-                dt[count / MAX_ITEM].Setdescription("説明書くよー");
+                dt.Setdescription("説明書くよー");
                 count++;
              
             }
             //情報がすべて揃ったらデータベースに入れる
             if (count % MAX_ITEM == 0 && count != 0)
             {
-                DateBase.Add(dt[(count - 1) / MAX_ITEM]);
-                dt[count / MAX_ITEM].Setplace_name(flie_parent);
-                dt[count / MAX_ITEM].Setgetflg(false);
-
-                
+                date tmp = new date();
+                tmp = dt;
+                DateBase.Add(tmp);
+                dt.Setplace_name(flie_parent);
+                dt.Setgetflg(false);
             }
         }
         //最後の分（今は佐賀）のデータをデータベースに入れる
-        PrefectureDate[SearchNumer(PrefectureName)] = DateBase;
+        List<date> ltmp = new List<date>();
+        ltmp = DateBase;
+        PrefectureDate[SearchNumer(PrefectureName)] = ltmp;
     }
 
     public List<date> GetPrefectureDate(int num)
@@ -147,8 +149,11 @@ public class y_Datebase : MonoBehaviour {
 
     public void GetChar(int PreNumber,int number)
     {
-        List<date> list = PrefectureDate[PreNumber];
-        date dt = list[number];
+        List<date> list=new List<date>();
+        list = PrefectureDate[PreNumber];
+        if (number > list.Count - 1) return;
+        date dt = new date();
+        dt = list[number];
         dt.Setgetflg(true);
         list[number] = dt;
         list[number].Setgetflg(true);
