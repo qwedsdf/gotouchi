@@ -42,11 +42,11 @@ public class y_pictures : MonoBehaviour {
         for (int i = 0; i < 47; i++)
         {
             List<date> list = DateScript.GetPrefectureDate(i);
+            if (list == null) continue;
             for (int f = 0; f < list.Count; f++)
             {
                 if (!list[f].Getgetflg()) continue;
                 bt_name += count;
-                Debug.Log(i);
                 transform.Find(bt_name).GetComponent<Image>().sprite = list[f].Getimg();
                 bt_date[count] = list[f];
                 count++;
