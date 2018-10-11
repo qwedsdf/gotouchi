@@ -42,10 +42,18 @@ public class y_Datebase : MonoBehaviour {
 
     //出身県ごとにデータを分ける
     List<date>[] PrefectureDate = new List<date>[47];
+
     //このなかに1都道府県ごとにキャラのデータを入れる（１都道府県のデータを全て入れる）
     List<date> DateBase = new List<date>();
+
+    int now_prefecture_num;
+
     //一キャラにつき必要な素材数
     const int MAX_ITEM = 2;
+
+    const string SaveKey = "UserID";
+
+    List<int> get_date = new List<int>();
 
 	// Use this for initialization
 	void Start () {
@@ -61,7 +69,7 @@ public class y_Datebase : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        DeleteAll();
 	}
 
     //入れる配列の番号を検索
@@ -98,12 +106,19 @@ public class y_Datebase : MonoBehaviour {
             string flie_parent = System.IO.Path.GetDirectoryName(files[i]);
             flie_parent = System.IO.Path.GetDirectoryName(flie_parent);
             flie_parent = System.IO.Path.GetFileNameWithoutExtension(flie_parent);
-            if (PrefectureName == "") PrefectureName = flie_parent;
-            //違う都道府県のフォルダに移ったら
-            else if (PrefectureName != flie_parent) {
-                PrefectureDate[SearchNumer(PrefectureName)] = DateBase;
+            if (PrefectureName == "")
+            {
                 PrefectureName = flie_parent;
-                DateBase=new List<date>();
+                now_prefecture_num = SearchNumer(PrefectureName);
+            }
+
+            //違う都道府県のフォルダに移ったら
+            else if (PrefectureName != flie_parent)
+            {
+                now_prefecture_num = SearchNumer(PrefectureName);
+                PrefectureDate[now_prefecture_num] = DateBase;
+                PrefectureName = flie_parent;
+                DateBase = new List<date>();
             }
 
             //画像読み込み
@@ -129,6 +144,8 @@ public class y_Datebase : MonoBehaviour {
             {
                 DateBase.Add(dt);
                 dt.Setplace_name(flie_parent);
+                //ここからロードを作る
+                List<int> savedate = Load();
                 dt.Setgetflg(false);
                 dt = new date();
             }
@@ -145,18 +162,40 @@ public class y_Datebase : MonoBehaviour {
     //キャラのゲット処理
     public void GetChar(int PreNumber,int number)
     {
-        List<date> list=new List<date>();
+        List<date> list = new List<date>();
         list = PrefectureDate[PreNumber];
         if (number > list.Count - 1) return;
         date dt = new date();
         dt = list[number];
-        dt.Setgetflg(true);
+        if (!dt.Getgetflg())
+        {
+            get_date.Add(PreNumber);
+            get_date.Add(number);
+            Save();
+            dt.Setgetflg(true);
+        }
         list[number] = dt;
         list[number].Setgetflg(true);
         PrefectureDate[PreNumber] = list;
     }
+
+    void Save() {
+        string json = JsonUtility.ToJson(get_date);
+        PlayerPrefs.SetString(SaveKey, json);
+    }
+
+    public static List<int> Load()
+    {
+        string json = PlayerPrefs.GetString(SaveKey);
+        List<int> savedate = JsonUtility.FromJson<List<int>>(json);
+        return savedate;
+    }
+
+    public void DeleteAll()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            PlayerPrefs.DeleteAll();
+        }
+    }
 }
-
-
-
-

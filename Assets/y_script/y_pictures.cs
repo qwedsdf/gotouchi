@@ -17,7 +17,7 @@ public class y_pictures : MonoBehaviour {
 
     //ボタンによってのデータを格納する配列
     const int MAX_BUTTOM_NUM = 20;
-    //date[] bt_date = new date[MAX_BUTTOM_NUM];
+    GameObject[] button = new GameObject[MAX_BUTTOM_NUM];
 
     List<date> chardate = new List<date>();
 
@@ -27,10 +27,7 @@ public class y_pictures : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        page_num = 0;
-        DateScript = GameObject.Find("Master").GetComponent<y_Datebase>();
-        picture = GameObject.Find("Description/picture");
-        text = GameObject.Find("Description/Text").GetComponent<Text>();
+        init();
         LoadPicture();
         Description.SetActive(false);
 	}
@@ -40,11 +37,26 @@ public class y_pictures : MonoBehaviour {
         
 	}
 
-    //図鑑の画面に配置する画像をロード
+    void init() {
+        page_num = 0;
+        DateScript = GameObject.Find("Master").GetComponent<y_Datebase>();
+        picture = GameObject.Find("Description/picture");
+        text = GameObject.Find("Description/Text").GetComponent<Text>();
+
+        string bt_name = "bt_char_";
+        for (int i = 0; i < MAX_BUTTOM_NUM; i++)
+        {
+            bt_name += i;
+            button[i] = transform.Find(bt_name).gameObject;
+            bt_name = "bt_char_";
+        }
+    }
+
+    //最初に図鑑の画面に配置する画像をロード
     void LoadPicture()
     {
-        int count=0;
-        string bt_name="bt_char_";
+        int count = 0 ;
+        RefreshButton();
         for (int i = 0; i < 47; i++)
         {
             List<date> list = DateScript.GetPrefectureDate(i);
@@ -54,16 +66,29 @@ public class y_pictures : MonoBehaviour {
                 if (!list[f].Getgetflg()) continue;
                 AddCharDate(list[f]);
                 if (count > 19) continue;
-                bt_name += count;
-                transform.Find(bt_name).GetComponent<Image>().sprite = list[f].Getimg();
-                //bt_date[count] = list[f];
+                button[count].SetActive(true);
+                button[count].GetComponent<Image>().sprite = list[f].Getimg();
                 count++;
-                bt_name = "bt_char_";
             }
         }
     }
 
-    void AddCharDate(date dt) {
+    //キャラを図鑑に表示させる（ページめくったときのみの関数）
+    void ShowChar()
+    {
+        int count = 0;
+        RefreshButton();
+        for (int f = page_num * MAX_BUTTOM_NUM; f < chardate.Count; f++)
+        {
+            if (count > 19) continue;
+            button[count].SetActive(true);
+            button[count].GetComponent<Image>().sprite = chardate[f].Getimg();
+            count++;
+        }
+    }
+
+    void AddCharDate(date dt)
+    {
         chardate.Add(dt);
     }
 
@@ -72,7 +97,8 @@ public class y_pictures : MonoBehaviour {
     {
         Description.SetActive(true);
         picture.GetComponent<SpriteRenderer>().sprite = chardate[num].Getimg();
-        text.text = chardate[num].Getplace_name();
+        text.text = "名前　" + chardate[num].Getname();
+        text.text += "\n出身地　" + chardate[num].Getplace_name();
         text.text += "\n" + chardate[num].Getdescription();
     }
 
@@ -93,7 +119,15 @@ public class y_pictures : MonoBehaviour {
         Description.SetActive(false);
     }
 
-    // ページをめくった処理
+    void RefreshButton()
+    {
+        for (int i = 0; i < MAX_BUTTOM_NUM; i++)
+        {
+            button[i].SetActive(false);
+        }
+    }
+
+    // 説明画面でページをめくった処理
     public void bt_page(int AddNum)
     {
         now_number += AddNum;
@@ -105,5 +139,17 @@ public class y_pictures : MonoBehaviour {
 
         Debug.Log(now_number);
         ShowDescription(now_number);
+    }
+
+    //キャラ選択画面でページをめくった場合
+    public void bt_page_char(int AddNum)
+    {
+        page_num += AddNum;
+        if (page_num < 0) page_num = 0;
+        else if (MAX_BUTTOM_NUM * page_num > chardate.Count)
+        {
+            page_num -= AddNum;
+        }
+        ShowChar();
     }
 }
