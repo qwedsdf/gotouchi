@@ -38,7 +38,7 @@ enum Prefecture {
 
 public class y_Datebase : MonoBehaviour {
     //キャラのデータ
-    string[] Prefecture_names = { "nagasaki", "saga", "hukuoka", "ooita", "kumamoto", "miyazaki","kagoshima" };
+    string[] Prefecture_names = { "長崎", "佐賀", "福岡", "大分", "熊本", "宮崎","鹿児島" };
 
     //出身県ごとにデータを分ける
     List<date>[] PrefectureDate = new List<date>[47];
@@ -49,7 +49,6 @@ public class y_Datebase : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        test_0();
         DontDestroyOnLoad(this);
         LoadDate();
         List<date> list = PrefectureDate[(int)Prefecture.Kagoshima];
@@ -103,16 +102,15 @@ public class y_Datebase : MonoBehaviour {
             //違う都道府県のフォルダに移ったら
             else if (PrefectureName != flie_parent) {
                 PrefectureDate[SearchNumer(PrefectureName)] = DateBase;
-                List<date> list = PrefectureDate[2];
-                Debug.Log("キャラ名"+list[0].Getimg().name);
                 PrefectureName = flie_parent;
                 DateBase=new List<date>();
             }
 
             //画像読み込み
-            if (System.IO.Path.GetExtension(files[i]) == ".jpg"){
+            if (System.IO.Path.GetExtension(files[i]) == ".png")
+            {
                 files[i] = files[i].Replace(remove_str, "");
-                files[i] = files[i].Replace(".jpg", "");
+                files[i] = files[i].Replace(".png", "");
                 //画像の名前をキャラの名前にする
                 dt.Setname(System.IO.Path.GetFileNameWithoutExtension(files[i]));
                 dt.Setimg(Resources.Load<Sprite>(files[i]));
@@ -122,7 +120,7 @@ public class y_Datebase : MonoBehaviour {
             //説明書読み込み
             else if (System.IO.Path.GetExtension(files[i]) == ".txt")
             {
-                dt.Setdescription("説明書くよー");
+                dt.Setdescription("説明書くよー" + count);
                 count++;
              
             }
@@ -136,9 +134,7 @@ public class y_Datebase : MonoBehaviour {
             }
         }
         //最後の分（今は佐賀）のデータをデータベースに入れる
-        List<date> ltmp = new List<date>();
-        ltmp = DateBase;
-        PrefectureDate[SearchNumer(PrefectureName)] = ltmp;
+        PrefectureDate[SearchNumer(PrefectureName)] = DateBase;
     }
 
     public List<date> GetPrefectureDate(int num)
@@ -157,34 +153,7 @@ public class y_Datebase : MonoBehaviour {
         dt.Setgetflg(true);
         list[number] = dt;
         list[number].Setgetflg(true);
-        Debug.Log(list[number].Getgetflg());
         PrefectureDate[PreNumber] = list;
-    }
-
-    public void bt_DebugFlgCheak() {
-        Debug.Log("ookisa "+PrefectureDate.Length);
-        for (int i = 0; i < PrefectureDate.Length; i++)
-        {
-            List<date> list = PrefectureDate[i];
-            for (int f = 0; f < list.Count; f++)
-            {
-                Debug.Log(i+" "+list[f].Getgetflg());
-            }
-        }
-    }
-    //////////////////////////////////デバッグ用スクリプト///////////////////////////////////
-    public void test_0() {
-        List<date> test = new List<date>();
-        date[] t = new date[2];
-        t[0] = new date();
-        t[0].Setgetflg(true);
-        test.Add(t[0]);
-        t[0] = new date();
-        t[0].Setgetflg(false);
-        test.Add(t[0]);
-        Debug.Log("デバッグのやつ" + test[0].getflg);
-        Debug.Log("デバッグのやつ" + test[1].getflg);
-        t[0] = new date();
     }
 }
 

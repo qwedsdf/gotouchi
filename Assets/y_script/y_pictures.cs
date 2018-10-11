@@ -17,11 +17,17 @@ public class y_pictures : MonoBehaviour {
 
     //ボタンによってのデータを格納する配列
     const int MAX_BUTTOM_NUM = 20;
-    date[] bt_date = new date[MAX_BUTTOM_NUM];
+    //date[] bt_date = new date[MAX_BUTTOM_NUM];
+
+    List<date> chardate = new List<date>();
+
+    int now_number;
+    int page_num;
     
 
 	// Use this for initialization
 	void Start () {
+        page_num = 0;
         DateScript = GameObject.Find("Master").GetComponent<y_Datebase>();
         picture = GameObject.Find("Description/picture");
         text = GameObject.Find("Description/Text").GetComponent<Text>();
@@ -46,30 +52,58 @@ public class y_pictures : MonoBehaviour {
             for (int f = 0; f < list.Count; f++)
             {
                 if (!list[f].Getgetflg()) continue;
+                AddCharDate(list[f]);
+                if (count > 19) continue;
                 bt_name += count;
                 transform.Find(bt_name).GetComponent<Image>().sprite = list[f].Getimg();
-                bt_date[count] = list[f];
+                //bt_date[count] = list[f];
                 count++;
                 bt_name = "bt_char_";
-                if (count > 19) return;
             }
         }
     }
 
+    void AddCharDate(date dt) {
+        chardate.Add(dt);
+    }
+
+    //説明画面を出す
+    void ShowDescription(int num)
+    {
+        Description.SetActive(true);
+        picture.GetComponent<SpriteRenderer>().sprite = chardate[num].Getimg();
+        text.text = chardate[num].Getplace_name();
+        text.text += "\n" + chardate[num].Getdescription();
+    }
+
     //キャラのボタンを押したら説明を出す
     public void bt_char(int num) {
-        if (bt_date[num].Getimg() == null)
+        num += MAX_BUTTOM_NUM * page_num;
+        if (chardate[num] == null)
         {
-            Debug.Log("何も入ってないお");
+            Debug.Log("何も入ってない");
             return;
         }
-        Description.SetActive(true);
-        picture.GetComponent<SpriteRenderer>().sprite = bt_date[num].Getimg();
-        text.text = bt_date[num].Getdescription();
-
+        now_number = num;
+        ShowDescription(num);
     }
 
     public void bt_close() {
+        Debug.Log("押されたよ");
         Description.SetActive(false);
+    }
+
+    // ページをめくった処理
+    public void bt_page(int AddNum)
+    {
+        now_number += AddNum;
+        //今の見ている説明の番号が0を下回った場合の処理
+        if (now_number < 0) now_number += chardate.Count;
+
+        //番号が最大値を超えないようにするためにやってる
+        else now_number = now_number % chardate.Count;
+
+        Debug.Log(now_number);
+        ShowDescription(now_number);
     }
 }

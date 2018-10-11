@@ -5,12 +5,14 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class y_buttom : MonoBehaviour {
-    GameObject[] buttom = new GameObject[5];
+    const int BUTTON_MAX = 5;
+    GameObject[] buttom = new GameObject[BUTTON_MAX];
     int PrefectureNumber;
 
 	// Use this for initialization
 	void Start () {
-        LoadButtom();
+        LoadButton();
+        RefreshButton();
 	}
 	
 	// Update is called once per frame
@@ -18,18 +20,32 @@ public class y_buttom : MonoBehaviour {
 		
 	}
 
-    void LoadButtom() {
-        for (int i = 0; i < 3; i++) {
+    void LoadButton() {
+        for (int i = 0; i < BUTTON_MAX; i++)
+        {
             string name="bt_char_" + i;
             buttom[i] = GameObject.Find(name);
         }
     }
 
+    void RefreshButton()
+    {
+        for (int i = 0; i < BUTTON_MAX; i++)
+        {
+            buttom[i].SetActive(false);
+        }
+    }
+
+
+    //////////////////////ボタン処理///////////////////////
     public void bt_Prefecture(int lPrefectureNumber)
     {
+        RefreshButton();
         PrefectureNumber = lPrefectureNumber;
         List<date> PrefectureDate = this.gameObject.GetComponent<y_Datebase>().GetPrefectureDate(lPrefectureNumber);
+        Debug.Log("データの数"+PrefectureDate.Count);
         for (int i = 0; i < PrefectureDate.Count; i++) {
+            buttom[i].SetActive(true);
             buttom[i].GetComponent<Image>().sprite = PrefectureDate[i].Getimg();
         }
     }
