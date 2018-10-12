@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 using System.IO;
+using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
 
+[System.Serializable]
 public class date
 {
-    Sprite img;//画像
-    string place_name;//場所
-    string description;//説明文章
-    string name;//名前
+    public Sprite img;//画像
+    public string place_name;//場所
+    public string description;//説明文章
+    public string name;//名前
     public bool getflg;//手に入れたかどうか
 
     public void Setimg(Sprite limg) { this.img = limg; }
@@ -53,7 +57,17 @@ public class y_Datebase : MonoBehaviour {
 
     const string SaveKey = "UserID";
 
-    List<int> get_date = new List<int>();
+    [SerializeField]
+    public List<int> get_date = new List<int>();
+
+    date a = new date
+    {
+        getflg = false,
+        img = null,//画像
+        place_name = "tt",//場所
+        description = "ss",//説
+        name = "aa",
+    };
 
 	// Use this for initialization
 	void Start () {
@@ -92,7 +106,7 @@ public class y_Datebase : MonoBehaviour {
         string remove_str = Application.dataPath + "/Resources/";
         string[] files = System.IO.Directory.GetFiles(@str, "*", System.IO.SearchOption.AllDirectories);
         date dt = new date();
-        dt.Setgetflg(false);
+        
 
         int count = 0 ;
         for (int i = 0; i < files.Length; i++)
@@ -142,16 +156,17 @@ public class y_Datebase : MonoBehaviour {
             //情報がすべて揃ったらデータベースに入れる
             if (count % MAX_ITEM == 0 && count != 0)
             {
+                dt.Setgetflg(false);
                 DateBase.Add(dt);
                 dt.Setplace_name(flie_parent);
-                //ここからロードを作る
-                List<int> savedate = Load();
-                dt.Setgetflg(false);
                 dt = new date();
             }
         }
         //最後の分（今は佐賀）のデータをデータベースに入れる
         PrefectureDate[SearchNumer(PrefectureName)] = DateBase;
+
+        //セーブデータをロードする
+        Load();
     }
 
     public List<date> GetPrefectureDate(int num)
@@ -179,15 +194,38 @@ public class y_Datebase : MonoBehaviour {
         PrefectureDate[PreNumber] = list;
     }
 
+    //セーブする
     void Save() {
-        string json = JsonUtility.ToJson(get_date);
-        PlayerPrefs.SetString(SaveKey, json);
+        string str = Serialize<List<int>>(get_date);
+        Debug.Log(str);
+        PlayerPrefs.SetString(SaveKey,str);
     }
 
-    public static List<int> Load()
+    //ロードする
+    void Load()
     {
-        string json = PlayerPrefs.GetString(SaveKey);
-        List<int> savedate = JsonUtility.FromJson<List<int>>(json);
+        get_date = GetSaveDate();
+        List<int> savedate = get_date;
+        if (savedate == null)
+        {
+            Debug.Log("セーブデータはないよ");
+            return;
+        }
+
+        Debug.Log("セーブデータの数は"+savedate.Count);
+        for (int i = 0; i < savedate.Count; i+=2)
+        {
+            List<date> list = PrefectureDate[savedate[i]];
+            list[savedate[i + 1]].Setgetflg(true);
+            PrefectureDate[savedate[i]] = list;
+        }
+    }
+
+    public static List<int> GetSaveDate()
+    {
+        var str = PlayerPrefs.GetString(SaveKey);
+        if (str == null) return null;
+        List<int> savedate = Deserialize<List<int>>(str);
         return savedate;
     }
 
@@ -197,5 +235,21 @@ public class y_Datebase : MonoBehaviour {
         {
             PlayerPrefs.DeleteAll();
         }
+    }
+
+
+    private static string Serialize<T>(T obj)
+    {
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
+        MemoryStream memoryStream = new MemoryStream();
+        binaryFormatter.Serialize(memoryStream, obj);
+        return Convert.ToBase64String(memoryStream.GetBuffer());
+    }
+
+    private static T Deserialize<T>(string str)
+    {
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
+        MemoryStream memoryStream = new MemoryStream(Convert.FromBase64String(str));
+        return (T)binaryFormatter.Deserialize(memoryStream);
     }
 }
