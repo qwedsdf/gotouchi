@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.IO;
-using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 
 [System.Serializable]
@@ -60,25 +59,12 @@ public class y_Datebase : MonoBehaviour {
     [SerializeField]
     public List<int> get_date = new List<int>();
 
-    date a = new date
-    {
-        getflg = false,
-        img = null,//画像
-        place_name = "tt",//場所
-        description = "ss",//説
-        name = "aa",
-    };
-
 	// Use this for initialization
 	void Start () {
         DontDestroyOnLoad(this);
+        //chackpath();
+        //LoadDateAndroid();
         LoadDate();
-        List<date> list = PrefectureDate[(int)Prefecture.Kagoshima];
-        Debug.Log(list.Count);
-        for (int i = 0; i < list.Count; i++)
-        {
-            Debug.Log(list[i].Getimg().name);
-        }
 	}
 	
 	// Update is called once per frame
@@ -98,17 +84,119 @@ public class y_Datebase : MonoBehaviour {
         return -1;
     }
 
+    void chackpath()
+    {
+        
+        string str = Application.streamingAssetsPath;
+        this.GetComponent<y_buttom>().chack("パスは" + str);
+        this.GetComponent<y_buttom>().chack("aa");
+        string[] files = System.IO.Directory.GetFiles(@str, "*", System.IO.SearchOption.AllDirectories);
+        this.GetComponent<y_buttom>().chack("大きさは" + files.Length);
+        for (int i = 0; i < files.Length; i++)
+        {
+            if (System.IO.Path.GetExtension(files[i]) == ".png")
+            {
+                this.GetComponent<y_buttom>().chack("パスは" + files[i]);
+            }
+        }
+    }
+
+    //アンドロイド用データに改変中
+    void LoadDateAndroid()
+    {
+        string PrefectureName = "";
+        string str = Application.streamingAssetsPath;
+        this.GetComponent<y_buttom>().chack("パスは" + str);
+        string[] files = System.IO.Directory.GetFiles(@str, "*", System.IO.SearchOption.AllDirectories);
+        //for (int i = 0; i < files.Length; i++)
+        //{
+        //    if (System.IO.Path.GetExtension(files[i]) == ".meta") continue;
+
+        //    //出身地を入れる(出身地が変わった場合は次に都道府県の配列に入れる)
+        //    string flie_parent = System.IO.Path.GetDirectoryName(files[i]);
+        //    flie_parent = System.IO.Path.GetDirectoryName(flie_parent);
+        //    flie_parent = System.IO.Path.GetFileNameWithoutExtension(flie_parent);
+        //    if (PrefectureName == "")
+        //    {
+        //        PrefectureName = flie_parent;
+        //        now_prefecture_num = SearchNumer(PrefectureName);
+        //    }
+
+        //    //違う都道府県のフォルダに移ったら
+        //    else if (PrefectureName != flie_parent)
+        //    {
+        //        now_prefecture_num = SearchNumer(PrefectureName);
+        //        PrefectureDate[now_prefecture_num] = DateBase;
+        //        PrefectureName = flie_parent;
+        //        DateBase = new List<date>();
+        //    }
+
+        //    //画像読み込み
+        //    if (System.IO.Path.GetExtension(files[i]) == ".png")
+        //    {
+        //        files[i] = ConvertPath(files[i], remove_str, ".png");
+        //        //画像の名前をキャラの名前にする
+        //        dt.Setname(System.IO.Path.GetFileNameWithoutExtension(files[i]));
+        //        dt.Setimg(Resources.Load<Sprite>(files[i]));
+        //        count++;
+        //    }
+
+        //    //説明書読み込み
+        //    else if (System.IO.Path.GetExtension(files[i]) == ".txt")
+        //    {
+        //        files[i] = ConvertPath(files[i], remove_str, ".txt");
+        //        TextAsset textdate;
+        //        textdate = Resources.Load<TextAsset>(files[i]);
+        //        dt.Setdescription(textdate.text + count);
+        //        count++;
+             
+        //    }
+        //    //情報がすべて揃ったらデータベースに入れる
+        //    if (count % MAX_ITEM == 0 && count != 0)
+        //    {
+        //        dt.Setgetflg(false);
+        //        DateBase.Add(dt);
+        //        dt.Setplace_name(flie_parent);
+        //        dt = new date();
+        //    }
+        //}
+        //最後の分（今は佐賀）のデータをデータベースに入れる
+        //PrefectureDate[SearchNumer(PrefectureName)] = DateBase;
+
+        ////セーブデータをロードする
+        //Load();
+
+        //}
+        WWW www = new WWW(str);
+        while(!www.isDone){
+            Debug.Log("ロードなう");
+        }
+        Debug.Log("ロード終わり");
+        this.GetComponent<y_buttom>().chack(www.text);
+
+    }
+
     //データベース作成
     void LoadDate() {
         string PrefectureName = "" ;
 
-        string str = Application.dataPath + "/Resources/DateChar";
+        string str = Application.dataPath + "/Resources/DateChar/";
         string remove_str = Application.dataPath + "/Resources/";
         string[] files = System.IO.Directory.GetFiles(@str, "*", System.IO.SearchOption.AllDirectories);
         date dt = new date();
+
+        //{
+        //    #if DEBUG
+        //    str = Application.dataPath + "/Resources/DateChar/";
+        //    remove_str = Application.dataPath + "/Resources/";
+        //    files = System.IO.Directory.GetFiles(@str, "*", System.IO.SearchOption.AllDirectories);
+        //    dt = new date();
+        //}
+        
         
 
         int count = 0 ;
+        
         for (int i = 0; i < files.Length; i++)
         {
             if (System.IO.Path.GetExtension(files[i]) == ".meta") continue;
@@ -138,8 +226,7 @@ public class y_Datebase : MonoBehaviour {
             //画像読み込み
             if (System.IO.Path.GetExtension(files[i]) == ".png")
             {
-                files[i] = files[i].Replace(remove_str, "");
-                files[i] = files[i].Replace(".png", "");
+                files[i] = ConvertPath(files[i], remove_str, ".png");
                 //画像の名前をキャラの名前にする
                 dt.Setname(System.IO.Path.GetFileNameWithoutExtension(files[i]));
                 dt.Setimg(Resources.Load<Sprite>(files[i]));
@@ -149,7 +236,10 @@ public class y_Datebase : MonoBehaviour {
             //説明書読み込み
             else if (System.IO.Path.GetExtension(files[i]) == ".txt")
             {
-                dt.Setdescription("説明書くよー" + count);
+                files[i] = ConvertPath(files[i], remove_str, ".txt");
+                TextAsset textdate;
+                textdate = Resources.Load<TextAsset>(files[i]);
+                dt.Setdescription(textdate.text + count);
                 count++;
              
             }
@@ -167,6 +257,14 @@ public class y_Datebase : MonoBehaviour {
 
         //セーブデータをロードする
         Load();
+    }
+
+    //Resources.Loadで使えるようにパスをコンバートする
+    string ConvertPath(string path,string removecharacter,string extension)
+    {
+        path = path.Replace(removecharacter, "");
+        path = path.Replace(extension, "");
+        return path;
     }
 
     public List<date> GetPrefectureDate(int num)
@@ -196,36 +294,36 @@ public class y_Datebase : MonoBehaviour {
 
     //セーブする
     void Save() {
-        string str = Serialize<List<int>>(get_date);
-        Debug.Log(str);
-        PlayerPrefs.SetString(SaveKey,str);
+        string lstr = Serialize<List<int>>(get_date);
+        Debug.Log(lstr);
+        PlayerPrefs.SetString(SaveKey,lstr);
     }
 
     //ロードする
     void Load()
     {
         get_date = GetSaveDate();
-        List<int> savedate = get_date;
-        if (savedate == null)
+        if (get_date == null)
         {
+            get_date = new List<int>();
             Debug.Log("セーブデータはないよ");
             return;
         }
 
-        Debug.Log("セーブデータの数は"+savedate.Count);
-        for (int i = 0; i < savedate.Count; i+=2)
+        Debug.Log("セーブデータの数は" + get_date.Count);
+        for (int i = 0; i < get_date.Count; i += 2)
         {
-            List<date> list = PrefectureDate[savedate[i]];
-            list[savedate[i + 1]].Setgetflg(true);
-            PrefectureDate[savedate[i]] = list;
+            List<date> list = PrefectureDate[get_date[i]];
+            list[get_date[i + 1]].Setgetflg(true);
+            PrefectureDate[get_date[i]] = list;
         }
     }
 
     public static List<int> GetSaveDate()
     {
-        var str = PlayerPrefs.GetString(SaveKey);
-        if (str == null) return null;
-        List<int> savedate = Deserialize<List<int>>(str);
+        var stri = PlayerPrefs.GetString(SaveKey);
+        if (stri == "") return null;
+        List<int> savedate = Deserialize<List<int>>(stri);
         return savedate;
     }
 
@@ -246,10 +344,10 @@ public class y_Datebase : MonoBehaviour {
         return Convert.ToBase64String(memoryStream.GetBuffer());
     }
 
-    private static T Deserialize<T>(string str)
+    private static T Deserialize<T>(string lstr)
     {
         BinaryFormatter binaryFormatter = new BinaryFormatter();
-        MemoryStream memoryStream = new MemoryStream(Convert.FromBase64String(str));
+        MemoryStream memoryStream = new MemoryStream(Convert.FromBase64String(lstr));
         return (T)binaryFormatter.Deserialize(memoryStream);
     }
 }
