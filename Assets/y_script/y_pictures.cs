@@ -63,11 +63,11 @@ public class y_pictures : MonoBehaviour {
             if (list == null) continue;
             for (int f = 0; f < list.Count; f++)
             {
-                if (!list[f].Getgetflg()) continue;
+                if (!list[f].getflg) continue;
                 AddCharDate(list[f]);
                 if (count > 19) continue;
                 button[count].SetActive(true);
-                button[count].GetComponent<Image>().sprite = list[f].Getimg();
+                button[count].GetComponent<Image>().sprite = list[f].img;
                 count++;
             }
         }
@@ -82,7 +82,7 @@ public class y_pictures : MonoBehaviour {
         {
             if (count > 19) continue;
             button[count].SetActive(true);
-            button[count].GetComponent<Image>().sprite = chardate[f].Getimg();
+            button[count].GetComponent<Image>().sprite = chardate[f].img;
             count++;
         }
     }
@@ -96,10 +96,10 @@ public class y_pictures : MonoBehaviour {
     void ShowDescription(int num)
     {
         Description.SetActive(true);
-        picture.GetComponent<SpriteRenderer>().sprite = chardate[num].Getimg();
-        text.text = "名前　" + chardate[num].Getname();
-        text.text += "\n出身地　" + chardate[num].Getplace_name();
-        text.text += "\n" + chardate[num].Getdescription();
+        picture.GetComponent<SpriteRenderer>().sprite = chardate[num].img;
+        text.text = "名前　" + chardate[num].name;
+        text.text += "\n出身地　" + chardate[num].place_name;
+        text.text += "\n" + chardate[num].description;
     }
 
     //キャラのボタンを押したら説明を出す

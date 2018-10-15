@@ -14,18 +14,6 @@ public class date
     public string description;//説明文章
     public string name;//名前
     public bool getflg;//手に入れたかどうか
-
-    public void Setimg(Sprite limg) { this.img = limg; }
-    public void Setplace_name(string lplace_name) { this.place_name = lplace_name; }
-    public void Setdescription(string ldescription) { this.description = ldescription; }
-    public void Setname(string lname) { this.name = lname; }
-    public void Setgetflg(bool lgetflg) { this.getflg = lgetflg; }
-
-    public Sprite Getimg() { return this.img; }
-    public string Getplace_name() { return this.place_name; }
-    public string Getdescription() { return this.description; }
-    public string Getname() { return this.name; }
-    public bool Getgetflg() { return this.getflg; }
 }
 
 enum Prefecture { 
@@ -185,16 +173,6 @@ public class y_Datebase : MonoBehaviour {
         string[] files = System.IO.Directory.GetFiles(@str, "*", System.IO.SearchOption.AllDirectories);
         date dt = new date();
 
-        //{
-        //    #if DEBUG
-        //    str = Application.dataPath + "/Resources/DateChar/";
-        //    remove_str = Application.dataPath + "/Resources/";
-        //    files = System.IO.Directory.GetFiles(@str, "*", System.IO.SearchOption.AllDirectories);
-        //    dt = new date();
-        //}
-        
-        
-
         int count = 0 ;
         
         for (int i = 0; i < files.Length; i++)
@@ -228,8 +206,9 @@ public class y_Datebase : MonoBehaviour {
             {
                 files[i] = ConvertPath(files[i], remove_str, ".png");
                 //画像の名前をキャラの名前にする
-                dt.Setname(System.IO.Path.GetFileNameWithoutExtension(files[i]));
-                dt.Setimg(Resources.Load<Sprite>(files[i]));
+                dt.name=System.IO.Path.GetFileNameWithoutExtension(files[i]);
+                dt.img=Resources.Load<Sprite>(files[i]);
+                //Debug.Log(dt.name+"　"+dt.img.bounds.size.x);
                 count++;
             }
 
@@ -239,16 +218,16 @@ public class y_Datebase : MonoBehaviour {
                 files[i] = ConvertPath(files[i], remove_str, ".txt");
                 TextAsset textdate;
                 textdate = Resources.Load<TextAsset>(files[i]);
-                dt.Setdescription(textdate.text + count);
+                dt.description=textdate.text + count;
                 count++;
              
             }
             //情報がすべて揃ったらデータベースに入れる
             if (count % MAX_ITEM == 0 && count != 0)
             {
-                dt.Setgetflg(false);
+                dt.getflg=false;
                 DateBase.Add(dt);
-                dt.Setplace_name(flie_parent);
+                dt.place_name=flie_parent;
                 dt = new date();
             }
         }
@@ -280,22 +259,21 @@ public class y_Datebase : MonoBehaviour {
         if (number > list.Count - 1) return;
         date dt = new date();
         dt = list[number];
-        if (!dt.Getgetflg())
+        if (!dt.getflg)
         {
             get_date.Add(PreNumber);
             get_date.Add(number);
             Save();
-            dt.Setgetflg(true);
+            dt.getflg=true;
         }
         list[number] = dt;
-        list[number].Setgetflg(true);
+        list[number].getflg=true;
         PrefectureDate[PreNumber] = list;
     }
 
     //セーブする
     void Save() {
         string lstr = Serialize<List<int>>(get_date);
-        Debug.Log(lstr);
         PlayerPrefs.SetString(SaveKey,lstr);
     }
 
@@ -314,7 +292,7 @@ public class y_Datebase : MonoBehaviour {
         for (int i = 0; i < get_date.Count; i += 2)
         {
             List<date> list = PrefectureDate[get_date[i]];
-            list[get_date[i + 1]].Setgetflg(true);
+            list[get_date[i + 1]].getflg=true;
             PrefectureDate[get_date[i]] = list;
         }
     }

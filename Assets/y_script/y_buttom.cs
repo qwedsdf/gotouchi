@@ -12,6 +12,10 @@ public class y_buttom : MonoBehaviour {
     GameObject[] bt_prefecture;
     public Text txt;
 
+    //アスペクト比固定のまま画像を載せるために使う変数
+    Vector2 button_size;
+    Vector2 img_size;
+
 	// Use this for initialization
 	void Start () {
         //今押されているボタンを探すためにボタンを配列に格納してる
@@ -32,6 +36,9 @@ public class y_buttom : MonoBehaviour {
             string name="bt_char_" + i;
             buttom[i] = GameObject.Find(name);
         }
+
+        button_size.x = buttom[BUTTON_MAX - 1].GetComponent<RectTransform>().sizeDelta.x;
+        button_size.y = buttom[BUTTON_MAX - 1].GetComponent<RectTransform>().sizeDelta.y;
     }
 
     void RefreshButton()
@@ -60,9 +67,13 @@ public class y_buttom : MonoBehaviour {
         }
         //都道府県別のデータを参照し、ボタンにイメージを配置
         for (int i = 0; i < PrefectureDate.Count; i++) {
+            //アスペクト比を算出
+            float aspect_button = button_size.x / button_size.y;
+            float aspect_img = PrefectureDate[i].img.bounds.size.x / PrefectureDate[i].img.bounds.size.y;
+
             buttom[i].SetActive(true);
-            buttom[i].GetComponent<Image>().sprite = PrefectureDate[i].Getimg();
-            txt.text += PrefectureDate[i].Getimg().name + "\n";
+            buttom[i].GetComponent<Image>().sprite = PrefectureDate[i].img;
+            txt.text += PrefectureDate[i].img.name + "\n";
         }
         txt.text += "表示中\n";
     }
