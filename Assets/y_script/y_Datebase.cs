@@ -44,12 +44,25 @@ public class y_Datebase : MonoBehaviour {
 
     const string SaveKey = "UserID";
 
+    static private GameObject obj = null;
+
     [SerializeField]
-    public List<int> get_date = new List<int>();
+    private List<int> get_date = new List<int>();
+
+    void Awake()
+    {
+        if (obj != null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        obj = this.gameObject;
+        DontDestroyOnLoad(this.gameObject);
+        
+    }
 
 	// Use this for initialization
 	void Start () {
-        DontDestroyOnLoad(this);
         //chackpath();
         //LoadDateAndroid();
         LoadDate();

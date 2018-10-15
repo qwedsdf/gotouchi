@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class y_pictures : MonoBehaviour {
 
@@ -16,10 +17,14 @@ public class y_pictures : MonoBehaviour {
     Text text;
 
     //ボタンによってのデータを格納する配列
-    const int MAX_BUTTOM_NUM = 20;
+    const int MAX_BUTTOM_NUM = 24;
     GameObject[] button = new GameObject[MAX_BUTTOM_NUM];
 
     List<date> chardate = new List<date>();
+
+    //スプライトレンダーの固定値
+    const float render_sizeX = 2f;
+    const float render_sizeY = 2.5f;
 
     int now_number;
     int page_num;
@@ -41,13 +46,14 @@ public class y_pictures : MonoBehaviour {
         page_num = 0;
         DateScript = GameObject.Find("Master").GetComponent<y_Datebase>();
         picture = GameObject.Find("Description/picture");
-        text = GameObject.Find("Description/Text").GetComponent<Text>();
+        text = GameObject.Find("Description/Canvas/Text").GetComponent<Text>();
 
         string bt_name = "bt_char_";
         for (int i = 0; i < MAX_BUTTOM_NUM; i++)
         {
             bt_name += i;
             button[i] = transform.Find(bt_name).gameObject;
+            button[i].GetComponent<Image>().preserveAspect = true;
             bt_name = "bt_char_";
         }
     }
@@ -65,7 +71,7 @@ public class y_pictures : MonoBehaviour {
             {
                 if (!list[f].getflg) continue;
                 AddCharDate(list[f]);
-                if (count > 19) continue;
+                if (count == MAX_BUTTOM_NUM) continue;
                 button[count].SetActive(true);
                 button[count].GetComponent<Image>().sprite = list[f].img;
                 count++;
@@ -80,7 +86,7 @@ public class y_pictures : MonoBehaviour {
         RefreshButton();
         for (int f = page_num * MAX_BUTTOM_NUM; f < chardate.Count; f++)
         {
-            if (count > 19) continue;
+            if (count == MAX_BUTTOM_NUM) break;
             button[count].SetActive(true);
             button[count].GetComponent<Image>().sprite = chardate[f].img;
             count++;
@@ -92,18 +98,18 @@ public class y_pictures : MonoBehaviour {
         chardate.Add(dt);
     }
 
-    //説明画面を出す
-    void ShowDescription(int num)
+
+    void RefreshButton()
     {
-        Description.SetActive(true);
-        picture.GetComponent<SpriteRenderer>().sprite = chardate[num].img;
-        text.text = "名前　" + chardate[num].name;
-        text.text += "\n出身地　" + chardate[num].place_name;
-        text.text += "\n" + chardate[num].description;
+        for (int i = 0; i < MAX_BUTTOM_NUM; i++)
+        {
+            button[i].SetActive(false);
+        }
     }
 
     //キャラのボタンを押したら説明を出す
-    public void bt_char(int num) {
+    public void bt_char(int num)
+    {
         num += MAX_BUTTOM_NUM * page_num;
         if (chardate[num] == null)
         {
@@ -114,17 +120,9 @@ public class y_pictures : MonoBehaviour {
         ShowDescription(num);
     }
 
-    public void bt_close() {
-        Debug.Log("押されたよ");
-        Description.SetActive(false);
-    }
-
-    void RefreshButton()
+    public void bt_close()
     {
-        for (int i = 0; i < MAX_BUTTOM_NUM; i++)
-        {
-            button[i].SetActive(false);
-        }
+        Description.SetActive(false);
     }
 
     // 説明画面でページをめくった処理
@@ -137,7 +135,6 @@ public class y_pictures : MonoBehaviour {
         //番号が最大値を超えないようにするためにやってる
         else now_number = now_number % chardate.Count;
 
-        Debug.Log(now_number);
         ShowDescription(now_number);
     }
 
@@ -151,5 +148,51 @@ public class y_pictures : MonoBehaviour {
             page_num -= AddNum;
         }
         ShowChar();
+    }
+
+    //セレクトシーンをロード
+    public void loadselect()
+    {
+        SceneManager.LoadScene("select");
+    }
+
+    //////////////////////ここから詳細情報出力用処理 ///////////////////////
+
+    //アスペクト比からscaleを変える
+    void SetAspect(int num)
+    {
+        SpriteRenderer sr = picture.GetComponent<SpriteRenderer>();
+        Vector2 img_size;
+        img_size = chardate[num].img.bounds.size;
+
+        //画像によりloaclscaleを調整
+        Vector2 aspect = new Vector2(img_size.x / render_sizeX, img_size.y / render_sizeY);
+
+
+        //大きい方のアスペクト比をみてloaclscaleを採寸
+        float scale;
+        if (aspect.x > aspect.y)
+        {
+            scale = render_sizeX / img_size.x;
+            sr.transform.localScale = new Vector2(scale, scale);
+        }
+        else
+        {
+            scale = render_sizeY / img_size.y;
+            sr.transform.localScale = new Vector2(scale, scale);
+        }
+
+        sr.sprite = chardate[num].img;
+    }
+
+    //説明画面を出す
+    void ShowDescription(int num)
+    {
+        Description.SetActive(true);
+        SetAspect(num);
+
+        text.text = "名前　" + chardate[num].name;
+        text.text += "\n出身地　" + chardate[num].place_name;
+        text.text += "\n" + chardate[num].description;
     }
 }

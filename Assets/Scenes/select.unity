@@ -252,7 +252,6 @@ GameObject:
   m_Component:
   - component: {fileID: 248353038}
   - component: {fileID: 248353037}
-  - component: {fileID: 248353039}
   m_Layer: 0
   m_Name: Master
   m_TagString: Untagged
@@ -285,19 +284,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &248353039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 248353036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dadf7b45b7acd8408400d7650227ff6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PrefectureVolum: 0
-  txt: {fileID: 1147145830}
 --- !u!1 &354829892
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -374,7 +360,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 248353039}
+      - m_Target: {fileID: 2036375050}
         m_MethodName: bt_Prefecture
         m_Mode: 3
         m_Arguments:
@@ -446,7 +432,7 @@ RectTransform:
   m_GameObject: {fileID: 400773158}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.056640625}
-  m_LocalScale: {x: 0.00521, y: 0.00521, z: 0.00521}
+  m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
   m_Children: []
   m_Father: {fileID: 77986417}
   m_RootOrder: 4
@@ -495,7 +481,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 248353039}
+      - m_Target: {fileID: 2036375050}
         m_MethodName: bt_GetChar
         m_Mode: 3
         m_Arguments:
@@ -703,7 +689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -730,7 +716,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 248353039}
+      - m_Target: {fileID: 2036375050}
         m_MethodName: bt_Prefecture
         m_Mode: 3
         m_Arguments:
@@ -973,7 +959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -1000,7 +986,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 248353039}
+      - m_Target: {fileID: 2036375050}
         m_MethodName: bt_Prefecture
         m_Mode: 3
         m_Arguments:
@@ -1146,7 +1132,7 @@ RectTransform:
   m_GameObject: {fileID: 1145337102}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.056640625}
-  m_LocalScale: {x: 0.0052083335, y: 0.0052083335, z: 0.0052083335}
+  m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
   m_Children: []
   m_Father: {fileID: 77986417}
   m_RootOrder: 0
@@ -1195,7 +1181,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 248353039}
+      - m_Target: {fileID: 2036375050}
         m_MethodName: bt_GetChar
         m_Mode: 3
         m_Arguments:
@@ -1415,7 +1401,7 @@ RectTransform:
   m_GameObject: {fileID: 1236077695}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.056640625}
-  m_LocalScale: {x: 0.00521, y: 0.00521, z: 0.00521}
+  m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
   m_Children: []
   m_Father: {fileID: 77986417}
   m_RootOrder: 3
@@ -1464,7 +1450,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 248353039}
+      - m_Target: {fileID: 2036375050}
         m_MethodName: bt_GetChar
         m_Mode: 3
         m_Arguments:
@@ -1559,7 +1545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -1586,7 +1572,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 248353039}
+      - m_Target: {fileID: 2036375050}
         m_MethodName: bt_Prefecture
         m_Mode: 3
         m_Arguments:
@@ -1806,7 +1792,7 @@ RectTransform:
   m_GameObject: {fileID: 1582621847}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.056640625}
-  m_LocalScale: {x: 0.00521, y: 0.00521, z: 0.00521}
+  m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
   m_Children: []
   m_Father: {fileID: 77986417}
   m_RootOrder: 1
@@ -1855,7 +1841,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 248353039}
+      - m_Target: {fileID: 2036375050}
         m_MethodName: bt_GetChar
         m_Mode: 3
         m_Arguments:
@@ -1950,7 +1936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -1977,7 +1963,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 248353039}
+      - m_Target: {fileID: 2036375050}
         m_MethodName: bt_Prefecture
         m_Mode: 3
         m_Arguments:
@@ -2049,7 +2035,7 @@ RectTransform:
   m_GameObject: {fileID: 1842580614}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.056640625}
-  m_LocalScale: {x: 0.00521, y: 0.00521, z: 0.00521}
+  m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
   m_Children: []
   m_Father: {fileID: 77986417}
   m_RootOrder: 2
@@ -2098,7 +2084,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 248353039}
+      - m_Target: {fileID: 2036375050}
         m_MethodName: bt_GetChar
         m_Mode: 3
         m_Arguments:
@@ -2220,8 +2206,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 248353039}
-        m_MethodName: loadscean
+      - m_Target: {fileID: 2036375050}
+        m_MethodName: LoadsScean_Picture_Book
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2315,7 +2301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -2342,7 +2328,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 248353039}
+      - m_Target: {fileID: 2036375050}
         m_MethodName: bt_Prefecture
         m_Mode: 3
         m_Arguments:
@@ -2511,7 +2497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -2538,7 +2524,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 248353039}
+      - m_Target: {fileID: 2036375050}
         m_MethodName: bt_Prefecture
         m_Mode: 3
         m_Arguments:
@@ -2668,6 +2654,7 @@ GameObject:
   - component: {fileID: 2036375049}
   - component: {fileID: 2036375048}
   - component: {fileID: 2036375047}
+  - component: {fileID: 2036375050}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2720,3 +2707,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2036375050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2036375046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dadf7b45b7acd8408400d7650227ff6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PrefectureVolum: 7
+  txt: {fileID: 1147145830}

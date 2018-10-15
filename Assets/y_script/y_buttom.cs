@@ -11,6 +11,7 @@ public class y_buttom : MonoBehaviour {
     public int PrefectureVolum;
     GameObject[] bt_prefecture;
     public Text txt;
+    y_Datebase DataBaseScript;
 
     //アスペクト比固定のまま画像を載せるために使う変数
     Vector2 button_size;
@@ -21,8 +22,9 @@ public class y_buttom : MonoBehaviour {
         //今押されているボタンを探すためにボタンを配列に格納してる
         //まずはボタンを配列に格納する関数作って
         bt_prefecture = new GameObject[PrefectureVolum];
+        DataBaseScript = GameObject.Find("Master").GetComponent<y_Datebase>();
         LoadButton();
-        RefreshButton();
+        RefreshButtonChar();
 	}
 	
 	// Update is called once per frame
@@ -31,17 +33,27 @@ public class y_buttom : MonoBehaviour {
 	}
 
     void LoadButton() {
+        ////////キャラが乗る用のボタン//////////
         for (int i = 0; i < BUTTON_MAX; i++)
         {
             string name="bt_char_" + i;
             buttom[i] = GameObject.Find(name);
+            buttom[i].GetComponent<Image>().preserveAspect = true;
         }
-
+        //ボタンの大きさを検知
         button_size.x = buttom[BUTTON_MAX - 1].GetComponent<RectTransform>().sizeDelta.x;
         button_size.y = buttom[BUTTON_MAX - 1].GetComponent<RectTransform>().sizeDelta.y;
+
+        //////////都道府県用のボタン//////////
+        for (int i = 0; i < PrefectureVolum; i++)
+        {
+            string name = "bt_prefecture_" + i;
+            bt_prefecture[i] = GameObject.Find(name);
+        }
     }
 
-    void RefreshButton()
+    //キャラクターのボタンを初期化
+    void RefreshButtonChar()
     {
         for (int i = 0; i < BUTTON_MAX; i++)
         {
@@ -49,40 +61,57 @@ public class y_buttom : MonoBehaviour {
         }
     }
 
+    //都道府県用ボタンを初期化と押したボタンの色を変える
+    void RefreshButtonPrefecture(int num) {
+        Button button;
+        ColorBlock colors;
+
+        for (int i = 0; i < PrefectureVolum; i++)
+        {
+            button = bt_prefecture[i].GetComponent<Button>();
+            colors = button.colors;
+            colors.normalColor = new Color(255f, 255f, 255f, 255f);
+            colors.highlightedColor = new Color(255f, 255f, 255f, 255f);
+            button.colors = colors;
+        }
+        button = bt_prefecture[num].GetComponent<Button>();
+        colors = button.colors;
+        colors.normalColor = new Color(255f, 0f, 0f, 255f);
+        colors.highlightedColor = new Color(255f, 0f, 0f, 255f);
+        button.colors = colors;
+    }
+
 
     //////////////////////ボタン処理///////////////////////
     public void bt_Prefecture(int lPrefectureNumber)
     {
-        txt.text += "押されたよ\n";
-        RefreshButton();
+        RefreshButtonChar();
+        RefreshButtonPrefecture(lPrefectureNumber);
         PrefectureNumber = lPrefectureNumber;
-        txt.text += "番号" + PrefectureNumber+"\n";
-        y_Datebase script = this.GetComponent<y_Datebase>();
-        txt.text += "ゲッコー終了" + "\n";
-        List<date> PrefectureDate = new List<date>();
-        PrefectureDate = script.GetPrefectureDate(lPrefectureNumber);
-        if (PrefectureDate == null)
+        List<date> PrefectureCharDate = new List<date>();
+        PrefectureCharDate = DataBaseScript.GetPrefectureDate(lPrefectureNumber);
+        if (PrefectureCharDate == null)
         {
             txt.text += "エラーでてますね";
         }
         //都道府県別のデータを参照し、ボタンにイメージを配置
-        for (int i = 0; i < PrefectureDate.Count; i++) {
+        for (int i = 0; i < PrefectureCharDate.Count; i++)
+        {
             //アスペクト比を算出
             float aspect_button = button_size.x / button_size.y;
-            float aspect_img = PrefectureDate[i].img.bounds.size.x / PrefectureDate[i].img.bounds.size.y;
+            float aspect_img = PrefectureCharDate[i].img.bounds.size.x / PrefectureCharDate[i].img.bounds.size.y;
 
             buttom[i].SetActive(true);
-            buttom[i].GetComponent<Image>().sprite = PrefectureDate[i].img;
-            txt.text += PrefectureDate[i].img.name + "\n";
+            buttom[i].GetComponent<Image>().sprite = PrefectureCharDate[i].img;
+
         }
-        txt.text += "表示中\n";
     }
 
     public void bt_GetChar(int num) {
-        gameObject.GetComponent<y_Datebase>().GetChar(PrefectureNumber,num);
+        DataBaseScript.GetChar(PrefectureNumber, num);
     }
 
-    public void loadscean()
+    public void LoadsScean_Picture_Book()
     {
         SceneManager.LoadScene("picture_book");
     }
