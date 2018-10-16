@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class y_buttom : MonoBehaviour {
-    const int BUTTON_MAX = 5;
+    const int BUTTON_MAX = 9;
     GameObject[] buttom = new GameObject[BUTTON_MAX];
     int PrefectureNumber;
     public int PrefectureVolum;
@@ -85,6 +85,7 @@ public class y_buttom : MonoBehaviour {
     //////////////////////ボタン処理///////////////////////
     public void bt_Prefecture(int lPrefectureNumber)
     {
+        Debug.Log("押したよ");
         RefreshButtonChar();
         RefreshButtonPrefecture(lPrefectureNumber);
         PrefectureNumber = lPrefectureNumber;
@@ -97,13 +98,8 @@ public class y_buttom : MonoBehaviour {
         //都道府県別のデータを参照し、ボタンにイメージを配置
         for (int i = 0; i < PrefectureCharDate.Count; i++)
         {
-            //アスペクト比を算出
-            float aspect_button = button_size.x / button_size.y;
-            float aspect_img = PrefectureCharDate[i].img.bounds.size.x / PrefectureCharDate[i].img.bounds.size.y;
-
             buttom[i].SetActive(true);
             buttom[i].GetComponent<Image>().sprite = PrefectureCharDate[i].img;
-
         }
     }
 

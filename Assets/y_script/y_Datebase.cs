@@ -29,7 +29,7 @@ enum Prefecture {
 
 public class y_Datebase : MonoBehaviour {
     //キャラのデータ
-    string[] Prefecture_names = { "長崎", "佐賀", "福岡", "大分", "熊本", "宮崎","鹿児島" };
+    string[] Prefecture_names = { "長崎", "佐賀", "福岡", "大分", "熊本", "宮崎", "鹿児島", "沖縄" };
 
     //出身県ごとにデータを分ける
     List<date>[] PrefectureDate = new List<date>[47];
@@ -58,7 +58,6 @@ public class y_Datebase : MonoBehaviour {
         }
         obj = this.gameObject;
         DontDestroyOnLoad(this.gameObject);
-        
     }
 
 	// Use this for initialization
@@ -75,7 +74,7 @@ public class y_Datebase : MonoBehaviour {
 
     //入れる配列の番号を検索
     int SearchNumer(string flie_parent){
-        Debug.Log(flie_parent);
+        
         for (int i = 0; i < Prefecture_names.Length; i++)
         {
             if (flie_parent == Prefecture_names[i]) {
@@ -232,6 +231,11 @@ public class y_Datebase : MonoBehaviour {
                 TextAsset textdate;
                 textdate = Resources.Load<TextAsset>(files[i]);
                 dt.description=textdate.text + count;
+                if (textdate == null)
+                {
+                    Debug.Log(dt.name);
+                }
+                Debug.Log(textdate);
                 count++;
              
             }
