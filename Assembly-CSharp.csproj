@@ -55,6 +55,7 @@
      <Compile Include="Assets\y_script\y_Datebase.cs" />
      <Compile Include="Assets\y_script\y_loading.cs" />
      <Compile Include="Assets\y_script\y_pictures.cs" />
+     <Compile Include="Assets\y_script\y_scroll.cs" />
      <None Include="Assets\StreamingAssets\DateChar\熊本\うとん行長しゃん\test.txt" />
      <None Include="Assets\StreamingAssets\DateChar\福岡\ももまるくん\test.txt" />
      <None Include="Assets\Resources\DateChar\沖縄\とまチョップ\test.txt" />

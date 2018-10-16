@@ -14,7 +14,8 @@ public class y_pictures : MonoBehaviour {
     //説明に乗るキャラの写真
     GameObject picture;
 
-    Text text;
+    Text text_name;
+    public Text text_profile;
 
     //ボタンによってのデータを格納する配列
     const int MAX_BUTTOM_NUM = 24;
@@ -29,12 +30,12 @@ public class y_pictures : MonoBehaviour {
     int now_number;
     int page_num;
     
-
 	// Use this for initialization
 	void Start () {
         init();
         LoadPicture();
         Description.SetActive(false);
+        Debug.Log(chardate.Count);
 	}
 	
 	// Update is called once per frame
@@ -46,7 +47,7 @@ public class y_pictures : MonoBehaviour {
         page_num = 0;
         DateScript = GameObject.Find("Master").GetComponent<y_Datebase>();
         picture = GameObject.Find("Description/picture");
-        text = GameObject.Find("Description/Canvas/Text").GetComponent<Text>();
+        text_name = GameObject.Find("Description/Canvas/Text_name").GetComponent<Text>();
 
         string bt_name = "bt_char_";
         for (int i = 0; i < MAX_BUTTOM_NUM; i++)
@@ -96,6 +97,7 @@ public class y_pictures : MonoBehaviour {
     void AddCharDate(date dt)
     {
         chardate.Add(dt);
+        Debug.Log(chardate.Count);
     }
 
 
@@ -117,6 +119,7 @@ public class y_pictures : MonoBehaviour {
             return;
         }
         now_number = num;
+        Debug.Log("押したとき" + chardate.Count);
         ShowDescription(num);
     }
 
@@ -128,12 +131,16 @@ public class y_pictures : MonoBehaviour {
     // 説明画面でページをめくった処理
     public void bt_page(int AddNum)
     {
+        Debug.Log(chardate.Count);
         now_number += AddNum;
         //今の見ている説明の番号が0を下回った場合の処理
         if (now_number < 0) now_number += chardate.Count;
 
         //番号が最大値を超えないようにするためにやってる
-        else now_number = now_number % chardate.Count;
+        else
+        {
+            now_number = now_number % chardate.Count;
+        }
 
         ShowDescription(now_number);
     }
@@ -191,8 +198,9 @@ public class y_pictures : MonoBehaviour {
         Description.SetActive(true);
         SetAspect(num);
 
-        text.text = "名前　" + chardate[num].name;
-        text.text += "\n出身地　" + chardate[num].place_name;
-        text.text += "\n" + chardate[num].description;
+        text_name.text = "名前　" + chardate[num].name;
+        text_name.text += "\n出身地　" + chardate[num].place_name;
+        text_profile.text += "\n" + chardate[num].description;
+        Debug.Log("出力中" + chardate.Count);
     }
 }

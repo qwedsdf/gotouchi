@@ -69,7 +69,7 @@ public class y_Datebase : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        DeleteAll();
+        DataDeleteAll();
 	}
 
     //入れる配列の番号を検索
@@ -235,7 +235,6 @@ public class y_Datebase : MonoBehaviour {
                 {
                     Debug.Log(dt.name);
                 }
-                Debug.Log(textdate);
                 count++;
              
             }
@@ -322,7 +321,7 @@ public class y_Datebase : MonoBehaviour {
         return savedate;
     }
 
-    public void DeleteAll()
+    public void DataDeleteAll()
     {
         if (Input.GetKey(KeyCode.Space))
         {
