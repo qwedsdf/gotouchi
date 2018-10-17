@@ -18,7 +18,8 @@ public class y_pictures : MonoBehaviour {
     public Text text_profile;
 
     //ボタンによってのデータを格納する配列
-    const int MAX_BUTTOM_NUM = 24;
+    const int MAX_BUTTOM_PARENT = 9;
+    const int MAX_BUTTOM_NUM = MAX_BUTTOM_PARENT * 4;
     GameObject[] button = new GameObject[MAX_BUTTOM_NUM];
 
     List<date> chardate = new List<date>();
@@ -49,14 +50,27 @@ public class y_pictures : MonoBehaviour {
         picture = GameObject.Find("Description/picture");
         text_name = GameObject.Find("Description/Canvas/Text_name").GetComponent<Text>();
 
-        string bt_name = "bt_char_";
-        for (int i = 0; i < MAX_BUTTOM_NUM; i++)
+        string bt_name;
+        int count = 0;
+        for (int i = 0; i < MAX_BUTTOM_PARENT; i++)
         {
+            bt_name = "bt_parent_";
             bt_name += i;
-            button[i] = transform.Find(bt_name).gameObject;
-            button[i].GetComponent<Image>().preserveAspect = true;
-            bt_name = "bt_char_";
+            GameObject bt_parent = GameObject.Find(bt_name);
+            foreach(Transform child in bt_parent.transform){
+                button[count] = child.gameObject;
+                button[count].GetComponent<Image>().preserveAspect = true;
+                count++;
+            }
         }
+
+        //for (int i = 0; i < MAX_BUTTOM_NUM; i++)
+        //{
+        //    bt_name = "bt_char_";
+        //    bt_name += i;
+        //    button[i] = transform.Find(bt_name).gameObject;
+        //    button[i].GetComponent<Image>().preserveAspect = true;
+        //}
     }
 
     //最初に図鑑の画面に配置する画像をロード
@@ -64,18 +78,23 @@ public class y_pictures : MonoBehaviour {
     {
         int count = 0 ;
         RefreshButton();
+        Color color = new Color(0,0,0);
         for (int i = 0; i < 47; i++)
         {
             List<date> list = DateScript.GetPrefectureDate(i);
             if (list == null) continue;
+            Debug.Log(list.Count);
             for (int f = 0; f < list.Count; f++)
             {
-                if (!list[f].getflg) continue;
-                AddCharDate(list[f]);
-                if (count == MAX_BUTTOM_NUM) continue;
+                //if (f == MAX_BUTTOM_NUM) break;
                 button[count].SetActive(true);
                 button[count].GetComponent<Image>().sprite = list[f].img;
                 count++;
+                if (!list[f].getflg) {
+                    button[count-1].GetComponent<Image>().color = color;
+                    continue;
+                }
+                AddCharDate(list[f]);
             }
         }
     }
@@ -110,16 +129,15 @@ public class y_pictures : MonoBehaviour {
     }
 
     //キャラのボタンを押したら説明を出す
-    public void bt_char(int num)
+    public void bt_char(y_ButtonInfo Info)
     {
-        num += MAX_BUTTOM_NUM * page_num;
+        int num = Info.GetButtonNumber();
         if (chardate[num] == null)
         {
             Debug.Log("何も入ってない");
             return;
         }
         now_number = num;
-        Debug.Log("押したとき" + chardate.Count);
         ShowDescription(num);
     }
 
@@ -163,7 +181,7 @@ public class y_pictures : MonoBehaviour {
         SceneManager.LoadScene("select");
     }
 
-    //////////////////////ここから詳細情報出力用処理 ///////////////////////
+    //////////////////////ここから詳細情報(キャラ説明)出力用処理 ///////////////////////
 
     //アスペクト比からscaleを変える
     void SetAspect(int num)
@@ -200,7 +218,6 @@ public class y_pictures : MonoBehaviour {
 
         text_name.text = "名前　" + chardate[num].name;
         text_name.text += "\n出身地　" + chardate[num].place_name;
-        text_profile.text += "\n" + chardate[num].description;
-        Debug.Log("出力中" + chardate.Count);
+        text_profile.text = chardate[num].description;
     }
 }

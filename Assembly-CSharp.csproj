@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\y_script\y_buttom.cs" />
+     <Compile Include="Assets\y_script\y_ButtonInfo.cs" />
      <Compile Include="Assets\y_script\y_Datebase.cs" />
      <Compile Include="Assets\y_script\y_loading.cs" />
      <Compile Include="Assets\y_script\y_pictures.cs" />
