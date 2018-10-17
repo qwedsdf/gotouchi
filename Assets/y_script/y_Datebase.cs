@@ -11,6 +11,7 @@ public class date
 {
     public Sprite img;//画像
     public string place_name;//場所
+    public string area;//所属地方
     public string description;//説明文章
     public string name;//名前
     public bool getflg;//手に入れたかどうか
@@ -195,9 +196,17 @@ public class y_Datebase : MonoBehaviour {
             files[i] = files[i].Replace(remove_str, "");
 
             //出身地を入れる(出身地が変わった場合は次に都道府県の配列に入れる)
+            Debug.Log(files[i]);
             string flie_parent = System.IO.Path.GetDirectoryName(files[i]);
+            Debug.Log(flie_parent);
             flie_parent = System.IO.Path.GetDirectoryName(flie_parent);
+            Debug.Log(flie_parent);
             flie_parent = System.IO.Path.GetFileNameWithoutExtension(flie_parent);
+            Debug.Log(flie_parent);
+
+            string area = System.IO.Path.GetDirectoryName(flie_parent);
+            dt.area = System.IO.Path.GetFileNameWithoutExtension(area);
+
             if (PrefectureName == "")
             {
                 PrefectureName = flie_parent;
@@ -217,6 +226,7 @@ public class y_Datebase : MonoBehaviour {
             if (System.IO.Path.GetExtension(files[i]) == ".png")
             {
                 files[i] = ConvertPath(files[i], remove_str, ".png");
+                Debug.Log(files[i]);
                 //画像の名前をキャラの名前にする
                 dt.name=System.IO.Path.GetFileNameWithoutExtension(files[i]);
                 dt.img=Resources.Load<Sprite>(files[i]);
