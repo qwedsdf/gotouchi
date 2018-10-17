@@ -30,10 +30,12 @@ enum Prefecture {
 
 public class y_Datebase : MonoBehaviour {
     //キャラのデータ
-    string[] Prefecture_names = { "長崎", "佐賀", "福岡", "大分", "熊本", "宮崎", "鹿児島", "沖縄" };
+    public static string[] Prefecture_names = { "長崎", "佐賀", "福岡", "大分", "熊本", "宮崎", "鹿児島", "沖縄",
+                                "鳥取","島根","岡山","広島","山口","香川","愛媛","高知" };
+    public static int PrefectureDateSize = 47;
 
     //出身県ごとにデータを分ける
-    List<date>[] PrefectureDate = new List<date>[47];
+    List<date>[] PrefectureDate = new List<date>[PrefectureDateSize];
 
     //このなかに1都道府県ごとにキャラのデータを入れる（１都道府県のデータを全て入れる）
     List<date> DateBase = new List<date>();
@@ -87,7 +89,6 @@ public class y_Datebase : MonoBehaviour {
 
     void chackpath()
     {
-        
         string str = Application.streamingAssetsPath;
         this.GetComponent<y_buttom>().chack("パスは" + str);
         this.GetComponent<y_buttom>().chack("aa");
@@ -195,17 +196,17 @@ public class y_Datebase : MonoBehaviour {
             //Resourseからの相対パスにするためいらない文字列は消す
             files[i] = files[i].Replace(remove_str, "");
 
-            //出身地を入れる(出身地が変わった場合は次に都道府県の配列に入れる)
-            Debug.Log(files[i]);
+            //出身地、エリアを入れる(出身地が変わった場合は都道府県の配列に入れる)
             string flie_parent = System.IO.Path.GetDirectoryName(files[i]);
-            Debug.Log(flie_parent);
             flie_parent = System.IO.Path.GetDirectoryName(flie_parent);
-            Debug.Log(flie_parent);
-            flie_parent = System.IO.Path.GetFileNameWithoutExtension(flie_parent);
-            Debug.Log(flie_parent);
 
+            //所属エリアを入れる
             string area = System.IO.Path.GetDirectoryName(flie_parent);
             dt.area = System.IO.Path.GetFileNameWithoutExtension(area);
+
+            //出身地を入れる
+            flie_parent = System.IO.Path.GetFileNameWithoutExtension(flie_parent);
+            Debug.Log(flie_parent);
 
             if (PrefectureName == "")
             {

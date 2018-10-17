@@ -18,7 +18,7 @@ public class y_pictures : MonoBehaviour {
     public Text text_profile;
 
     //ボタンによってのデータを格納する配列
-    const int MAX_BUTTOM_PARENT = 9;
+    const int MAX_BUTTOM_PARENT = 14;
     const int MAX_BUTTOM_NUM = MAX_BUTTOM_PARENT * 4;
     GameObject[] button = new GameObject[MAX_BUTTOM_NUM];
 
@@ -34,7 +34,7 @@ public class y_pictures : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         init();
-        LoadPicture();
+        LoadPicture("");
         Description.SetActive(false);
         Debug.Log(chardate.Count);
 	}
@@ -74,26 +74,31 @@ public class y_pictures : MonoBehaviour {
     }
 
     //最初に図鑑の画面に配置する画像をロード
-    void LoadPicture()
+    public void LoadPicture(string area)
     {
+        chardate.Clear();
         int count = 0 ;
         RefreshButton();
         Color color = new Color(0,0,0);
-        for (int i = 0; i < 47; i++)
+        Color clear_color = new Color(255, 255, 255);
+        for (int i = 0; i < y_Datebase.PrefectureDateSize; i++)
         {
             List<date> list = DateScript.GetPrefectureDate(i);
             if (list == null) continue;
-            Debug.Log(list.Count);
             for (int f = 0; f < list.Count; f++)
             {
-                //if (f == MAX_BUTTOM_NUM) break;
+                if (list[f].area != area) continue;
+                if (count == MAX_BUTTOM_NUM) break;
                 button[count].SetActive(true);
                 button[count].GetComponent<Image>().sprite = list[f].img;
-                count++;
                 if (!list[f].getflg) {
-                    button[count-1].GetComponent<Image>().color = color;
-                    continue;
+                    button[count].GetComponent<Image>().color = color;
                 }
+                else
+                {
+                    button[count].GetComponent<Image>().color = clear_color;
+                }
+                count++;
                 AddCharDate(list[f]);
             }
         }
@@ -116,7 +121,6 @@ public class y_pictures : MonoBehaviour {
     void AddCharDate(date dt)
     {
         chardate.Add(dt);
-        Debug.Log(chardate.Count);
     }
 
 
@@ -128,13 +132,21 @@ public class y_pictures : MonoBehaviour {
         }
     }
 
+    //////////////////ボタンの処理//////////////////
+
+    //エリア選択ボタンを押したとき
+    public void bt_area(y_bt_area script)
+    {
+        Debug.Log(script.GetAreaName());
+        LoadPicture(script.GetAreaName());
+    }
+
     //キャラのボタンを押したら説明を出す
     public void bt_char(y_ButtonInfo Info)
     {
         int num = Info.GetButtonNumber();
-        if (chardate[num] == null)
+        if (!chardate[num].getflg || chardate[num]==null)
         {
-            Debug.Log("何も入ってない");
             return;
         }
         now_number = num;
@@ -150,15 +162,25 @@ public class y_pictures : MonoBehaviour {
     public void bt_page(int AddNum)
     {
         Debug.Log(chardate.Count);
-        now_number += AddNum;
-        //今の見ている説明の番号が0を下回った場合の処理
-        if (now_number < 0) now_number += chardate.Count;
+        
+        int savecount = 0;
+        do{
+            now_number += AddNum;
 
-        //番号が最大値を超えないようにするためにやってる
-        else
-        {
-            now_number = now_number % chardate.Count;
-        }
+            //今の見ている説明の番号が0を下回った場合の処理
+            if (now_number < 0) now_number += chardate.Count;
+
+            //番号が最大値を超えないようにするためにやってる
+            else
+            {
+                now_number = now_number % chardate.Count;
+            }
+
+        savecount++;
+
+
+        } while (!chardate[now_number].getflg && savecount < chardate.Count);
+        
 
         ShowDescription(now_number);
     }

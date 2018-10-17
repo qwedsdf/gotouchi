@@ -49,6 +49,7 @@ public class y_buttom : MonoBehaviour {
         {
             string name = "bt_prefecture_" + i;
             bt_prefecture[i] = GameObject.Find(name);
+            bt_prefecture[i].transform.Find("Text").GetComponent<Text>().text = y_Datebase.Prefecture_names[i];
         }
     }
 

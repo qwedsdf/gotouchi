@@ -1,0 +1,7 @@
+1.「y_Datebase」の「Prefecture_names」というstringの配列に
+追加したい県の名前を入れる。
+
+2.「y_buttom」の「PrefectureVolum」を画面に表示されている
+都道府県ボタンの数に合わせる。（これはヒエラルキーから触れる）
+
+3.「text.txt」の文字コードがUTF-8か確かめる
