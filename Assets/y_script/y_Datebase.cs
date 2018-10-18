@@ -49,6 +49,9 @@ public class y_Datebase : MonoBehaviour {
 
     static private GameObject obj = null;
 
+    const string TEXT_EXTENSION = ".txt";
+    const string IMG_EXTENSION = ".png";
+
     [SerializeField]
     private List<int> get_date = new List<int>();
 
@@ -96,7 +99,7 @@ public class y_Datebase : MonoBehaviour {
         this.GetComponent<y_buttom>().chack("大きさは" + files.Length);
         for (int i = 0; i < files.Length; i++)
         {
-            if (System.IO.Path.GetExtension(files[i]) == ".png")
+            if (System.IO.Path.GetExtension(files[i]) == IMG_EXTENSION)
             {
                 this.GetComponent<y_buttom>().chack("パスは" + files[i]);
             }
@@ -134,9 +137,9 @@ public class y_Datebase : MonoBehaviour {
         //    }
 
         //    //画像読み込み
-        //    if (System.IO.Path.GetExtension(files[i]) == ".png")
+        //    if (System.IO.Path.GetExtension(files[i]) == IMG_EXTENSION)
         //    {
-        //        files[i] = ConvertPath(files[i], remove_str, ".png");
+        //        files[i] = ConvertPath(files[i], remove_str, IMG_EXTENSION);
         //        //画像の名前をキャラの名前にする
         //        dt.Setname(System.IO.Path.GetFileNameWithoutExtension(files[i]));
         //        dt.Setimg(Resources.Load<Sprite>(files[i]));
@@ -144,9 +147,9 @@ public class y_Datebase : MonoBehaviour {
         //    }
 
         //    //説明書読み込み
-        //    else if (System.IO.Path.GetExtension(files[i]) == ".txt")
+        //    else if (System.IO.Path.GetExtension(files[i]) == TEXT_EXTENSION)
         //    {
-        //        files[i] = ConvertPath(files[i], remove_str, ".txt");
+        //        files[i] = ConvertPath(files[i], remove_str, TEXT_EXTENSION);
         //        TextAsset textdate;
         //        textdate = Resources.Load<TextAsset>(files[i]);
         //        dt.Setdescription(textdate.text + count);
@@ -224,9 +227,9 @@ public class y_Datebase : MonoBehaviour {
             }
 
             //画像読み込み
-            if (System.IO.Path.GetExtension(files[i]) == ".png")
+            if (System.IO.Path.GetExtension(files[i]) == IMG_EXTENSION)
             {
-                files[i] = ConvertPath(files[i], remove_str, ".png");
+                files[i] = ConvertPath(files[i], remove_str, IMG_EXTENSION);
                 Debug.Log(files[i]);
                 //画像の名前をキャラの名前にする
                 dt.name=System.IO.Path.GetFileNameWithoutExtension(files[i]);
@@ -236,9 +239,9 @@ public class y_Datebase : MonoBehaviour {
             }
 
             //説明書読み込み
-            else if (System.IO.Path.GetExtension(files[i]) == ".txt")
+            else if (System.IO.Path.GetExtension(files[i]) == TEXT_EXTENSION)
             {
-                files[i] = ConvertPath(files[i], remove_str, ".txt");
+                files[i] = ConvertPath(files[i], remove_str, TEXT_EXTENSION);
                 TextAsset textdate;
                 textdate = Resources.Load<TextAsset>(files[i]);
                 dt.description=textdate.text + count;

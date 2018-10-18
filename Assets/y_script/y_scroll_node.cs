@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class y_scroll_node : MonoBehaviour {
-    public y_bottom script;
+    public y_bottom sc_bottom;
+    public y_pictures sc_pictuers;
     float size;
     float MaxPosY;
     float MinPosY;
+    public static string PARENT_COMMON_NAME = "bt_parent_";
+
+    public static int UP = 1;
+    public static int DOWN = -1;
 
 	// Use this for initialization
 	void Start () {
-        size = script.GetAllSize() + script.GetIntervalSize();
-        MaxPosY = script.GetMaxPosY();
-        MinPosY = script.GetMinPosY();
-
-        ChackScrollPos();
+        size = sc_bottom.GetAllSize() + sc_bottom.GetIntervalSize();
+        MaxPosY = sc_bottom.GetMaxPosY();
+        MinPosY = sc_bottom.GetMinPosY();
 	}
 	
 	// Update is called once per frame
@@ -22,21 +25,24 @@ public class y_scroll_node : MonoBehaviour {
         ChackScrollPos();
     }
 
-    //あまりで出来そうな気がするからあとでやる
-    void ChackScrollPos()
+    //余り出来そうな気がするからあとでやる
+    public void ChackScrollPos()
     {
         RectTransform rect = GetComponent<RectTransform>();
         Vector2 vec = GetComponent<RectTransform>().position;
         float tmp = vec.y - MaxPosY;
-        Debug.Log(tmp);
+        string parent_name = gameObject.name;
+        parent_name = parent_name.Replace(PARENT_COMMON_NAME, "");
+        int num = int.Parse(parent_name);
         if (tmp > 0)
         {
-            Debug.Log(tmp);
+            sc_pictuers.LoadPoctureScroll(num, UP);
             vec.y = MinPosY + tmp % size;
             rect.position = vec;
         }
         else if (vec.y < MinPosY)
         {
+            sc_pictuers.LoadPoctureScroll(num, DOWN);
             vec.y = MaxPosY + tmp % size;
             rect.position = vec;
         }

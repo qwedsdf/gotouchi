@@ -18,7 +18,7 @@ public class y_ButtonInfo : MonoBehaviour
     public int GetButtonNumber()
     {
         string parent_name = transform.parent.gameObject.name;
-        parent_name = parent_name.Replace("bt_parent_", "");
+        parent_name = parent_name.Replace(y_scroll_node.PARENT_COMMON_NAME, "");
 
         string name = transform.gameObject.name;
         name = name.Replace("bt_char_", "");

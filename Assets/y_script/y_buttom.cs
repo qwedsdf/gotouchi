@@ -13,6 +13,9 @@ public class y_buttom : MonoBehaviour {
     public Text txt;
     y_Datebase DataBaseScript;
 
+    const string BUTTON_CHAR_COMMON_NAME = "bt_char_";
+    const string BUTTON_PREFECTURE_COMMON_NAME = "bt_prefecture_";
+
     //アスペクト比固定のまま画像を載せるために使う変数
     Vector2 button_size;
     Vector2 img_size;
@@ -36,7 +39,7 @@ public class y_buttom : MonoBehaviour {
         ////////キャラが乗る用のボタン//////////
         for (int i = 0; i < BUTTON_MAX; i++)
         {
-            string name="bt_char_" + i;
+            string name=BUTTON_CHAR_COMMON_NAME + i;
             buttom[i] = GameObject.Find(name);
             buttom[i].GetComponent<Image>().preserveAspect = true;
         }
@@ -47,7 +50,7 @@ public class y_buttom : MonoBehaviour {
         //////////都道府県用のボタン//////////
         for (int i = 0; i < PrefectureVolum; i++)
         {
-            string name = "bt_prefecture_" + i;
+            string name = BUTTON_PREFECTURE_COMMON_NAME + i;
             bt_prefecture[i] = GameObject.Find(name);
             bt_prefecture[i].transform.Find("Text").GetComponent<Text>().text = y_Datebase.Prefecture_names[i];
         }

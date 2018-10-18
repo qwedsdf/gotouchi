@@ -19,7 +19,8 @@ public class y_pictures : MonoBehaviour {
 
     //ボタンによってのデータを格納する配列
     const int MAX_BUTTOM_PARENT = 7;
-    const int MAX_BUTTOM_NUM = MAX_BUTTOM_PARENT * 4;
+    const int MAX_BUTTOM_ROW = 4;
+    const int MAX_BUTTOM_NUM = MAX_BUTTOM_PARENT * MAX_BUTTOM_ROW;
     GameObject[] button = new GameObject[MAX_BUTTOM_NUM];
 
     List<date> chardate = new List<date>();
@@ -28,11 +29,24 @@ public class y_pictures : MonoBehaviour {
     const float render_sizeX = 2f;
     const float render_sizeY = 2.5f;
 
+    //一列に入っているボタンの数
+    const int ROW_BUTTON_VOLUM = 4;
+
+    Color color = new Color(0, 0, 0);
+    Color clear_color = new Color(255, 255, 255);
+
     int now_number;
     int page_num;
+
+    int now_load_num;
+    public GameObject content;
+
+    Vector2 first_content_pos;
+    bool once_push;
     
 	// Use this for initialization
 	void Start () {
+        once_push = false;
         init();
         LoadPicture("");
         Description.SetActive(false);
@@ -45,6 +59,9 @@ public class y_pictures : MonoBehaviour {
 	}
 
     void init() {
+        first_content_pos = content.GetComponent<RectTransform>().offsetMax;
+        Debug.Log("初期値"+first_content_pos.y);
+
         page_num = 0;
         DateScript = GameObject.Find("Master").GetComponent<y_Datebase>();
         picture = GameObject.Find("Description/picture");
@@ -78,11 +95,17 @@ public class y_pictures : MonoBehaviour {
     //エリア選択した後に図鑑の画面に配置する画像をロード
     public void LoadPicture(string area)
     {
+        //ノードとコンテントの場所を初期化
+
+        content.GetComponent<RectTransform>().offsetMax = first_content_pos;
+
+        y_bottom.scroll_flg = true;
         chardate.Clear();
         int count = 0 ;
-        RefreshButton();
-        Color color = new Color(0,0,0);
-        Color clear_color = new Color(255, 255, 255);
+        RefreshButtonAll();
+
+        once_push = true;
+        
         for (int i = 0; i < y_Datebase.PrefectureDateSize; i++)
         {
             List<date> list = DateScript.GetPrefectureDate(i);
@@ -90,7 +113,8 @@ public class y_pictures : MonoBehaviour {
             for (int f = 0; f < list.Count; f++)
             {
                 if (list[f].area != area) continue;
-                if (count == MAX_BUTTOM_NUM) break;
+                AddCharDate(list[f]);
+                if (count == MAX_BUTTOM_NUM) continue;
                 button[count].SetActive(true);
                 button[count].GetComponent<Image>().sprite = list[f].img;
                 if (!list[f].getflg) {
@@ -101,22 +125,65 @@ public class y_pictures : MonoBehaviour {
                     button[count].GetComponent<Image>().color = clear_color;
                 }
                 count++;
-                AddCharDate(list[f]);
             }
         }
+        if (chardate.Count < MAX_BUTTOM_NUM)
+        {
+            Debug.Log("スクロールさせない");
+            y_bottom.scroll_flg = false;
+            content.GetComponent<RectTransform>().offsetMin = new Vector2(0, y_bottom.BOTTOM);
+        }
+        now_load_num = MAX_BUTTOM_NUM;
     }
 
     //スクロール中の画像読み込み
-    void LoadPoctureScroll()
+    public void LoadPoctureScroll(int parent_num, int direction)
     {
+        int load_num;
+        
+        //上方向にスワイプしたら
+        if (direction == y_scroll_node.UP) load_num = now_load_num;
+        //下方向にスワイプしたら
+        else
+        {
+            load_num = now_load_num - (MAX_BUTTOM_PARENT + 1) * ROW_BUTTON_VOLUM;
+        }
 
+        Debug.Log("ロード前の番号　" + now_load_num);
+        
+        //親のオブジェクトの番号
+        RefreshButton(parent_num);
+        parent_num = parent_num * ROW_BUTTON_VOLUM;
+        for (int i = 0; i < ROW_BUTTON_VOLUM; i++)
+        {
+            now_load_num += direction;
+            if (load_num >= chardate.Count || load_num < 0)
+            {  
+                y_bottom.scroll_flg = false;
+                continue;
+            }
+            button[parent_num + i].SetActive(true);
+            if (!chardate[load_num].getflg)
+            {
+                button[parent_num + i].GetComponent<Image>().color = color;
+            }
+            else
+            {
+                button[parent_num + i].GetComponent<Image>().color = clear_color;
+            }
+            y_bottom.scroll_flg = true;
+            button[parent_num + i].GetComponent<Image>().sprite = chardate[load_num].img;
+            load_num++;
+        }
+
+        Debug.Log("ロード後の番号　" + now_load_num);
     }
 
     //キャラを図鑑に表示させる（ページめくったときのみの関数）
     void ShowChar()
     {
         int count = 0;
-        RefreshButton();
+        RefreshButtonAll();
         for (int f = page_num * MAX_BUTTOM_NUM; f < chardate.Count; f++)
         {
             if (count == MAX_BUTTOM_NUM) break;
@@ -131,11 +198,23 @@ public class y_pictures : MonoBehaviour {
         chardate.Add(dt);
     }
 
-
-    void RefreshButton()
+    void RefreshButtonAll()
     {
-        for (int i = 0; i < MAX_BUTTOM_NUM; i++)
+        for (int i = 0; i < MAX_BUTTOM_PARENT; i++)
         {
+            RefreshButton(i);
+        }
+    }
+
+    void RefreshButton(int parent_num)
+    {
+        if (parent_num < 0) return;
+        for (int i = parent_num * MAX_BUTTOM_ROW; i < parent_num * MAX_BUTTOM_ROW + MAX_BUTTOM_ROW; i++)
+        {
+            //ここ直す（初期化バグ）
+            Debug.Log(button[i].active);
+            y_scroll_node sc = button[i].GetComponent<y_scroll_node>();
+            sc.ChackScrollPos();
             button[i].SetActive(false);
         }
     }
