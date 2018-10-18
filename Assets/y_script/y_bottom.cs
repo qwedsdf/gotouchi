@@ -14,14 +14,21 @@ public class y_bottom : MonoBehaviour {
     public float last_pos;
     public float interval_size;
 
+    void Awake()
+    {
+        first_pos = first_node.transform.position.y;
+        last_pos = last_node.transform.position.y;
+        interval_size = Mathf.Abs(first_pos - second_node.transform.position.y);
+    }
+
     void Start()
     {
         first_pos = first_node.transform.position.y;
         last_pos = last_node.transform.position.y;
         interval_size = Mathf.Abs(first_pos - second_node.transform.position.y);
 
-        Debug.Log("開始場所" + first_pos);
-        Debug.Log("終了地点" + last_pos);
+        Debug.Log("上限値" + GetMaxPosY());
+        Debug.Log("下限値" + last_pos);
         Debug.Log("間隔" + interval_size);
         Debug.Log("全体の" + GetAllSize());
     }
@@ -36,12 +43,12 @@ public class y_bottom : MonoBehaviour {
     }
 
 
-    public float GetFirstPos()
+    public float GetMaxPosY()
     {
-        return first_pos;
+        return first_pos + interval_size;
     }
 
-    public float GetLastPos()
+    public float GetMinPosY()
     {
         return last_pos;
     }

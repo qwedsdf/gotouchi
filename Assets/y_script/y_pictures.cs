@@ -18,7 +18,7 @@ public class y_pictures : MonoBehaviour {
     public Text text_profile;
 
     //ボタンによってのデータを格納する配列
-    const int MAX_BUTTOM_PARENT = 14;
+    const int MAX_BUTTOM_PARENT = 7;
     const int MAX_BUTTOM_NUM = MAX_BUTTOM_PARENT * 4;
     GameObject[] button = new GameObject[MAX_BUTTOM_NUM];
 
@@ -73,7 +73,9 @@ public class y_pictures : MonoBehaviour {
         //}
     }
 
-    //最初に図鑑の画面に配置する画像をロード
+    ///////////////画像読み込み関係///////////////
+
+    //エリア選択した後に図鑑の画面に配置する画像をロード
     public void LoadPicture(string area)
     {
         chardate.Clear();
@@ -102,6 +104,12 @@ public class y_pictures : MonoBehaviour {
                 AddCharDate(list[f]);
             }
         }
+    }
+
+    //スクロール中の画像読み込み
+    void LoadPoctureScroll()
+    {
+
     }
 
     //キャラを図鑑に表示させる（ページめくったときのみの関数）
