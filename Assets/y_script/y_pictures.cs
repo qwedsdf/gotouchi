@@ -18,10 +18,10 @@ public class y_pictures : MonoBehaviour {
     public Text text_profile;
 
     //ボタンによってのデータを格納する配列
-    const int MAX_BUTTOM_PARENT = 7;
-    const int MAX_BUTTOM_ROW = 4;
-    const int MAX_BUTTOM_NUM = MAX_BUTTOM_PARENT * MAX_BUTTOM_ROW;
-    GameObject[] button = new GameObject[MAX_BUTTOM_NUM];
+    const int MAX_BUTTON_PARENT = 7;
+    const int MAX_BUTTON_ROW = 4;
+    const int MAX_BUTTON_NUM = MAX_BUTTON_PARENT * MAX_BUTTON_ROW;
+    GameObject[] button = new GameObject[MAX_BUTTON_NUM];
 
     List<date> chardate = new List<date>();
 
@@ -55,7 +55,7 @@ public class y_pictures : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+      
 	}
 
     void init() {
@@ -69,7 +69,7 @@ public class y_pictures : MonoBehaviour {
 
         string bt_name;
         int count = 0;
-        for (int i = 0; i < MAX_BUTTOM_PARENT; i++)
+        for (int i = 0; i < MAX_BUTTON_PARENT; i++)
         {
             bt_name = "bt_parent_";
             bt_name += i;
@@ -81,7 +81,7 @@ public class y_pictures : MonoBehaviour {
             }
         }
 
-        //for (int i = 0; i < MAX_BUTTOM_NUM; i++)
+        //for (int i = 0; i < MAX_BUTTON_NUM; i++)
         //{
         //    bt_name = "bt_char_";
         //    bt_name += i;
@@ -105,6 +105,8 @@ public class y_pictures : MonoBehaviour {
         RefreshButtonAll();
 
         once_push = true;
+
+        ParentPosInit();
         
         for (int i = 0; i < y_Datebase.PrefectureDateSize; i++)
         {
@@ -114,7 +116,7 @@ public class y_pictures : MonoBehaviour {
             {
                 if (list[f].area != area) continue;
                 AddCharDate(list[f]);
-                if (count == MAX_BUTTOM_NUM) continue;
+                if (count == MAX_BUTTON_NUM) continue;
                 button[count].SetActive(true);
                 button[count].GetComponent<Image>().sprite = list[f].img;
                 if (!list[f].getflg) {
@@ -127,13 +129,13 @@ public class y_pictures : MonoBehaviour {
                 count++;
             }
         }
-        if (chardate.Count < MAX_BUTTOM_NUM)
+        if (chardate.Count < MAX_BUTTON_NUM)
         {
             Debug.Log("スクロールさせない");
             y_bottom.scroll_flg = false;
             content.GetComponent<RectTransform>().offsetMin = new Vector2(0, y_bottom.BOTTOM);
         }
-        now_load_num = MAX_BUTTOM_NUM;
+        now_load_num = MAX_BUTTON_NUM;
     }
 
     //スクロール中の画像読み込み
@@ -146,7 +148,7 @@ public class y_pictures : MonoBehaviour {
         //下方向にスワイプしたら
         else
         {
-            load_num = now_load_num - (MAX_BUTTOM_PARENT + 1) * ROW_BUTTON_VOLUM;
+            load_num = now_load_num - (MAX_BUTTON_PARENT + 1) * ROW_BUTTON_VOLUM;
         }
 
         Debug.Log("ロード前の番号　" + now_load_num);
@@ -184,9 +186,9 @@ public class y_pictures : MonoBehaviour {
     {
         int count = 0;
         RefreshButtonAll();
-        for (int f = page_num * MAX_BUTTOM_NUM; f < chardate.Count; f++)
+        for (int f = page_num * MAX_BUTTON_NUM; f < chardate.Count; f++)
         {
-            if (count == MAX_BUTTOM_NUM) break;
+            if (count == MAX_BUTTON_NUM) break;
             button[count].SetActive(true);
             button[count].GetComponent<Image>().sprite = chardate[f].img;
             count++;
@@ -198,9 +200,23 @@ public class y_pictures : MonoBehaviour {
         chardate.Add(dt);
     }
 
+    /////////////////初期化関係/////////////////
+
+    void ParentPosInit()
+    {
+        for (int i = 0; i < MAX_BUTTON_PARENT; i++)
+        {
+            //ここ直す（初期化バグ）
+            string name = y_scroll_node.PARENT_COMMON_NAME + i;
+            y_scroll_node sc = GameObject.Find(name).GetComponent<y_scroll_node>();
+            sc.InitPos();
+        }
+    }
+
+
     void RefreshButtonAll()
     {
-        for (int i = 0; i < MAX_BUTTOM_PARENT; i++)
+        for (int i = 0; i < MAX_BUTTON_PARENT; i++)
         {
             RefreshButton(i);
         }
@@ -209,12 +225,9 @@ public class y_pictures : MonoBehaviour {
     void RefreshButton(int parent_num)
     {
         if (parent_num < 0) return;
-        for (int i = parent_num * MAX_BUTTOM_ROW; i < parent_num * MAX_BUTTOM_ROW + MAX_BUTTOM_ROW; i++)
+        int first_num = parent_num * MAX_BUTTON_ROW;
+        for (int i = first_num; i < first_num + MAX_BUTTON_ROW; i++)
         {
-            //ここ直す（初期化バグ）
-            Debug.Log(button[i].active);
-            y_scroll_node sc = button[i].GetComponent<y_scroll_node>();
-            sc.ChackScrollPos();
             button[i].SetActive(false);
         }
     }
@@ -224,7 +237,7 @@ public class y_pictures : MonoBehaviour {
     //エリア選択ボタンを押したとき
     public void bt_area(y_bt_area script)
     {
-        Debug.Log(script.GetAreaName());
+        ParentPosInit();
         LoadPicture(script.GetAreaName());
     }
 
@@ -232,7 +245,7 @@ public class y_pictures : MonoBehaviour {
     public void bt_char(y_ButtonInfo Info)
     {
         int num = Info.GetButtonNumber();
-        if (!chardate[num].getflg || chardate[num]==null)
+        if (!chardate[num].getflg || chardate[num] == null)
         {
             return;
         }
@@ -277,7 +290,7 @@ public class y_pictures : MonoBehaviour {
     {
         page_num += AddNum;
         if (page_num < 0) page_num = 0;
-        else if (MAX_BUTTOM_NUM * page_num > chardate.Count)
+        else if (MAX_BUTTON_NUM * page_num > chardate.Count)
         {
             page_num -= AddNum;
         }

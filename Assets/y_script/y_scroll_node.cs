@@ -8,6 +8,7 @@ public class y_scroll_node : MonoBehaviour {
     float size;
     float MaxPosY;
     float MinPosY;
+    float first_posY;
     public static string PARENT_COMMON_NAME = "bt_parent_";
 
     public static int UP = 1;
@@ -15,6 +16,7 @@ public class y_scroll_node : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        first_posY = transform.position.y;
         size = sc_bottom.GetAllSize() + sc_bottom.GetIntervalSize();
         MaxPosY = sc_bottom.GetMaxPosY();
         MinPosY = sc_bottom.GetMinPosY();
@@ -24,6 +26,14 @@ public class y_scroll_node : MonoBehaviour {
 	void Update () {
         ChackScrollPos();
     }
+
+    public void InitPos()
+    {
+        Vector3 vec = transform.position;
+        vec.y = first_posY;
+        transform.position = vec;
+    }
+
 
     //余り出来そうな気がするからあとでやる
     public void ChackScrollPos()

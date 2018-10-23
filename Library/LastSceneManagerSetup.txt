@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/select.unity
+- path: Assets/Scenes/picture_book.unity
   isLoaded: 1
   isActive: 1
