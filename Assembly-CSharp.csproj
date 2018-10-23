@@ -62,6 +62,7 @@
      <Compile Include="Assets\y_script\y_buttom.cs" />
      <Compile Include="Assets\y_script\y_ButtonInfo.cs" />
      <Compile Include="Assets\y_script\y_Datebase.cs" />
+     <Compile Include="Assets\y_script\y_Description.cs" />
      <Compile Include="Assets\y_script\y_loading.cs" />
      <Compile Include="Assets\y_script\y_pictures.cs" />
      <Compile Include="Assets\y_script\y_scroll_node.cs" />

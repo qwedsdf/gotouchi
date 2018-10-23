@@ -255,7 +255,7 @@ public class y_pictures : MonoBehaviour {
 
     public void bt_close()
     {
-        Description.SetActive(false);
+        y_Description.active_flg = false;
     }
 
     // 説明画面でページをめくった処理

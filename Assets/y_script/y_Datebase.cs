@@ -6,7 +6,6 @@ using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-[System.Serializable]
 public class date
 {
     public Sprite img;//画像
@@ -27,6 +26,18 @@ enum Prefecture {
     Kagoshima
 }
 
+[SerializeField]
+public class Serialization<T>
+{
+    [SerializeField]
+    List<T> target;
+    public List<T> ToList() { return target; }
+
+    public Serialization(List<T> target)
+    {
+        this.target = target;
+    }
+}
 
 public class y_Datebase : MonoBehaviour {
     //キャラのデータ
@@ -209,7 +220,6 @@ public class y_Datebase : MonoBehaviour {
 
             //出身地を入れる
             flie_parent = System.IO.Path.GetFileNameWithoutExtension(flie_parent);
-            Debug.Log(flie_parent);
 
             if (PrefectureName == "")
             {
@@ -230,7 +240,6 @@ public class y_Datebase : MonoBehaviour {
             if (System.IO.Path.GetExtension(files[i]) == IMG_EXTENSION)
             {
                 files[i] = ConvertPath(files[i], remove_str, IMG_EXTENSION);
-                Debug.Log(files[i]);
                 //画像の名前をキャラの名前にする
                 dt.name=System.IO.Path.GetFileNameWithoutExtension(files[i]);
                 dt.img=Resources.Load<Sprite>(files[i]);
@@ -303,14 +312,16 @@ public class y_Datebase : MonoBehaviour {
 
     //セーブする
     void Save() {
-        string lstr = Serialize<List<int>>(get_date);
-        PlayerPrefs.SetString(SaveKey,lstr);
+        string json = JsonUtility.ToJson(new Serialization<int>(get_date));
+        Debug.Log("json使ったやつ " + json);
+
+        PlayerPrefs.SetString(SaveKey, json);
     }
 
     //ロードする
     void Load()
     {
-        get_date = GetSaveDate();
+        get_date = JsonUtility.FromJson<List<int>>(PlayerPrefs.GetString(SaveKey));
         if (get_date == null)
         {
             get_date = new List<int>();
@@ -344,6 +355,7 @@ public class y_Datebase : MonoBehaviour {
     }
 
 
+    //シリアライズ化
     private static string Serialize<T>(T obj)
     {
         BinaryFormatter binaryFormatter = new BinaryFormatter();
@@ -352,6 +364,7 @@ public class y_Datebase : MonoBehaviour {
         return Convert.ToBase64String(memoryStream.GetBuffer());
     }
 
+    //デシリアライズ化
     private static T Deserialize<T>(string lstr)
     {
         BinaryFormatter binaryFormatter = new BinaryFormatter();
