@@ -61,6 +61,4 @@ public class y_Description : MonoBehaviour {
             rec.localScale = size;
         }
     }
-
-
 }

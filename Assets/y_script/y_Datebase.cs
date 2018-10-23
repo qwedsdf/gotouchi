@@ -321,13 +321,15 @@ public class y_Datebase : MonoBehaviour {
     //ロードする
     void Load()
     {
-        get_date = JsonUtility.FromJson<List<int>>(PlayerPrefs.GetString(SaveKey));
-        if (get_date == null)
+        string lstr = PlayerPrefs.GetString(SaveKey);
+        Debug.Log(lstr);
+        if (lstr == "")
         {
             get_date = new List<int>();
             Debug.Log("セーブデータはないよ");
             return;
         }
+        get_date = JsonUtility.FromJson<Serialization<int>>(lstr).ToList();
 
         Debug.Log("セーブデータの数は" + get_date.Count);
         for (int i = 0; i < get_date.Count; i += 2)
@@ -338,37 +340,11 @@ public class y_Datebase : MonoBehaviour {
         }
     }
 
-    public static List<int> GetSaveDate()
-    {
-        var stri = PlayerPrefs.GetString(SaveKey);
-        if (stri == "") return null;
-        List<int> savedate = Deserialize<List<int>>(stri);
-        return savedate;
-    }
-
     public void DataDeleteAll()
     {
         if (Input.GetKey(KeyCode.Space))
         {
             PlayerPrefs.DeleteAll();
         }
-    }
-
-
-    //シリアライズ化
-    private static string Serialize<T>(T obj)
-    {
-        BinaryFormatter binaryFormatter = new BinaryFormatter();
-        MemoryStream memoryStream = new MemoryStream();
-        binaryFormatter.Serialize(memoryStream, obj);
-        return Convert.ToBase64String(memoryStream.GetBuffer());
-    }
-
-    //デシリアライズ化
-    private static T Deserialize<T>(string lstr)
-    {
-        BinaryFormatter binaryFormatter = new BinaryFormatter();
-        MemoryStream memoryStream = new MemoryStream(Convert.FromBase64String(lstr));
-        return (T)binaryFormatter.Deserialize(memoryStream);
     }
 }

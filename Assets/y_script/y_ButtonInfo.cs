@@ -17,7 +17,9 @@ public class y_ButtonInfo : MonoBehaviour
 
     public int GetButtonNumber()
     {
-        string parent_name = transform.parent.gameObject.name;
+        GameObject parent = transform.parent.gameObject;
+
+        string parent_name = parent.name;
         parent_name = parent_name.Replace(y_scroll_node.PARENT_COMMON_NAME, "");
 
         string name = transform.gameObject.name;
@@ -26,6 +28,8 @@ public class y_ButtonInfo : MonoBehaviour
         int number = int.Parse(parent_name);
         number = number * 4;
         number += int.Parse(name);
+
+        number += parent.GetComponent<y_scroll_node>().GetCount() * y_pictures.MAX_BUTTON_NUM;
 
         return number;
     }
