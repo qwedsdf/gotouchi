@@ -59,13 +59,14 @@
      <Compile Include="Assets\InfiniteScroll\Loop\ItemControllerLoop.cs" />
      <Compile Include="Assets\y_script\y_bottom.cs" />
      <Compile Include="Assets\y_script\y_bt_area.cs" />
-     <Compile Include="Assets\y_script\y_buttom.cs" />
+     <Compile Include="Assets\y_script\y_button.cs" />
      <Compile Include="Assets\y_script\y_ButtonInfo.cs" />
      <Compile Include="Assets\y_script\y_Database.cs" />
      <Compile Include="Assets\y_script\y_Description.cs" />
      <Compile Include="Assets\y_script\y_loading.cs" />
      <Compile Include="Assets\y_script\y_pictures.cs" />
      <Compile Include="Assets\y_script\y_scroll_node.cs" />
+     <Compile Include="Assets\y_script\y_SetAspect.cs" />
      <None Include="Assets\Resources\DataChar\エリア1\山口\ちょるる\test.txt" />
      <None Include="Assets\Resources\DataChar\エリア0\鹿児島\イーサキング\test.txt" />
      <None Include="Assets\Resources\DataChar\エリア1\島根\しまねっこ\test.txt" />

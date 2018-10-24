@@ -162,8 +162,6 @@ public class y_pictures : MonoBehaviour
             load_num = now_load_num - (MAX_BUTTON_PARENT + 1) * ROW_BUTTON_VOLUM;
         }
 
-        Debug.Log("ロード前の番号　" + now_load_num);
-
         //親のオブジェクトの番号
         RefreshButton(parent_num);
         parent_num = parent_num * ROW_BUTTON_VOLUM;

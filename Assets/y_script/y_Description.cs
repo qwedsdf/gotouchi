@@ -18,10 +18,7 @@ public class y_Description : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //Vector3 vec = rec.transform.position;
-        //vec.x = Camera.main.transform.position.x;
-        //vec.y = Camera.main.transform.position.y;
-        //rec.transform.position = vec;
+       
 	}
 	
 	// Update is called once per frame
