@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class y_pictures : MonoBehaviour
 {
 
-    y_Datebase DateScript;
+    y_Database dataScript;
 
     //説明で使うオブジェクトの親
     public GameObject Description;
@@ -28,7 +28,7 @@ public class y_pictures : MonoBehaviour
 
     //パス
 
-    List<date> chardate = new List<date>();
+    List<data> chardata = new List<data>();
 
     //スプライトレンダーの固定値
     const float render_sizeX = 2f;
@@ -56,10 +56,10 @@ public class y_pictures : MonoBehaviour
         init();
         LoadPicture("");
         Description.SetActive(false);
-        Debug.Log(chardate.Count);
+        Debug.Log(chardata.Count);
     }
 
-    // Update is called once per frame
+    // Updata is called once per frame
     void Update()
     {
 
@@ -71,7 +71,7 @@ public class y_pictures : MonoBehaviour
         Debug.Log("初期値" + first_content_pos.y);
 
         page_num = 0;
-        DateScript = GameObject.Find("Master").GetComponent<y_Datebase>();
+        dataScript = GameObject.Find("Master").GetComponent<y_Database>();
         picture = GameObject.Find("Description/picture");
         text_name = GameObject.Find("Description/Canvas/Text_name").GetComponent<Text>();
 
@@ -110,7 +110,7 @@ public class y_pictures : MonoBehaviour
         content.GetComponent<RectTransform>().offsetMax = first_content_pos;
 
         y_bottom.scroll_flg = true;
-        chardate.Clear();
+        chardata.Clear();
         int count = 0;
         RefreshButtonAll();
 
@@ -118,14 +118,14 @@ public class y_pictures : MonoBehaviour
 
         ParentPosInit();
 
-        for (int i = 0; i < y_Datebase.PrefectureDateSize; i++)
+        for (int i = 0; i < y_Database.PrefectureDataSize; i++)
         {
-            List<date> list = DateScript.GetPrefectureDate(i);
+            List<data> list = dataScript.GetPrefectureData(i);
             if (list == null) continue;
             for (int f = 0; f < list.Count; f++)
             {
                 if (list[f].area != area) continue;
-                AddCharDate(list[f]);
+                AddChardata(list[f]);
                 if (count == MAX_BUTTON_NUM) continue;
                 button[count].SetActive(true);
                 image[count].GetComponent<Image>().sprite = list[f].img;
@@ -140,7 +140,7 @@ public class y_pictures : MonoBehaviour
                 count++;
             }
         }
-        if (chardate.Count < MAX_BUTTON_NUM)
+        if (chardata.Count < MAX_BUTTON_NUM)
         {
             Debug.Log("スクロールさせない");
             y_bottom.scroll_flg = false;
@@ -170,13 +170,13 @@ public class y_pictures : MonoBehaviour
         for (int i = 0; i < ROW_BUTTON_VOLUM; i++)
         {
             now_load_num += direction;
-            if (load_num >= chardate.Count || load_num < 0)
+            if (load_num >= chardata.Count || load_num < 0)
             {
                 y_bottom.scroll_flg = false;
                 continue;
             }
             button[parent_num + i].SetActive(true);
-            if (!chardate[load_num].getflg)
+            if (!chardata[load_num].getflg)
             {
                 image[parent_num + i].GetComponent<Image>().color = color;
             }
@@ -185,7 +185,7 @@ public class y_pictures : MonoBehaviour
                 image[parent_num + i].GetComponent<Image>().color = clear_color;
             }
             y_bottom.scroll_flg = true;
-            image[parent_num + i].GetComponent<Image>().sprite = chardate[load_num].img;
+            image[parent_num + i].GetComponent<Image>().sprite = chardata[load_num].img;
             load_num++;
         }
 
@@ -197,18 +197,18 @@ public class y_pictures : MonoBehaviour
     //{
     //    int count = 0;
     //    RefreshButtonAll();
-    //    for (int f = page_num * MAX_BUTTON_NUM; f < chardate.Count; f++)
+    //    for (int f = page_num * MAX_BUTTON_NUM; f < chardata.Count; f++)
     //    {
     //        if (count == MAX_BUTTON_NUM) break;
     //        button[count].SetActive(true);
-    //        button[count].GetComponent<Image>().sprite = chardate[f].img;
+    //        button[count].GetComponent<Image>().sprite = chardata[f].img;
     //        count++;
     //    }
     //}
 
-    void AddCharDate(date dt)
+    void AddChardata(data dt)
     {
-        chardate.Add(dt);
+        chardata.Add(dt);
     }
 
     /////////////////初期化関係/////////////////
@@ -257,7 +257,7 @@ public class y_pictures : MonoBehaviour
     public void bt_char(y_ButtonInfo Info)
     {
         int num = Info.GetButtonNumber();
-        if (!chardate[num].getflg || chardate[num] == null)
+        if (!chardata[num].getflg || chardata[num] == null)
         {
             return;
         }
@@ -280,18 +280,18 @@ public class y_pictures : MonoBehaviour
             now_number += AddNum;
 
             //今の見ている説明の番号が0を下回った場合の処理
-            if (now_number < 0) now_number += chardate.Count;
+            if (now_number < 0) now_number += chardata.Count;
 
             //番号が最大値を超えないようにするためにやってる
             else
             {
-                now_number = now_number % chardate.Count;
+                now_number = now_number % chardata.Count;
             }
 
             savecount++;
 
 
-        } while (!chardate[now_number].getflg && savecount < chardate.Count);
+        } while (!chardata[now_number].getflg && savecount < chardata.Count);
 
 
         ShowDescription(now_number);
@@ -302,7 +302,7 @@ public class y_pictures : MonoBehaviour
     //{
     //    page_num += AddNum;
     //    if (page_num < 0) page_num = 0;
-    //    else if (MAX_BUTTON_NUM * page_num > chardate.Count)
+    //    else if (MAX_BUTTON_NUM * page_num > chardata.Count)
     //    {
     //        page_num -= AddNum;
     //    }
@@ -322,7 +322,7 @@ public class y_pictures : MonoBehaviour
     {
         SpriteRenderer sr = picture.GetComponent<SpriteRenderer>();
         Vector2 img_size;
-        img_size = chardate[num].img.bounds.size;
+        img_size = chardata[num].img.bounds.size;
 
         //画像によりloaclscaleを調整
         Vector2 aspect = new Vector2(img_size.x / render_sizeX, img_size.y / render_sizeY);
@@ -341,7 +341,7 @@ public class y_pictures : MonoBehaviour
             sr.transform.localScale = new Vector2(scale, scale);
         }
 
-        sr.sprite = chardate[num].img;
+        sr.sprite = chardata[num].img;
     }
 
     //説明画面を出す
@@ -351,9 +351,9 @@ public class y_pictures : MonoBehaviour
         Description.SetActive(true);
         SetAspect(num);
 
-        text_name.text = "名前　" + chardate[num].name;
-        text_name.text += "\n出身地　" + chardate[num].place_name;
-        text_profile.text = chardate[num].description;
+        text_name.text = "名前　" + chardata[num].name;
+        text_name.text += "\n出身地　" + chardata[num].place_name;
+        text_profile.text = chardata[num].description;
     }
 
     ///////////////ボタンを押せなくする//////////////////

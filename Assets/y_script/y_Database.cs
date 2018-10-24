@@ -6,7 +6,7 @@ using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-public class date
+public class data
 {
     public Sprite img;//画像
     public string place_name;//場所
@@ -16,7 +16,31 @@ public class date
     public bool getflg;//手に入れたかどうか
 }
 
-enum Prefecture { 
+[Serializable]
+public class Savedata
+{
+    public string area;//所属地方
+    public string prefecture_name;//場所
+    public int prefecture_num;//都道府県番号
+    public string char_name;//名前
+    public int char_num;//キャラの番号
+}
+
+[Serializable]
+public class Serialization<T>
+{
+    [SerializeField]
+    List<T> data;
+    public List<T> ToList() { return data; }
+
+    public Serialization(List<T> target)
+    {
+        data = target;
+    }
+}
+
+enum Prefecture
+{
     Nagasaki,
     Saga,
     Hukuoka,
@@ -26,30 +50,17 @@ enum Prefecture {
     Kagoshima
 }
 
-[SerializeField]
-public class Serialization<T>
-{
-    [SerializeField]
-    List<T> target;
-    public List<T> ToList() { return target; }
-
-    public Serialization(List<T> target)
-    {
-        this.target = target;
-    }
-}
-
-public class y_Datebase : MonoBehaviour {
+public class y_Database : MonoBehaviour {
     //キャラのデータ
     public static string[] Prefecture_names = { "長崎", "佐賀", "福岡", "大分", "熊本", "宮崎", "鹿児島", "沖縄",
                                 "鳥取","島根","岡山","広島","山口","香川","愛媛","高知" };
-    public static int PrefectureDateSize = 47;
+    public static int PrefectureDataSize = 47;
 
     //出身県ごとにデータを分ける
-    List<date>[] PrefectureDate = new List<date>[PrefectureDateSize];
+    List<data>[] Prefecturedata = new List<data>[PrefectureDataSize];
 
     //このなかに1都道府県ごとにキャラのデータを入れる（１都道府県のデータを全て入れる）
-    List<date> DateBase = new List<date>();
+    List<data> dataBase = new List<data>();
 
     int now_prefecture_num;
 
@@ -63,8 +74,9 @@ public class y_Datebase : MonoBehaviour {
     const string TEXT_EXTENSION = ".txt";
     const string IMG_EXTENSION = ".png";
 
+
     [SerializeField]
-    private List<int> get_date = new List<int>();
+    List<Savedata> get_data;
 
     void Awake()
     {
@@ -80,11 +92,11 @@ public class y_Datebase : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //chackpath();
-        //LoadDateAndroid();
-        LoadDate();
+        //LoaddataAndroid();
+        Loaddata();
 	}
 	
-	// Update is called once per frame
+	// Updata is called once per frame
 	void Update () {
         DataDeleteAll();
 	}
@@ -118,7 +130,7 @@ public class y_Datebase : MonoBehaviour {
     }
 
     //アンドロイド用データに改変中
-    void LoadDateAndroid()
+    void LoaddataAndroid()
     {
         string PrefectureName = "";
         string str = Application.streamingAssetsPath;
@@ -142,9 +154,9 @@ public class y_Datebase : MonoBehaviour {
         //    else if (PrefectureName != flie_parent)
         //    {
         //        now_prefecture_num = SearchNumer(PrefectureName);
-        //        PrefectureDate[now_prefecture_num] = DateBase;
+        //        Prefecturedata[now_prefecture_num] = dataBase;
         //        PrefectureName = flie_parent;
-        //        DateBase = new List<date>();
+        //        dataBase = new List<data>();
         //    }
 
         //    //画像読み込み
@@ -161,9 +173,9 @@ public class y_Datebase : MonoBehaviour {
         //    else if (System.IO.Path.GetExtension(files[i]) == TEXT_EXTENSION)
         //    {
         //        files[i] = ConvertPath(files[i], remove_str, TEXT_EXTENSION);
-        //        TextAsset textdate;
-        //        textdate = Resources.Load<TextAsset>(files[i]);
-        //        dt.Setdescription(textdate.text + count);
+        //        TextAsset textdata;
+        //        textdata = Resources.Load<TextAsset>(files[i]);
+        //        dt.Setdescription(textdata.text + count);
         //        count++;
              
         //    }
@@ -171,13 +183,13 @@ public class y_Datebase : MonoBehaviour {
         //    if (count % MAX_ITEM == 0 && count != 0)
         //    {
         //        dt.Setgetflg(false);
-        //        DateBase.Add(dt);
+        //        dataBase.Add(dt);
         //        dt.Setplace_name(flie_parent);
-        //        dt = new date();
+        //        dt = new data();
         //    }
         //}
         //最後の分（今は佐賀）のデータをデータベースに入れる
-        //PrefectureDate[SearchNumer(PrefectureName)] = DateBase;
+        //Prefecturedata[SearchNumer(PrefectureName)] = dataBase;
 
         ////セーブデータをロードする
         //Load();
@@ -193,13 +205,13 @@ public class y_Datebase : MonoBehaviour {
     }
 
     //データベース作成
-    void LoadDate() {
+    void Loaddata() {
         string PrefectureName = "" ;
 
-        string str = Application.dataPath + "/Resources/DateChar/";
+        string str = Application.dataPath + "/Resources/dataChar/";
         string remove_str = Application.dataPath + "/Resources/";
         string[] files = System.IO.Directory.GetFiles(@str, "*", System.IO.SearchOption.AllDirectories);
-        date dt = new date();
+        data dt = new data();
 
         int count = 0 ;
         
@@ -231,9 +243,9 @@ public class y_Datebase : MonoBehaviour {
             else if (PrefectureName != flie_parent)
             {
                 now_prefecture_num = SearchNumer(PrefectureName);
-                PrefectureDate[now_prefecture_num] = DateBase;
+                Prefecturedata[now_prefecture_num] = dataBase;
                 PrefectureName = flie_parent;
-                DateBase = new List<date>();
+                dataBase = new List<data>();
             }
 
             //画像読み込み
@@ -251,10 +263,10 @@ public class y_Datebase : MonoBehaviour {
             else if (System.IO.Path.GetExtension(files[i]) == TEXT_EXTENSION)
             {
                 files[i] = ConvertPath(files[i], remove_str, TEXT_EXTENSION);
-                TextAsset textdate;
-                textdate = Resources.Load<TextAsset>(files[i]);
-                dt.description=textdate.text + count;
-                if (textdate == null)
+                TextAsset textdata;
+                textdata = Resources.Load<TextAsset>(files[i]);
+                dt.description=textdata.text + count;
+                if (textdata == null)
                 {
                     Debug.Log(dt.name);
                 }
@@ -265,13 +277,13 @@ public class y_Datebase : MonoBehaviour {
             if (count % MAX_ITEM == 0 && count != 0)
             {
                 dt.getflg=false;
-                DateBase.Add(dt);
+                dataBase.Add(dt);
                 dt.place_name=flie_parent;
-                dt = new date();
+                dt = new data();
             }
         }
         //最後の分（今は佐賀）のデータをデータベースに入れる
-        PrefectureDate[SearchNumer(PrefectureName)] = DateBase;
+        Prefecturedata[SearchNumer(PrefectureName)] = dataBase;
 
         //セーブデータをロードする
         Load();
@@ -285,35 +297,40 @@ public class y_Datebase : MonoBehaviour {
         return path;
     }
 
-    public List<date> GetPrefectureDate(int num)
+    public List<data> GetPrefectureData(int num)
     {
-        return PrefectureDate[num];
+        return Prefecturedata[num];
     }
 
     //キャラのゲット処理
     public void GetChar(int PreNumber,int number)
     {
-        List<date> list = new List<date>();
-        list = PrefectureDate[PreNumber];
+        List<data> list = new List<data>();
+        list = Prefecturedata[PreNumber];
         if (number > list.Count - 1) return;
-        date dt = new date();
+        data dt = new data();
         dt = list[number];
         if (!dt.getflg)
         {
-            get_date.Add(PreNumber);
-            get_date.Add(number);
+            Savedata savedata = new Savedata();
+            savedata.area = dt.area;
+            savedata.prefecture_name = dt.place_name;
+            savedata.prefecture_num = PreNumber;
+            savedata.char_name = dt.name;
+            savedata.char_num = number;
+            get_data.Add(savedata);
             Save();
             dt.getflg=true;
         }
         list[number] = dt;
         list[number].getflg=true;
-        PrefectureDate[PreNumber] = list;
+        Prefecturedata[PreNumber] = list;
     }
 
     //セーブする
     void Save() {
-        string json = JsonUtility.ToJson(new Serialization<int>(get_date));
-        Debug.Log("json使ったやつ " + json);
+        string json = JsonUtility.ToJson(new Serialization<Savedata>(get_data),true);
+        Debug.Log("json使ったやつ\n" + json);
 
         PlayerPrefs.SetString(SaveKey, json);
     }
@@ -322,21 +339,20 @@ public class y_Datebase : MonoBehaviour {
     void Load()
     {
         string lstr = PlayerPrefs.GetString(SaveKey);
-        Debug.Log(lstr);
         if (lstr == "")
         {
-            get_date = new List<int>();
+            get_data = new List<Savedata>();
             Debug.Log("セーブデータはないよ");
             return;
         }
-        get_date = JsonUtility.FromJson<Serialization<int>>(lstr).ToList();
+        get_data = JsonUtility.FromJson<Serialization<Savedata>>(lstr).ToList();
 
-        Debug.Log("セーブデータの数は" + get_date.Count);
-        for (int i = 0; i < get_date.Count; i += 2)
+        Debug.Log("セーブデータの数は" + get_data.Count);
+        for (int i = 0; i < get_data.Count; i++)
         {
-            List<date> list = PrefectureDate[get_date[i]];
-            list[get_date[i + 1]].getflg=true;
-            PrefectureDate[get_date[i]] = list;
+            List<data> list = Prefecturedata[get_data[i].prefecture_num];
+            list[get_data[i].char_num].getflg = true;
+            Prefecturedata[get_data[i].prefecture_num] = list;
         }
     }
 

@@ -10,6 +10,7 @@ public class y_Description : MonoBehaviour {
 
     static public bool active_flg = false;
 
+    //他のスクリプトのstartで参照しているためここにいれた
     void Awake()
     {
         rec = GetComponent<RectTransform>();
@@ -17,7 +18,10 @@ public class y_Description : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        
+        //Vector3 vec = rec.transform.position;
+        //vec.x = Camera.main.transform.position.x;
+        //vec.y = Camera.main.transform.position.y;
+        //rec.transform.position = vec;
 	}
 	
 	// Update is called once per frame
@@ -27,6 +31,8 @@ public class y_Description : MonoBehaviour {
 
     void OnEnable()
     {
+        SetPosition();
+        
         Vector3 size = rec.localScale;
         size.x = 0f;
         size.y = 0f;
@@ -34,6 +40,17 @@ public class y_Description : MonoBehaviour {
         active_flg = true;
     }
 
+    //表示位置を調整
+    void SetPosition()
+    {
+        Vector3 point = new Vector3(Screen.width / 2,Screen.height / 2,0f);
+        point = Camera.main.ScreenToWorldPoint(point);
+        point.z = 0f;
+
+        rec.transform.position = point;
+    }
+
+    //今の大きさを確認して調整する
     void chack_scale(){
         if (active_flg && rec.localScale.x < MAX_SIZE)
         {

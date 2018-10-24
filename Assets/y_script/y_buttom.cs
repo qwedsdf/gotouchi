@@ -11,7 +11,7 @@ public class y_buttom : MonoBehaviour {
     public int PrefectureVolum;
     GameObject[] bt_prefecture;
     public Text txt;
-    y_Datebase DataBaseScript;
+    y_Database DataBaseScript;
 
     const string BUTTON_CHAR_COMMON_NAME = "bt_char_";
     const string BUTTON_PREFECTURE_COMMON_NAME = "bt_prefecture_";
@@ -25,7 +25,7 @@ public class y_buttom : MonoBehaviour {
         //今押されているボタンを探すためにボタンを配列に格納してる
         //まずはボタンを配列に格納する関数作って
         bt_prefecture = new GameObject[PrefectureVolum];
-        DataBaseScript = GameObject.Find("Master").GetComponent<y_Datebase>();
+        DataBaseScript = GameObject.Find("Master").GetComponent<y_Database>();
         LoadButton();
         RefreshButtonChar();
 	}
@@ -52,7 +52,7 @@ public class y_buttom : MonoBehaviour {
         {
             string name = BUTTON_PREFECTURE_COMMON_NAME + i;
             bt_prefecture[i] = GameObject.Find(name);
-            bt_prefecture[i].transform.Find("Text").GetComponent<Text>().text = y_Datebase.Prefecture_names[i];
+            bt_prefecture[i].transform.Find("Text").GetComponent<Text>().text = y_Database.Prefecture_names[i];
         }
     }
 
@@ -93,8 +93,8 @@ public class y_buttom : MonoBehaviour {
         RefreshButtonChar();
         RefreshButtonPrefecture(lPrefectureNumber);
         PrefectureNumber = lPrefectureNumber;
-        List<date> PrefectureCharDate = new List<date>();
-        PrefectureCharDate = DataBaseScript.GetPrefectureDate(lPrefectureNumber);
+        List<data> PrefectureCharDate = new List<data>();
+        PrefectureCharDate = DataBaseScript.GetPrefectureData(lPrefectureNumber);
         if (PrefectureCharDate == null)
         {
             txt.text += "エラーでてますね";

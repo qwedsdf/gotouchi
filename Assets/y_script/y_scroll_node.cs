@@ -10,6 +10,7 @@ public class y_scroll_node : MonoBehaviour {
     float MinPosY;
     float first_posY;
     public static string PARENT_COMMON_NAME = "bt_parent_";
+    public static string CHAR_COMMON_NAME = "bt_char_";
     public int count;
 
     public static int UP = 1;

@@ -23,7 +23,7 @@ public class y_ButtonInfo : MonoBehaviour
         parent_name = parent_name.Replace(y_scroll_node.PARENT_COMMON_NAME, "");
 
         string name = transform.gameObject.name;
-        name = name.Replace("bt_char_", "");
+        name = name.Replace(y_scroll_node.CHAR_COMMON_NAME, "");
 
         int number = int.Parse(parent_name);
         number = number * 4;
