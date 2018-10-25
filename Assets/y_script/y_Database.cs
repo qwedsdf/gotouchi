@@ -51,10 +51,21 @@ enum Prefecture
 }
 
 public class y_Database : MonoBehaviour {
+    //デバッグ用の変数
+    public GameObject test_img;
+
+
+
     //キャラのデータ
     public static string[] Prefecture_names = { "長崎", "佐賀", "福岡", "大分", "熊本", "宮崎", "鹿児島", "沖縄",
                                 "鳥取","島根","岡山","広島","山口","香川","愛媛","高知" };
+
+    const int VOLUME_KYUSH = 8;
+    const int VOLUME_SHIKOKU = 8;
+
     public static int PrefectureDataSize = 47;
+    public static int MaxAreaLenth = 2;
+    public static int[] AreaLenth = { VOLUME_SHIKOKU, VOLUME_KYUSH };
 
     //出身県ごとにデータを分ける
     List<data>[] Prefecturedata = new List<data>[PrefectureDataSize];
@@ -70,6 +81,9 @@ public class y_Database : MonoBehaviour {
     const string SaveKey = "UserID";
 
     static private GameObject obj = null;
+
+    const string DATE_FOLDER_NAME = "DataChar";
+    const string AREA_FOLDER_NAME = "area"; 
 
     const string TEXT_EXTENSION = ".txt";
     const string IMG_EXTENSION = ".png";
@@ -91,9 +105,9 @@ public class y_Database : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //chackpath();
-        LoadDataAndroid();
-        //LoadData();
+        //checkpath();
+        //LoadDataAndroid();
+        LoadData();
 	}
 	
 	// Updata is called once per frame
@@ -113,210 +127,149 @@ public class y_Database : MonoBehaviour {
         return -1;
     }
 
-    void chackpath()
+    void checkpath()
     {
         string str = Application.streamingAssetsPath;
-        //this.GetComponent<y_button>().chack("パスは" + str);
-        //this.GetComponent<y_button>().chack("aa");
-        GameObject.Find("EventSystem").GetComponent<y_button>().chack("うわああ");
+        //this.GetComponent<y_button>().check("パスは" + str);
+        //this.GetComponent<y_button>().check("aa");
+        GameObject.Find("EventSystem").GetComponent<y_button>().check("うわああ");
         string[] files = System.IO.Directory.GetFiles(@str, "*.png", System.IO.SearchOption.AllDirectories);
-        GameObject.Find("EventSystem").GetComponent<y_button>().chack("大きさは" + files.Length);
+        GameObject.Find("EventSystem").GetComponent<y_button>().check("大きさは" + files.Length);
         for (int i = 0; i < files.Length; i++)
         {
             if (System.IO.Path.GetExtension(files[i]) == IMG_EXTENSION)
             {
-                this.GetComponent<y_button>().chack("パスは" + files[i]);
+                this.GetComponent<y_button>().check("パスは" + files[i]);
             }
         }
     }
 
-    //アンドロイド用データに改変中
-    void LoadDataAndroid()
+    //データベースを作成する
+    void LoadData()
     {
-        string PrefectureName = "";
-        string str = Application.dataPath;
+        //ロードできているか確認
+        test_img.GetComponent<Image>().sprite = Resources.Load<Sprite>("ja-bou");
 
-        Sprite[] Spritedata = Resources.LoadAll<Sprite>("DataChar");
-        TextAsset[] Textdata = Resources.LoadAll<TextAsset>("DataChar");
-
-        string remove_str = Application.dataPath;
-        int count = 0 ;
-        Debug.Log(remove_str);
-        //string[] resourcesDirectoryPaths = Directory.GetDirectories("Assets/Resources/DataChar", "*", SearchOption.AllDirectories);
-
-        string[] files = System.IO.Directory.GetDirectories(Application.dataPath, "Resources", System.IO.SearchOption.AllDirectories);
-
-        foreach (string path in files)
+        int loadcount = 0;
+        //エリア検索
+        for (int i = 0; i < MaxAreaLenth; i++)
         {
-            GameObject.Find("EventSystem").GetComponent<y_button>().chack(path);
-        }
-
-        string[] lfiles = System.IO.Directory.GetFiles(files[0], "ja-bou.png", System.IO.SearchOption.AllDirectories);
-        foreach (string path in lfiles)
-        {
-            GameObject.Find("EventSystem").GetComponent<y_button>().chack(path);
-        }
-        
-
-        data dt = new data();
-        //GameObject.Find("EventSystem").GetComponent<y_button>().chack("データの量は" + Textdata.Length);
-        return;
-        for (int i = 0; i < files.Length; i++)
-        {
-            if (System.IO.Path.GetExtension(files[i]) == ".meta") continue;
-
-            //出身地を入れる(出身地が変わった場合は次に都道府県の配列に入れる)
-            string flie_parent = System.IO.Path.GetDirectoryName(files[i]);
-            flie_parent = System.IO.Path.GetDirectoryName(flie_parent);
-            flie_parent = System.IO.Path.GetFileNameWithoutExtension(flie_parent);
-            if (PrefectureName == "")
+            //都道府県検索
+            for (int f = 0; f < AreaLenth[i]; f++)
             {
-                PrefectureName = flie_parent;
-                now_prefecture_num = SearchNumer(PrefectureName);
-            }
-
-            //違う都道府県のフォルダに移ったら
-            else if (PrefectureName != flie_parent)
-            {
-                now_prefecture_num = SearchNumer(PrefectureName);
-                Prefecturedata[now_prefecture_num] = dataBase;
-                PrefectureName = flie_parent;
-                dataBase = new List<data>();
-            }
-
-           //画像読み込み
-            if (System.IO.Path.GetExtension(files[i]) == IMG_EXTENSION)
-            {
-                
-                files[i] = ConvertPath(files[i], remove_str, IMG_EXTENSION);
-                //画像の名前をキャラの名前にする
-                dt.name=System.IO.Path.GetFileNameWithoutExtension(files[i]);
-                dt.img=Resources.Load<Sprite>(files[i]);
-                count++;
-            }
-
-            //説明書読み込み
-            else if (System.IO.Path.GetExtension(files[i]) == TEXT_EXTENSION)
-            {
-                files[i] = ConvertPath(files[i], remove_str, TEXT_EXTENSION);
-                TextAsset textdata;
-                textdata = Resources.Load<TextAsset>(files[i]);
-                dt.description=textdata.text + count;
-                if (textdata == null)
+                string number = loadcount.ToString();
+                string path = DATE_FOLDER_NAME + "/" + AREA_FOLDER_NAME + i.ToString();
+                if (loadcount < 10) number = "0" + number;
+                path += "/" + number;
+                Sprite[] tmp_sprite = Resources.LoadAll<Sprite>(path);
+                TextAsset[] tmp_text = Resources.LoadAll<TextAsset>(path);
+                List<data> tmp_data=new List<data>();
+                //キャラ検索
+                for (int k = 0; k < tmp_sprite.Length; k++)
                 {
-                    Debug.Log(dt.name);
+                    data dt = new data();
+                    dt.area = AREA_FOLDER_NAME + i.ToString();
+                    dt.getflg = false;
+                    dt.place_name = Prefecture_names[loadcount];
+                    dt.img = tmp_sprite[k];
+                    dt.description = tmp_text[k].text;
+                    dt.name = dt.img.name;
+
+                    tmp_data.Add(dt);
                 }
-                count++;
-             
-            }
-            //情報がすべて揃ったらデータベースに入れる
-            if (count % MAX_ITEM == 0 && count != 0)
-            {
-                dt.getflg = false;
-                dataBase.Add(dt);
-                dt.place_name = flie_parent;
-                dt = new data();
+                Prefecturedata[loadcount] = tmp_data;
+                //次の都道府県に移動
+                loadcount++;
             }
         }
-        //最後の分（今は佐賀）のデータをデータベースに入れる
-        Prefecturedata[SearchNumer(PrefectureName)] = dataBase;
-
         //セーブデータをロードする
         Load();
     }
 
     //データベース作成
-    void LoadData() {
-        string PrefectureName = "" ;
+    //void BeforeLoadData() {
+    //    string PrefectureName = "" ;
 
-        string str = Application.dataPath + "/Resources/DataChar/";
-        string remove_str = Application.dataPath + "/Resources/";
-        string[] files = System.IO.Directory.GetFiles(@str, "*", System.IO.SearchOption.AllDirectories);
-        data dt = new data();
-        int count = 0 ;
+    //    string str = Application.dataPath + "/Resources/DataChar/";
+    //    string remove_str = Application.dataPath + "/Resources/";
+    //    string[] files = System.IO.Directory.GetFiles(@str, "*", System.IO.SearchOption.AllDirectories);
+    //    data dt = new data();
+    //    int count = 0 ;
         
-        for (int i = 0; i < files.Length; i++)
-        {
-            if (System.IO.Path.GetExtension(files[i]) == ".meta") continue;
-            files[i] = files[i].Replace("\\", "/");
+    //    for (int i = 0; i < files.Length; i++)
+    //    {
+    //        if (System.IO.Path.GetExtension(files[i]) == ".meta") continue;
+    //        files[i] = files[i].Replace("\\", "/");
 
-            //Resourseからの相対パスにするためいらない文字列は消す
-            files[i] = files[i].Replace(remove_str, "");
+    //        //Resourseからの相対パスにするためいらない文字列は消す
+    //        files[i] = files[i].Replace(remove_str, "");
 
-            //出身地、エリアを入れる(出身地が変わった場合は都道府県の配列に入れる)
-            string flie_parent = System.IO.Path.GetDirectoryName(files[i]);
-            flie_parent = System.IO.Path.GetDirectoryName(flie_parent);
+    //        //出身地、エリアを入れる(出身地が変わった場合は都道府県の配列に入れる)
+    //        string flie_parent = System.IO.Path.GetDirectoryName(files[i]);
+    //        flie_parent = System.IO.Path.GetDirectoryName(flie_parent);
 
-            //所属エリアを入れる
-            string area = System.IO.Path.GetDirectoryName(flie_parent);
-            dt.area = System.IO.Path.GetFileNameWithoutExtension(area);
+    //        //所属エリアを入れる
+    //        string area = System.IO.Path.GetDirectoryName(flie_parent);
+    //        dt.area = System.IO.Path.GetFileNameWithoutExtension(area);
 
-            //出身地を入れる
-            flie_parent = System.IO.Path.GetFileNameWithoutExtension(flie_parent);
+    //        //出身地を入れる
+    //        flie_parent = System.IO.Path.GetFileNameWithoutExtension(flie_parent);
 
-            if (PrefectureName == "")
-            {
-                PrefectureName = flie_parent;
-                now_prefecture_num = SearchNumer(PrefectureName);
-            }
+    //        if (PrefectureName == "")
+    //        {
+    //            PrefectureName = flie_parent;
+    //            now_prefecture_num = SearchNumer(PrefectureName);
+    //        }
 
-            //違う都道府県のフォルダに移ったら
-            else if (PrefectureName != flie_parent)
-            {
-                now_prefecture_num = SearchNumer(PrefectureName);
-                Prefecturedata[now_prefecture_num] = dataBase;
-                PrefectureName = flie_parent;
-                dataBase = new List<data>();
-            }
+    //        //違う都道府県のフォルダに移ったら
+    //        else if (PrefectureName != flie_parent)
+    //        {
+    //            now_prefecture_num = SearchNumer(PrefectureName);
+    //            Prefecturedata[now_prefecture_num] = dataBase;
+    //            PrefectureName = flie_parent;
+    //            dataBase = new List<data>();
+    //        }
 
-            //画像読み込み
-            if (System.IO.Path.GetExtension(files[i]) == IMG_EXTENSION)
-            {
-                files[i] = ConvertPath(files[i], remove_str, IMG_EXTENSION);
-                //画像の名前をキャラの名前にする
-                dt.name=System.IO.Path.GetFileNameWithoutExtension(files[i]);
-                dt.img=Resources.Load<Sprite>(files[i]);
-                //Debug.Log(dt.name+"　"+dt.img.bounds.size.x);
-                count++;
-            }
+    //        //画像読み込み
+    //        if (System.IO.Path.GetExtension(files[i]) == IMG_EXTENSION)
+    //        {
+    //            files[i] = ConvertPath(files[i], remove_str, IMG_EXTENSION);
+    //            //画像の名前をキャラの名前にする
+    //            dt.name=System.IO.Path.GetFileNameWithoutExtension(files[i]);
+    //            dt.img=Resources.Load<Sprite>(files[i]);
+    //            //Debug.Log(dt.name+"　"+dt.img.bounds.size.x);
+    //            count++;
+    //        }
 
-            //説明書読み込み
-            else if (System.IO.Path.GetExtension(files[i]) == TEXT_EXTENSION)
-            {
-                files[i] = ConvertPath(files[i], remove_str, TEXT_EXTENSION);
-                TextAsset textdata;
-                textdata = Resources.Load<TextAsset>(files[i]);
-                dt.description=textdata.text + count;
-                if (textdata == null)
-                {
-                    Debug.Log(dt.name);
-                }
-                count++;
+    //        //説明書読み込み
+    //        else if (System.IO.Path.GetExtension(files[i]) == TEXT_EXTENSION)
+    //        {
+    //            files[i] = ConvertPath(files[i], remove_str, TEXT_EXTENSION);
+    //            TextAsset textdata;
+    //            textdata = Resources.Load<TextAsset>(files[i]);
+    //            dt.description=textdata.text + count;
+    //            if (textdata == null)
+    //            {
+    //                Debug.Log(dt.name);
+    //            }
+    //            count++;
              
-            }
-            //情報がすべて揃ったらデータベースに入れる
-            if (count % MAX_ITEM == 0 && count != 0)
-            {
-                dt.getflg=false;
-                dataBase.Add(dt);
-                dt.place_name=flie_parent;
-                dt = new data();
-            }
-        }
-        //最後の分（今は佐賀）のデータをデータベースに入れる
-        Prefecturedata[SearchNumer(PrefectureName)] = dataBase;
+    //        }
+    //        //情報がすべて揃ったらデータベースに入れる
+    //        if (count % MAX_ITEM == 0 && count != 0)
+    //        {
+    //            dt.getflg=false;
+    //            dataBase.Add(dt);
+    //            dt.place_name=flie_parent;
+    //            dt = new data();
+    //        }
+    //    }
+    //    //最後の分（今は佐賀）のデータをデータベースに入れる
+    //    Prefecturedata[SearchNumer(PrefectureName)] = dataBase;
 
-        //セーブデータをロードする
-        Load();
-    }
-
-    //Resources.Loadで使えるようにパスをコンバートする
-    string ConvertPath(string path,string removecharacter,string extension)
-    {
-        path = path.Replace(removecharacter, "");
-        path = path.Replace(extension, "");
-        return path;
-    }
+    //    //セーブデータをロードする
+    //    Load();
+    //}
 
     public List<data> GetPrefectureData(int num)
     {

@@ -116,7 +116,7 @@ public class y_button : MonoBehaviour {
         SceneManager.LoadScene("picture_book");
     }
 
-    public void chack(string str)
+    public void check(string str)
     {
         txt.text += str + "\n";
     }

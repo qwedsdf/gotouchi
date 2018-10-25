@@ -5120,7 +5120,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30A8\u30EA\u30A20"
+  m_Text: area0
 --- !u!222 &882433311
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5608,7 +5608,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30A8\u30EA\u30A21"
+  m_Text: area1
 --- !u!222 &967272109
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10101,7 +10101,7 @@ GameObject:
   - component: {fileID: 1947871341}
   - component: {fileID: 1947871342}
   m_Layer: 5
-  m_Name: buttom
+  m_Name: button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10138,6 +10138,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Description: {fileID: 739809397}
   text_profile: {fileID: 1857652766}
+  bt_area_obj:
+  - {fileID: 2003852699}
+  - {fileID: 1779943902}
   content: {fileID: 1008354088}
 --- !u!1 &1951209040
 GameObject:

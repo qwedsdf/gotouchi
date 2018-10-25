@@ -2,7 +2,6 @@ Android
 PlayerPath?
 C:/Users/HarukaGoto/Desktop/gotiuchi.apk
 SceneListBegin?
-Assets/Scenes/Loading.unity
 Assets/Scenes/select.unity
 Assets/Scenes/picture_book.unity
 SceneListEnd?
@@ -113,7 +112,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-0f0dfe5a06d0a0c3757d98170e43798a Assembly-CSharp.dll:.y_Database
+4452982dd65949963b76bed8c8c78884 Assembly-CSharp.dll:.y_Database
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ItemControllerInfinite
 322cb40e1e282f28af980cbef7922a90 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker

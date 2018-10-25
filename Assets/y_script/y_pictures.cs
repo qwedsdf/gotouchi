@@ -23,8 +23,11 @@ public class y_pictures : MonoBehaviour
     const int MAX_BUTTON_ROW = 4;
     static public int MAX_BUTTON_NUM = MAX_BUTTON_PARENT * MAX_BUTTON_ROW;
     const string IMG_OBJ_NAME = "Image";
+
+    //ボタンを格納するやつ
     GameObject[] button = new GameObject[MAX_BUTTON_NUM];
     GameObject[] image = new GameObject[MAX_BUTTON_NUM];
+    public GameObject[] bt_area_obj;
 
     //パス
 
@@ -360,6 +363,10 @@ public class y_pictures : MonoBehaviour
         for (int i = 0; i < MAX_BUTTON_NUM; i++)
         {
             button[i].GetComponent<Button>().interactable = flg;
+        }
+        foreach (GameObject button in bt_area_obj)
+        {
+            button.GetComponent<Button>().interactable = flg;
         }
     }
 }
