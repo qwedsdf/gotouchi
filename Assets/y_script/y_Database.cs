@@ -92,8 +92,8 @@ public class y_Database : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //chackpath();
-        //LoadDataAndroid();
-        LoadData();
+        LoadDataAndroid();
+        //LoadData();
 	}
 	
 	// Updata is called once per frame
@@ -139,13 +139,27 @@ public class y_Database : MonoBehaviour {
         Sprite[] Spritedata = Resources.LoadAll<Sprite>("DataChar");
         TextAsset[] Textdata = Resources.LoadAll<TextAsset>("DataChar");
 
-        Debug.Log("リソースから" + Textdata.Length);
-
         string remove_str = Application.dataPath;
         int count = 0 ;
-        string[] files = System.IO.Directory.GetFiles(@str, "*", System.IO.SearchOption.AllDirectories);
+        Debug.Log(remove_str);
+        //string[] resourcesDirectoryPaths = Directory.GetDirectories("Assets/Resources/DataChar", "*", SearchOption.AllDirectories);
+
+        string[] files = System.IO.Directory.GetDirectories(Application.dataPath, "Resources", System.IO.SearchOption.AllDirectories);
+
+        foreach (string path in files)
+        {
+            GameObject.Find("EventSystem").GetComponent<y_button>().chack(path);
+        }
+
+        string[] lfiles = System.IO.Directory.GetFiles(files[0], "ja-bou.png", System.IO.SearchOption.AllDirectories);
+        foreach (string path in lfiles)
+        {
+            GameObject.Find("EventSystem").GetComponent<y_button>().chack(path);
+        }
+        
+
         data dt = new data();
-        GameObject.Find("EventSystem").GetComponent<y_button>().chack("データの量は" + Textdata.Length);
+        //GameObject.Find("EventSystem").GetComponent<y_button>().chack("データの量は" + Textdata.Length);
         return;
         for (int i = 0; i < files.Length; i++)
         {
@@ -215,7 +229,7 @@ public class y_Database : MonoBehaviour {
     void LoadData() {
         string PrefectureName = "" ;
 
-        string str = Application.dataPath + "/Resources/dataChar/";
+        string str = Application.dataPath + "/Resources/DataChar/";
         string remove_str = Application.dataPath + "/Resources/";
         string[] files = System.IO.Directory.GetFiles(@str, "*", System.IO.SearchOption.AllDirectories);
         data dt = new data();

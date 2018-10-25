@@ -118,6 +118,6 @@ public class y_button : MonoBehaviour {
 
     public void chack(string str)
     {
-        txt.text = str + "\n";
+        txt.text += str + "\n";
     }
 }

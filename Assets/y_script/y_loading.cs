@@ -23,7 +23,7 @@ public class y_loading : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        test();
 	}
 
     IEnumerator LoadScene()
@@ -34,5 +34,10 @@ public class y_loading : MonoBehaviour {
         {
             yield return null;
         }
+    }
+
+    public void test()
+    {
+        text.text = "通っているよ";
     }
 }
