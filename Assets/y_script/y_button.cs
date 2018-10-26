@@ -8,6 +8,7 @@ public class y_button : MonoBehaviour {
     const int BUTTON_MAX = 9;
     GameObject[] buttom = new GameObject[BUTTON_MAX];
     int PrefectureNumber;
+    int start_num;
     public int PrefectureVolum;
     GameObject[] bt_prefecture;
     public Text txt;
@@ -15,6 +16,9 @@ public class y_button : MonoBehaviour {
 
     const string BUTTON_CHAR_COMMON_NAME = "bt_char_";
     const string BUTTON_PREFECTURE_COMMON_NAME = "bt_prefecture_";
+
+    //エリア判別用変数
+    static public int area_num = 1;
 
     //アスペクト比固定のまま画像を載せるために使う変数
     Vector2 button_size;
@@ -48,12 +52,27 @@ public class y_button : MonoBehaviour {
         button_size.y = buttom[BUTTON_MAX - 1].GetComponent<RectTransform>().sizeDelta.y;
 
         //////////都道府県用のボタン//////////
-        for (int i = 0; i < PrefectureVolum; i++)
+        start_num = 0;
+
+        for (int i = 0; i < area_num - 1; i++)
+        {
+            start_num += y_Database.AreaLenth[i];
+        }
+
+        for (int i = 0; i < y_Database.AreaLenth[area_num]; i++)
         {
             string name = BUTTON_PREFECTURE_COMMON_NAME + i;
             bt_prefecture[i] = GameObject.Find(name);
-            bt_prefecture[i].transform.Find("Text").GetComponent<Text>().text = y_Database.Prefecture_names[i];
+            bt_prefecture[i].transform.Find("Text").GetComponent<Text>().text = y_Database.Prefecture_names[i+start_num];
         }
+
+        for (int i = y_Database.AreaLenth[area_num]; i < PrefectureVolum; i++)
+        {
+            string name = BUTTON_PREFECTURE_COMMON_NAME + i;
+            bt_prefecture[i] = GameObject.Find(name);
+            bt_prefecture[i].SetActive(false);
+        }
+
     }
 
     //キャラクターのボタンを初期化
@@ -70,7 +89,7 @@ public class y_button : MonoBehaviour {
         Button button;
         ColorBlock colors;
 
-        for (int i = 0; i < PrefectureVolum; i++)
+        for (int i = 0; i < y_Database.AreaLenth[area_num]; i++)
         {
             button = bt_prefecture[i].GetComponent<Button>();
             colors = button.colors;
@@ -90,11 +109,12 @@ public class y_button : MonoBehaviour {
     public void bt_Prefecture(int lPrefectureNumber)
     {
         Debug.Log("押したよ");
+        int tmp_num = start_num + lPrefectureNumber;
         RefreshButtonChar();
         RefreshButtonPrefecture(lPrefectureNumber);
-        PrefectureNumber = lPrefectureNumber;
+        PrefectureNumber = tmp_num;
         List<data> PrefectureCharDate = new List<data>();
-        PrefectureCharDate = DataBaseScript.GetPrefectureData(lPrefectureNumber);
+        PrefectureCharDate = DataBaseScript.GetPrefectureData(tmp_num);
         if (PrefectureCharDate == null)
         {
             txt.text += "エラーでてますね";
@@ -119,5 +139,10 @@ public class y_button : MonoBehaviour {
     public void check(string str)
     {
         txt.text += str + "\n";
+    }
+
+    public void LoadAreaSelectScene()
+    {
+        SceneManager.LoadScene("select_area");
     }
 }

@@ -29,7 +29,7 @@ public class y_Description : MonoBehaviour {
     void OnEnable()
     {
         SetPosition();
-        
+
         Vector3 size = rec.localScale;
         size.x = 0f;
         size.y = 0f;

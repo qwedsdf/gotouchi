@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Editor\ExportAssetBundle.cs" />
      <Compile Include="Assets\Editor\y_MenuItem.cs" />
  <Reference Include="UnityEngine.CoreModule">
  <HintPath>C:/Program Files/Unity_2017412/Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>

@@ -18,30 +18,16 @@ public class y_SetAspect : MonoBehaviour {
     {
         camera = GetComponent<Camera>();
 
-        camera.orthographicSize = height / 2f;
+        float aspect = (float)Screen.width / (float)Screen.height;
 
-        float aspect = (float)Screen.height / (float)Screen.width;
+        float ideal_aspect = width / height;
 
-        float ideal_aspect = height / width;
+        float scale = ideal_aspect / aspect;
 
-        float magnification;
-        float camera_width;
-
-        if (ideal_aspect > aspect)
-        {
-            magnification = height / Screen.height;
-
-            camera_width = width / (Screen.width * magnification);
-
-        }
-        else 
-        {
-            magnification = width / Screen.width;
-
-            camera_width = height / (Screen.height * magnification);
-        }
-
-        camera.rect = new Rect((1f - camera_width) / 2f, 0f, camera_width, 1f);
+        //カメラの描画開始位置をX座標にどのくらいずらすか
+        float rectX = (1.0f - scale) / 2f;
+        //カメラの描画開始位置と表示領域の設定
+        camera.rect = new Rect(rectX, 0f, scale, 1f);
     }
 
 	// Use this for initialization
@@ -51,6 +37,6 @@ public class y_SetAspect : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        SetScreenAspect();
+        
 	}
 }

@@ -23,13 +23,15 @@ public class y_pictures : MonoBehaviour
     const int MAX_BUTTON_ROW = 4;
     static public int MAX_BUTTON_NUM = MAX_BUTTON_PARENT * MAX_BUTTON_ROW;
     const string IMG_OBJ_NAME = "Image";
+    const float DESCRIPTION_PANEL_FIRSTPOS = -0.2f;
 
     //ボタンを格納するやつ
     GameObject[] button = new GameObject[MAX_BUTTON_NUM];
     GameObject[] image = new GameObject[MAX_BUTTON_NUM];
     public GameObject[] bt_area_obj;
 
-    //パス
+    //説明文が貼ってあるパネル
+    public GameObject scroll_panel;
 
     List<data> chardata = new List<data>();
 
@@ -275,6 +277,11 @@ public class y_pictures : MonoBehaviour
     // 説明画面でページをめくった処理
     public void bt_page(int AddNum)
     {
+        Vector3 pos = scroll_panel.GetComponent<RectTransform>().position;
+        Debug.Log(pos.y);
+        pos.y = DESCRIPTION_PANEL_FIRSTPOS;
+        scroll_panel.GetComponent<RectTransform>().position = pos;
+
         int savecount = 0;
         do
         {
@@ -314,6 +321,15 @@ public class y_pictures : MonoBehaviour
     public void loadselect()
     {
         SceneManager.LoadScene("select");
+    }
+
+
+    //セーブデータ全消し
+    public void bt_DataDeleteAll()
+    {
+        PlayerPrefs.DeleteAll();
+        dataScript.Load();
+        LoadPicture("area0");
     }
 
     //////////////////////ここから詳細情報(キャラ説明)出力用処理 ///////////////////////
