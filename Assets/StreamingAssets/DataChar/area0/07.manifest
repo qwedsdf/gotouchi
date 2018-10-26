@@ -1,0 +1,37 @@
+ManifestFileVersion: 0
+CRC: 3018659977
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: f0fd38837ebea223a5f025f00f97168b
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: e8214c69729ed7b4e0f89bad6e44781a
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 49
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- "Assets/Resources/DataChar/area0/07/GO\u592A\u304F\u3093/GO\u592A\u304F\u3093.png"
+- "Assets/Resources/DataChar/area0/07/\u30B8\u30F3\u30AE\u30B9\u30AB\u30F3\u306E\u30B8\u30F3\u304F\u3093/\u30B8\u30F3\u30AE\u30B9\u30AB\u30F3\u306E\u30B8\u30F3\u304F\u3093.png"
+- "Assets/Resources/DataChar/area0/07/\u304B\u3050\u3089\u3063\u304D\uFF5E/test.txt"
+- "Assets/Resources/DataChar/area0/07/\u304A\u3089\u3044\u3082\u541B/test.txt"
+- "Assets/Resources/DataChar/area0/07/\u304B\u3050\u3089\u3063\u304D\uFF5E/\u304B\u3050\u3089\u3063\u304D\uFF5E.png"
+- "Assets/Resources/DataChar/area0/07/\u30B8\u30F3\u30AE\u30B9\u30AB\u30F3\u306E\u30B8\u30F3\u304F\u3093/test.txt"
+- "Assets/Resources/DataChar/area0/07/\u304A\u305F\u308B\u904B\u304C\u3063\u3071/\u304A\u305F\u308B\u904B\u304C\u3063\u3071.png"
+- "Assets/Resources/DataChar/area0/07/\u304A\u305F\u308B\u904B\u304C\u3063\u3071/test.txt"
+- "Assets/Resources/DataChar/area0/07/\u3048\u3079\u30C1\u30E5\u30F3/test.txt"
+- "Assets/Resources/DataChar/area0/07/GO\u592A\u304F\u3093/test.txt"
+- "Assets/Resources/DataChar/area0/07/\u3042\u3055\u3063\u3074\u30FC/\u3042\u3055\u3063\u3074\u30FC.png"
+- "Assets/Resources/DataChar/area0/07/\u3042\u3055\u3063\u3074\u30FC/test.txt"
+- "Assets/Resources/DataChar/area0/07/\u3068\u307E\u30C1\u30E7\u30C3\u30D7/test.txt"
+- "Assets/Resources/DataChar/area0/07/\u3059\u308B\u3081\uFF5E/\u3059\u308B\u3081\uFF5E.png"
+- "Assets/Resources/DataChar/area0/07/\u3059\u308B\u3081\uFF5E/test.txt"
+- "Assets/Resources/DataChar/area0/07/\u304A\u3089\u3044\u3082\u541B/\u304A\u3089\u3044\u3082\u541B.png"
+- "Assets/Resources/DataChar/area0/07/\u3068\u307E\u30C1\u30E7\u30C3\u30D7/\u3068\u307E\u30C1\u30E7\u30C3\u30D7.png"
+- "Assets/Resources/DataChar/area0/07/\u3048\u3079\u30C1\u30E5\u30F3/\u3048\u3079\u30C1\u30E5\u30F3.png"
+Dependencies: []

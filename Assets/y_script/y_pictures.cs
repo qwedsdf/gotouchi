@@ -57,7 +57,7 @@ public class y_pictures : MonoBehaviour
     {
         once_push = false;
         init();
-        LoadPicture("");
+        LoadPicture("area0");
         Description.SetActive(false);
         Debug.Log(chardata.Count);
     }

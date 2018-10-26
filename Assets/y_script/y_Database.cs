@@ -16,6 +16,7 @@ public class data
     public bool getflg;//手に入れたかどうか
 }
 
+
 [Serializable]
 public class Savedata
 {
@@ -53,8 +54,6 @@ enum Prefecture
 public class y_Database : MonoBehaviour {
     //デバッグ用の変数
     public GameObject test_img;
-
-
 
     //キャラのデータ
     public static string[] Prefecture_names = { "長崎", "佐賀", "福岡", "大分", "熊本", "宮崎", "鹿児島", "沖縄",
@@ -107,7 +106,8 @@ public class y_Database : MonoBehaviour {
 	void Start () {
         //checkpath();
         //LoadDataAndroid();
-        LoadData();
+        //LoadData();
+        BundleLoadData();
 	}
 	
 	// Updata is called once per frame
@@ -144,6 +144,69 @@ public class y_Database : MonoBehaviour {
         }
     }
 
+    void AssetsBundleLoad(Sprite[] sp)
+    {
+        string bundleUrl = Application.streamingAssetsPath + "/DataChar/area0";
+        Debug.Log(bundleUrl);
+        AssetBundleCreateRequest request = AssetBundle.LoadFromFileAsync(bundleUrl);
+        
+        AssetBundle assetBundle = request.assetBundle;
+        sp = assetBundle.LoadAllAssets<Sprite>();
+    }
+
+    //データベースを作成する
+    void BundleLoadData()
+    {
+        //ロードできているか確認
+        test_img.GetComponent<Image>().sprite = Resources.Load<Sprite>("ja-bou");
+
+        int loadcount = 0;
+        //エリアごとに分ける
+        for (int i = 0; i < MaxAreaLenth; i++)
+        {
+            //都道府県ごと
+            for (int f = 0; f < AreaLenth[i]; f++)
+            {
+                string number = loadcount.ToString();
+                string path = DATE_FOLDER_NAME + "/" + AREA_FOLDER_NAME + i.ToString();
+                if (loadcount < 10) number = "0" + number;
+                path += "/" + number;
+
+                Sprite[] tmp_sprite;
+                TextAsset[] tmp_text;
+
+                //AssetsBundleLoad(tmp_sprite);
+
+                string bundleUrl = Application.streamingAssetsPath + "/" + path;
+                AssetBundleCreateRequest request = AssetBundle.LoadFromFileAsync(bundleUrl);
+                AssetBundle assetBundle = request.assetBundle;
+
+                tmp_sprite = assetBundle.LoadAllAssets<Sprite>();
+                tmp_text = assetBundle.LoadAllAssets<TextAsset>();
+
+                List<data> tmp_data = new List<data>();
+                //キャラごと
+                for (int k = 0; k < tmp_sprite.Length; k++)
+                {
+                    data dt = new data();
+                    dt.area = AREA_FOLDER_NAME + i.ToString();
+                    dt.getflg = false;
+                    dt.place_name = Prefecture_names[loadcount];
+                    dt.img = tmp_sprite[k];
+                    dt.description = tmp_text[k].text;
+                    dt.name = dt.img.name;
+
+                    tmp_data.Add(dt);
+                }
+                Prefecturedata[loadcount] = tmp_data;
+                //次の都道府県に移動
+                loadcount++;
+            }
+        }
+        //セーブデータをロードする
+        Load();
+    }
+
     //データベースを作成する
     void LoadData()
     {
@@ -151,10 +214,10 @@ public class y_Database : MonoBehaviour {
         test_img.GetComponent<Image>().sprite = Resources.Load<Sprite>("ja-bou");
 
         int loadcount = 0;
-        //エリア検索
+        //エリアごとに分ける
         for (int i = 0; i < MaxAreaLenth; i++)
         {
-            //都道府県検索
+            //都道府県ごと
             for (int f = 0; f < AreaLenth[i]; f++)
             {
                 string number = loadcount.ToString();
@@ -164,7 +227,7 @@ public class y_Database : MonoBehaviour {
                 Sprite[] tmp_sprite = Resources.LoadAll<Sprite>(path);
                 TextAsset[] tmp_text = Resources.LoadAll<TextAsset>(path);
                 List<data> tmp_data=new List<data>();
-                //キャラ検索
+                //キャラごと
                 for (int k = 0; k < tmp_sprite.Length; k++)
                 {
                     data dt = new data();
