@@ -19,6 +19,7 @@ public class y_button : MonoBehaviour {
 
     //エリア判別用変数
     static public int area_num = 1;
+    int larea_num;
 
     //アスペクト比固定のまま画像を載せるために使う変数
     Vector2 button_size;
@@ -30,6 +31,7 @@ public class y_button : MonoBehaviour {
         //まずはボタンを配列に格納する関数作って
         bt_prefecture = new GameObject[PrefectureVolum];
         DataBaseScript = GameObject.Find("Master").GetComponent<y_Database>();
+        larea_num = area_num - 1;
         LoadButton();
         RefreshButtonChar();
 	}
@@ -54,19 +56,19 @@ public class y_button : MonoBehaviour {
         //////////都道府県用のボタン//////////
         start_num = 0;
 
-        for (int i = 0; i < area_num - 1; i++)
+        for (int i = 0; i < larea_num; i++)
         {
             start_num += y_Database.AreaLenth[i];
         }
 
-        for (int i = 0; i < y_Database.AreaLenth[area_num]; i++)
+        for (int i = 0; i < y_Database.AreaLenth[larea_num]; i++)
         {
             string name = BUTTON_PREFECTURE_COMMON_NAME + i;
             bt_prefecture[i] = GameObject.Find(name);
             bt_prefecture[i].transform.Find("Text").GetComponent<Text>().text = y_Database.Prefecture_names[i+start_num];
         }
 
-        for (int i = y_Database.AreaLenth[area_num]; i < PrefectureVolum; i++)
+        for (int i = y_Database.AreaLenth[larea_num]; i < PrefectureVolum; i++)
         {
             string name = BUTTON_PREFECTURE_COMMON_NAME + i;
             bt_prefecture[i] = GameObject.Find(name);
@@ -89,7 +91,7 @@ public class y_button : MonoBehaviour {
         Button button;
         ColorBlock colors;
 
-        for (int i = 0; i < y_Database.AreaLenth[area_num]; i++)
+        for (int i = 0; i < y_Database.AreaLenth[larea_num]; i++)
         {
             button = bt_prefecture[i].GetComponent<Button>();
             colors = button.colors;

@@ -180,7 +180,6 @@ public class y_Database : MonoBehaviour {
                 string bundleUrl = Application.streamingAssetsPath + "/" + path;
                 AssetBundleCreateRequest request = AssetBundle.LoadFromFileAsync(bundleUrl);
                 AssetBundle assetBundle = request.assetBundle;
-                Debug.Log(f + assetBundle.name);
 
                 tmp_sprite = assetBundle.LoadAllAssets<Sprite>();
                 tmp_text = assetBundle.LoadAllAssets<TextAsset>();

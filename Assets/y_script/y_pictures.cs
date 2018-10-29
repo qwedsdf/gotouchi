@@ -19,18 +19,20 @@ public class y_pictures : MonoBehaviour
     public Text text_profile;
 
     //ボタンによってのデータを格納する配列
+    const int MAX_BUTTON_AREA = 4;
     const int MAX_BUTTON_PARENT = 7;
     const int MAX_BUTTON_ROW = 4;
     static public int MAX_BUTTON_NUM = MAX_BUTTON_PARENT * MAX_BUTTON_ROW;
     const string IMG_OBJ_NAME = "Image";
-    const float DESCRIPTION_PANEL_FIRSTPOS = -0.2f;
+    const float DESCRIPTION_PANEL_FIRSTPOS = -0.19f;
 
     //ボタンを格納するやつ
     GameObject[] button = new GameObject[MAX_BUTTON_NUM];
     GameObject[] image = new GameObject[MAX_BUTTON_NUM];
-    public GameObject[] bt_area_obj;
+    GameObject[] bt_area_obj = new GameObject[MAX_BUTTON_AREA];
 
-    //説明文が貼ってあるパネル
+    //説明文が貼ってあるパネルとテキスト
+    public GameObject scroll_panel_text;
     public GameObject scroll_panel;
 
     List<data> chardata = new List<data>();
@@ -42,8 +44,11 @@ public class y_pictures : MonoBehaviour
     //一列に入っているボタンの数
     const int ROW_BUTTON_VOLUM = 4;
 
+    //キャラにマスクをかける用のパレット
     Color color = new Color(0, 0, 0);
     Color clear_color = new Color(255, 255, 255);
+
+    bool scroll_stop_flg;
 
     int now_number;
     int page_num;
@@ -52,14 +57,14 @@ public class y_pictures : MonoBehaviour
     public GameObject content;
 
     Vector2 first_content_pos;
-    bool once_push;
 
     // Use this for initialization
     void Start()
     {
-        once_push = false;
+        //once_push = false;
         init();
-        LoadPicture("area0");
+        scroll_stop_flg = false;
+        LoadPicture(0);
         Description.SetActive(false);
         Debug.Log(chardata.Count);
     }
@@ -67,7 +72,7 @@ public class y_pictures : MonoBehaviour
     // Updata is called once per frame
     void Update()
     {
-
+        CheckScrollStop();
     }
 
     void init()
@@ -96,22 +101,22 @@ public class y_pictures : MonoBehaviour
             }
         }
 
-        //for (int i = 0; i < MAX_BUTTON_NUM; i++)
-        //{
-        //    bt_name = "bt_char_";
-        //    bt_name += i;
-        //    button[i] = transform.Find(bt_name).gameObject;
-        //    button[i].GetComponent<Image>().preserveAspect = true;
-        //}
+        for (int i = 0; i < MAX_BUTTON_AREA; i++)
+        {
+            int tmp=i+1;
+            string tmp_str="Canvas/bt_area" +tmp.ToString();
+            bt_area_obj[i] = GameObject.Find(tmp_str);
+        }
     }
 
     ///////////////画像読み込み関係///////////////
 
     //エリア選択した後に図鑑の画面に配置する画像をロード
-    public void LoadPicture(string area)
+    public void LoadPicture(int areanum)
     {
-        //ノードとコンテントの場所を初期化
+        string area = "area" + areanum.ToString();
 
+        //ノードとコンテントの場所を初期化
         content.GetComponent<RectTransform>().offsetMax = first_content_pos;
 
         y_bottom.scroll_flg = true;
@@ -119,7 +124,7 @@ public class y_pictures : MonoBehaviour
         int count = 0;
         RefreshButtonAll();
 
-        once_push = true;
+        //once_push = true;
 
         ParentPosInit();
 
@@ -250,10 +255,10 @@ public class y_pictures : MonoBehaviour
     //////////////////ボタンの処理//////////////////
 
     //エリア選択ボタンを押したとき
-    public void bt_area(y_bt_area script)
+    public void bt_area(int areanum)
     {
         ParentPosInit();
-        LoadPicture(script.GetAreaName());
+        LoadPicture(areanum);
     }
 
     //キャラのボタンを押したら説明を出す
@@ -274,14 +279,34 @@ public class y_pictures : MonoBehaviour
         ChangeInteractable(true);
     }
 
+    //スクロールを止めるかどうかを判断
+    void CheckScrollStop()
+    {
+        if (scroll_stop_flg)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                scroll_panel.GetComponent<ScrollRect>().inertia = true;
+                scroll_stop_flg = false;
+            }
+        }
+    }
+
+
+    //説明文のスクロールポジションの初期化
+    public void RefreshScollPos()
+    {
+        scroll_stop_flg = true;
+        scroll_panel.GetComponent<ScrollRect>().inertia = false;
+        Vector3 pos = scroll_panel_text.GetComponent<RectTransform>().position;
+        pos.y = DESCRIPTION_PANEL_FIRSTPOS;
+        scroll_panel_text.GetComponent<RectTransform>().position=pos;
+    }
+
     // 説明画面でページをめくった処理
     public void bt_page(int AddNum)
     {
-        Vector3 pos = scroll_panel.GetComponent<RectTransform>().position;
-        Debug.Log(pos.y);
-        pos.y = DESCRIPTION_PANEL_FIRSTPOS;
-        scroll_panel.GetComponent<RectTransform>().position = pos;
-
+        RefreshScollPos();
         int savecount = 0;
         do
         {
@@ -329,7 +354,7 @@ public class y_pictures : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         dataScript.Load();
-        LoadPicture("area0");
+        LoadPicture(0);
     }
 
     //////////////////////ここから詳細情報(キャラ説明)出力用処理 ///////////////////////

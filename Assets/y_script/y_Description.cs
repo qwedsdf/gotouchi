@@ -6,6 +6,7 @@ public class y_Description : MonoBehaviour {
     const float MAX_SIZE=1;
     const float MIN_SIZE = 0;
     RectTransform rec;
+    public y_pictures script_pictures;
     public float growing_spd;
 
     static public bool active_flg = false;
@@ -52,8 +53,8 @@ public class y_Description : MonoBehaviour {
         if (active_flg && rec.localScale.x < MAX_SIZE)
         {
             Vector3 size = rec.localScale;
-            size.x += growing_spd;
-            size.y += growing_spd;
+            size.x += Time.deltaTime * growing_spd;
+            size.y += Time.deltaTime * growing_spd;
             if (size.x > MAX_SIZE)
             {
                 size.x = MAX_SIZE;
@@ -64,12 +65,13 @@ public class y_Description : MonoBehaviour {
         else if (!active_flg && rec.localScale.x > MIN_SIZE)
         {
             Vector3 size = rec.localScale;
-            size.x -= growing_spd;
-            size.y -= growing_spd;
+            size.x -= Time.deltaTime * growing_spd;
+            size.y -= Time.deltaTime * growing_spd;
             if (size.x <= MIN_SIZE)
             {
                 size.x = MIN_SIZE;
                 size.y = MIN_SIZE;
+                script_pictures.RefreshScollPos();
                 this.gameObject.SetActive(false);
             }
             rec.localScale = size;
