@@ -8,33 +8,32 @@ public class y_flick : MonoBehaviour {
     const float NEXT_DISTANCE = 5f;
     public y_pictures script_button;
 
+    bool hitflg;
+
 	// Use this for initialization
 	void Start () {
-		
+        hitflg = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+        Flick();
 	}
 
-    void OnCollisionEnter()
+    public void Onclikmouse()
     {
-        Flick();
+        touchStartPosX = Input.mousePosition.x;
+        Debug.Log("触っている");
+        hitflg = true;
     }
 
     //フリック
     void Flick()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            touchStartPosX = Input.mousePosition.x;
-        }
-
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             touchEndPosX = Input.mousePosition.x;
-            FlickDirectionCheck();
+            if(hitflg)FlickDirectionCheck();
         }
     }
 
@@ -53,5 +52,6 @@ public class y_flick : MonoBehaviour {
                 script_button.bt_page(1);
             }
         }
+        hitflg = false;
     }
 }

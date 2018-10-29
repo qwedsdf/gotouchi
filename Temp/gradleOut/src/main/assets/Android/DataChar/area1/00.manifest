@@ -1,0 +1,29 @@
+ManifestFileVersion: 0
+CRC: 1976214096
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: b84e0519431f0875c3c6bf09b4e4bd84
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: e8214c69729ed7b4e0f89bad6e44781a
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 49
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- "Assets/Resources/DataChar/area0/00/\u3057\u307E\u3070\u3089\u3093/test.txt"
+- "Assets/Resources/DataChar/area0/00/\u304A\u3080\u3089\u3093\u3061\u3083\u3093/test.txt"
+- "Assets/Resources/DataChar/area0/00/\u30A6\u30F3\u30BC\u30EA\u30FC\u30CC/test.txt"
+- "Assets/Resources/DataChar/area0/00/\u3064\u3070\u304D\u306D\u3053/\u3064\u3070\u304D\u306D\u3053.png"
+- "Assets/Resources/DataChar/area0/00/\u3064\u3070\u304D\u306D\u3053/test.txt"
+- "Assets/Resources/DataChar/area0/00/\u304A\u3080\u3089\u3093\u3061\u3083\u3093/\u304A\u3080\u3089\u3093\u3061\u3083\u3093.png"
+- "Assets/Resources/DataChar/area0/00/\u4EBA\u9762\u77F3\u304F\u3093/test.txt"
+- "Assets/Resources/DataChar/area0/00/\u3057\u307E\u3070\u3089\u3093/\u3057\u307E\u3070\u3089\u3093.png"
+- "Assets/Resources/DataChar/area0/00/\u30A6\u30F3\u30BC\u30EA\u30FC\u30CC/\u30A6\u30F3\u30BC\u30EA\u30FC\u30CC.png"
+- "Assets/Resources/DataChar/area0/00/\u4EBA\u9762\u77F3\u304F\u3093/\u4EBA\u9762\u77F3\u304F\u3093.png"
+Dependencies: []

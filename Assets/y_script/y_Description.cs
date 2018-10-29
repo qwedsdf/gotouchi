@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class y_Description : MonoBehaviour {
     const float MAX_SIZE=1;
@@ -8,6 +9,7 @@ public class y_Description : MonoBehaviour {
     RectTransform rec;
     public y_pictures script_pictures;
     public float growing_spd;
+    public GameObject scroll_view;
 
     static public bool active_flg = false;
 
@@ -31,6 +33,7 @@ public class y_Description : MonoBehaviour {
     {
         SetPosition();
 
+        scroll_view.GetComponent<ScrollRect>().vertical = false;
         Vector3 size = rec.localScale;
         size.x = 0f;
         size.y = 0f;
@@ -72,6 +75,7 @@ public class y_Description : MonoBehaviour {
                 size.x = MIN_SIZE;
                 size.y = MIN_SIZE;
                 script_pictures.RefreshScollPos();
+                scroll_view.GetComponent<ScrollRect>().vertical = true;
                 this.gameObject.SetActive(false);
             }
             rec.localScale = size;

@@ -1,0 +1,23 @@
+ManifestFileVersion: 0
+CRC: 301920181
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 2d71bee0ca9a2c00173758b1d1e7d46e
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: e8214c69729ed7b4e0f89bad6e44781a
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 49
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- "Assets/Resources/DataChar/area1/13/\u3046\u3069\u3093\u8133/\u3046\u3069\u3093\u8133.png"
+- "Assets/Resources/DataChar/area1/13/\u3072\u3087\u3053\u305F\u3093/\u3072\u3087\u3053\u305F\u3093.png"
+- "Assets/Resources/DataChar/area1/13/\u3046\u3069\u3093\u8133/test.txt"
+- "Assets/Resources/DataChar/area1/13/\u3072\u3087\u3053\u305F\u3093/test.txt"
+Dependencies: []

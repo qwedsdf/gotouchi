@@ -128,6 +128,7 @@ public class y_pictures : MonoBehaviour
 
         ParentPosInit();
 
+        //エリアを参照し、画像を抽出・表示
         for (int i = 0; i < y_Database.PrefectureDataSize; i++)
         {
             List<data> list = dataScript.GetPrefectureData(i);
@@ -150,9 +151,10 @@ public class y_pictures : MonoBehaviour
                 count++;
             }
         }
+
+        //キャラの数をみてスクロールをするかを決める
         if (chardata.Count < MAX_BUTTON_NUM)
         {
-            Debug.Log("スクロールさせない");
             y_bottom.scroll_flg = false;
             content.GetComponent<RectTransform>().offsetMin = new Vector2(0, y_bottom.BOTTOM);
         }

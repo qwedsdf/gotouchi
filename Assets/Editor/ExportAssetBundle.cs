@@ -14,7 +14,7 @@ public class ExportAssetbundle
         // フォルダ(なければ)作成
         Directory.CreateDirectory(Application.streamingAssetsPath + "/Android");
         // Android用
-        BuildPipeline.BuildAssetBundles(Application.streamingAssetsPath + "/Android", BuildAssetBundleOptions.ChunkBasedCompression, BuildTarget.Android);
+        BuildPipeline.BuildAssetBundles(Application.streamingAssetsPath + "/Android/", BuildAssetBundleOptions.ChunkBasedCompression, BuildTarget.Android);
 #elif UNITY_IOS
         Directory.CreateDirectory(Application.streamingAssetsPath + "/iOS");
         // iOS用(勝手にSwitch PlatFormされるので注意！)
