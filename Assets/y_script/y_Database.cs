@@ -158,9 +158,6 @@ public class y_Database : MonoBehaviour {
     //データベースを作成する
     void BundleLoadData()
     {
-        //ロードできているか確認
-        test_img.GetComponent<Image>().sprite = Resources.Load<Sprite>("ja-bou");
-
         int loadcount = 0;
         //エリアごとに分ける
         for (int i = 0; i < MaxAreaLenth; i++)

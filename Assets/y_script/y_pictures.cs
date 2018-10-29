@@ -66,7 +66,6 @@ public class y_pictures : MonoBehaviour
         scroll_stop_flg = false;
         LoadPicture(0);
         Description.SetActive(false);
-        Debug.Log(chardata.Count);
     }
 
     // Updata is called once per frame
@@ -78,7 +77,6 @@ public class y_pictures : MonoBehaviour
     void init()
     {
         first_content_pos = content.GetComponent<RectTransform>().offsetMax;
-        Debug.Log("初期値" + first_content_pos.y);
 
         page_num = 0;
         dataScript = GameObject.Find("Master").GetComponent<y_Database>();
@@ -198,8 +196,6 @@ public class y_pictures : MonoBehaviour
             image[parent_num + i].GetComponent<Image>().sprite = chardata[load_num].img;
             load_num++;
         }
-
-        Debug.Log("ロード後の番号　" + now_load_num);
     }
 
     ////キャラを図鑑に表示させる（ページめくったときのみの関数）

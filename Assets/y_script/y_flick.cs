@@ -5,7 +5,7 @@ using UnityEngine;
 public class y_flick : MonoBehaviour {
     //フリックで使うベクトル
     float touchStartPosX, touchEndPosX;
-    const float NEXT_DISTANCE = 5f;
+    const float NEXT_DISTANCE = 70f;
     public y_pictures script_button;
 
     bool hitflg;
@@ -23,7 +23,6 @@ public class y_flick : MonoBehaviour {
     public void Onclikmouse()
     {
         touchStartPosX = Input.mousePosition.x;
-        Debug.Log("触っている");
         hitflg = true;
     }
 
