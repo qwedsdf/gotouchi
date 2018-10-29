@@ -21,7 +21,7 @@ public class y_Description : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-       
+        scroll_view.GetComponent<ScrollRect>().vertical = true;
 	}
 	
 	// Update is called once per frame

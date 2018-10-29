@@ -2,6 +2,7 @@ Android
 PlayerPath?
 C:/Users/HarukaGoto/Desktop/gotiuchi.apk
 SceneListBegin?
+Assets/Scenes/Loading.unity
 Assets/Scenes/select_area.unity
 Assets/Scenes/select.unity
 Assets/Scenes/picture_book.unity

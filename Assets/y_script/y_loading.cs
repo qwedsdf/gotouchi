@@ -28,7 +28,7 @@ public class y_loading : MonoBehaviour {
 
     IEnumerator LoadScene()
     {
-        async = SceneManager.LoadSceneAsync("select");
+        async = SceneManager.LoadSceneAsync("select_area");
 
         while (!async.isDone)
         {
