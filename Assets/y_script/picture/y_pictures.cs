@@ -350,8 +350,7 @@ public class y_pictures : MonoBehaviour
     //セーブデータ全消し
     public void bt_DataDeleteAll()
     {
-        PlayerPrefs.DeleteAll();
-        dataScript.Load();
+        dataScript.ResetGetChar();
         LoadPicture(0);
     }
 
@@ -407,5 +406,11 @@ public class y_pictures : MonoBehaviour
         {
             button.GetComponent<Button>().interactable = flg;
         }
+    }
+
+    public void SetPlayerChar()
+    {
+        dataScript.save_data_all.playerdata.use_char = picture.GetComponent<SpriteRenderer>().sprite;
+        dataScript.Save();
     }
 }

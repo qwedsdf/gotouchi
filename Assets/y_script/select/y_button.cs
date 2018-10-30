@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class y_button : MonoBehaviour {
     const int BUTTON_MAX = 9;
     GameObject[] buttom = new GameObject[BUTTON_MAX];
-    int PrefectureNumber;
+    static public int PrefectureNumber;
     int start_num;
     public int PrefectureVolum;
     GameObject[] bt_prefecture;
@@ -19,11 +19,16 @@ public class y_button : MonoBehaviour {
 
     //エリア判別用変数
     static public int area_num = 1;
+    static public int char_num;
     int larea_num;
 
     //アスペクト比固定のまま画像を載せるために使う変数
     Vector2 button_size;
     Vector2 img_size;
+
+    //バトルシーンで使うやつ
+    static public data now_battle_chardate;
+
 
 	// Use this for initialization
 	void Start () {
@@ -32,6 +37,10 @@ public class y_button : MonoBehaviour {
         bt_prefecture = new GameObject[PrefectureVolum];
         DataBaseScript = GameObject.Find("Master").GetComponent<y_Database>();
         larea_num = area_num - 1;
+        if (y_game.winflg) {
+            bt_GetChar(char_num);
+            y_game.winflg = false;
+        }
         LoadButton();
         RefreshButtonChar();
 	}
@@ -128,14 +137,15 @@ public class y_button : MonoBehaviour {
             buttom[i].GetComponent<Image>().sprite = PrefectureCharDate[i].img;
         }
     }
+    public void bt_PushCharButton(int num)
+    {
+        now_battle_chardate = DataBaseScript.GetCharData(PrefectureNumber,num);
+        char_num = num;
+        SceneManager.LoadScene("game");
+    }
 
     public void bt_GetChar(int num) {
         DataBaseScript.GetChar(PrefectureNumber, num);
-    }
-
-    public void LoadsScean_Picture_Book()
-    {
-        SceneManager.LoadScene("picture_book");
     }
 
     public void check(string str)
@@ -146,5 +156,10 @@ public class y_button : MonoBehaviour {
     public void LoadAreaSelectScene()
     {
         SceneManager.LoadScene("select_area");
+    }
+
+    public void LoadScean_Picture_Book()
+    {
+        SceneManager.LoadScene("picture_book");
     }
 }

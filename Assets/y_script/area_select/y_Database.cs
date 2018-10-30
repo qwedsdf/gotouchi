@@ -26,19 +26,32 @@ public class Savedata
     public string char_name;//名前
     public int char_num;//キャラの番号
 }
+[Serializable]
+public class Playerdata
+{
+    public string player_name = "NO NAME";
+    public Sprite use_char;
+}
 
 [Serializable]
-public class Serialization<T>
+public class SavedataAll
 {
-    [SerializeField]
-    List<T> data;
-    public List<T> ToList() { return data; }
-
-    public Serialization(List<T> target)
-    {
-        data = target;
-    }
+    public Playerdata playerdata;
+    public List<Savedata> savedata;
 }
+
+//[Serializable]
+//public class Serialization<T>
+//{
+//    [SerializeField]
+//    List<T> data;
+//    public List<T> ToList() { return data; }
+
+//    public Serialization(List<T> target)
+//    {
+//        data = target;
+//    }
+//}
 
 enum Prefecture
 {
@@ -99,6 +112,8 @@ public class y_Database : MonoBehaviour {
 
     [SerializeField]
     List<Savedata> get_data;
+
+    public SavedataAll save_data_all = new SavedataAll();
 
     void Awake()
     {
@@ -207,6 +222,13 @@ public class y_Database : MonoBehaviour {
         return Prefecturedata[num];
     }
 
+    public data GetCharData(int PreNumber, int number)
+    {
+        List<data> list = new List<data>();
+        list = Prefecturedata[PreNumber];
+        return list[number];
+    }
+
     //キャラのゲット処理
     public void GetChar(int PreNumber,int number)
     {
@@ -233,9 +255,16 @@ public class y_Database : MonoBehaviour {
     }
 
     //セーブする
-    void Save() {
-        string json = JsonUtility.ToJson(new Serialization<Savedata>(get_data),true);
+    public void Save() {
+        //string json = JsonUtility.ToJson(new Serialization<Savedata>(get_data),true);
+        //Debug.Log("json使ったやつ\n" + json);
+        ////textSave(json);
+
+        //データ構造変更
+        save_data_all.savedata = get_data;
+        string json = JsonUtility.ToJson(save_data_all, true);
         Debug.Log("json使ったやつ\n" + json);
+        //textSave(json);//アンドロイドで通らなくなる
 
         PlayerPrefs.SetString(SaveKey, json);
     }
@@ -243,6 +272,7 @@ public class y_Database : MonoBehaviour {
     //ロードする
     public void Load()
     {
+        //フラグを初期化
         for (int i = 0; i < Prefecturedata.Length; i++)
         {
             List<data> list = Prefecturedata[i];
@@ -257,17 +287,51 @@ public class y_Database : MonoBehaviour {
         string lstr = PlayerPrefs.GetString(SaveKey);
         if (lstr == "")
         {
+            save_data_all = new SavedataAll();
             get_data = new List<Savedata>();
             Debug.Log("セーブデータはないよ");
             return;
         }
-        get_data = JsonUtility.FromJson<Serialization<Savedata>>(lstr).ToList();
+        save_data_all = JsonUtility.FromJson<SavedataAll>(lstr);
+        Debug.Log(lstr);
+        Debug.Log(save_data_all.playerdata.use_char);
+        LoadDataAll();
+        //get_data = JsonUtility.FromJson<Serialization<Savedata>>(lstr).ToList();
 
+        ////jsonからデータを読み取り、ロード
+        //for (int i = 0; i < get_data.Count; i++)
+        //{
+        //    List<data> list = Prefecturedata[get_data[i].prefecture_num];
+        //    list[get_data[i].char_num].getflg = true;
+        //    Prefecturedata[get_data[i].prefecture_num] = list;
+        //}
+    }
+
+    //キャラ取得データを全て消す
+    public void ResetGetChar()
+    {
+        get_data.Clear();
+        Save();
+        Load();
+    }
+
+    void LoadDataAll()
+    {
+        get_data = save_data_all.savedata;
         for (int i = 0; i < get_data.Count; i++)
         {
             List<data> list = Prefecturedata[get_data[i].prefecture_num];
             list[get_data[i].char_num].getflg = true;
             Prefecturedata[get_data[i].prefecture_num] = list;
         }
+    }
+
+    public void textSave(string txt)
+    {
+        string path = Application.streamingAssetsPath + "/SaveData/GetData.txt";
+        StreamWriter sw = new StreamWriter(path, false); //true=追記 false=上書き
+        sw.WriteLine(txt);
+        sw.Flush();
+        sw.Close();
     }
 }

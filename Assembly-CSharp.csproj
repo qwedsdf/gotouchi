@@ -51,23 +51,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\InfiniteScroll\Common\Item.cs" />
-     <Compile Include="Assets\InfiniteScroll\IInfiniteScrollSetup.cs" />
-     <Compile Include="Assets\InfiniteScroll\Infinite\ItemControllerInfinite.cs" />
-     <Compile Include="Assets\InfiniteScroll\InfiniteScroll.cs" />
-     <Compile Include="Assets\InfiniteScroll\Limited\ItemControllerLimited.cs" />
-     <Compile Include="Assets\InfiniteScroll\Loop\ItemControllerLoop.cs" />
+     <Compile Include="Assets\SimpleParticlePack\Scripts\ParticleTester.cs" />
      <Compile Include="Assets\y_script\area_select\y_Database.cs" />
      <Compile Include="Assets\y_script\area_select\y_LoadSelect.cs" />
      <Compile Include="Assets\y_script\AssetBundleManager.cs" />
      <Compile Include="Assets\y_script\game\y_game.cs" />
      <Compile Include="Assets\y_script\game\y_player.cs" />
+     <Compile Include="Assets\y_script\game\y_text_result.cs" />
      <Compile Include="Assets\y_script\picture\y_bottom.cs" />
      <Compile Include="Assets\y_script\picture\y_ButtonInfo.cs" />
      <Compile Include="Assets\y_script\picture\y_Description.cs" />
      <Compile Include="Assets\y_script\picture\y_flick.cs" />
      <Compile Include="Assets\y_script\picture\y_pictures.cs" />
      <Compile Include="Assets\y_script\picture\y_scroll_node.cs" />
+     <Compile Include="Assets\y_script\profile\y_SetProfile.cs" />
      <Compile Include="Assets\y_script\select\y_button.cs" />
      <Compile Include="Assets\y_script\select\y_loading.cs" />
      <Compile Include="Assets\y_script\SingletonMonoBehaviour.cs" />
@@ -117,6 +114,7 @@
      <None Include="Assets\Resources\DataChar\area2\11\呉氏\test.txt" />
      <None Include="Assets\Resources\DataChar\area4\19\たんぽ小町ちゃん\test.txt" />
      <None Include="Assets\Resources\DataChar\area8\26\トリピー\test.txt" />
+     <None Include="Assets\StreamingAssets\SaveData\GetData.txt" />
      <None Include="Assets\Resources\DataChar\area1\02\ji-mo\test.txt" />
      <None Include="Assets\Resources\DataChar\area1\06\西郷つん\test.txt" />
      <None Include="Assets\Resources\DataChar\area1\07\あさっぴー\test.txt" />

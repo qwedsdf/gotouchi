@@ -9,11 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Loading.unity
     guid: 78dd0737712f8304982c62e17c58ca80
   - enabled: 1
+    path: Assets/Scenes/profile.unity
+    guid: b92edbdc0b17a964baf57f57957622c8
+  - enabled: 1
     path: Assets/Scenes/select_area.unity
     guid: 396504488acb5aa47bcb6d4d1176c79b
   - enabled: 1
     path: Assets/Scenes/select.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/game.unity
+    guid: a7e757b99313040488427ebc19c77b36
   - enabled: 1
     path: Assets/Scenes/picture_book.unity
     guid: a273d573613829d4180c9aabd9b55470

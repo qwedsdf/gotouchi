@@ -4,16 +4,25 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class y_game : MonoBehaviour {
-    const float PLAYER_SIZE=1.5f;
+    static public float PLAYER_SIZE = 1.0f;
+    const float PUSH_POWWER = 15f;
     Rigidbody2D[] rb=new Rigidbody2D[2];
-
+    static public bool winflg = false;
+    static public int PLAYERNUM = 0;
+    static public int ENEMYNUM = 1;
+    public GameObject text;
+    static public GameObject game_mastar;
     public GameObject[] player;
+    static public AudioSource audiosouce;
     int count;
     bool[] readylflg = new bool[2];
 
 	// Use this for initialization
 	void Start () {
         init();
+        game_mastar = this.gameObject;
+        text.SetActive(false);
+        audiosouce = this.GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -26,12 +35,17 @@ public class y_game : MonoBehaviour {
         count = 0;
         for (int i = 0; i < player.Length; i++)
         {
+            if (i == ENEMYNUM)
+            {
+                player[i].GetComponent<SpriteRenderer>().sprite = y_button.now_battle_chardate.img;
+            }
             rb[i] = player[i].GetComponent<Rigidbody2D>();
             readylflg[i] = false;
             
             //画像のサイズを見て、オブジェクトの大きさを調整
             float player_sprite_size;
-            player_sprite_size = player[i].GetComponent<SpriteRenderer>().size.x;
+            player_sprite_size = player[i].GetComponent<SpriteRenderer>().bounds.size.x;
+            Debug.Log("プレイヤー"+i+" " + player_sprite_size);
             float magnification = PLAYER_SIZE / player_sprite_size;
             Vector3 localsize = player[i].transform.localScale;
             localsize.x *= magnification;
@@ -48,7 +62,7 @@ public class y_game : MonoBehaviour {
 
     void EnemyAttack()
     {
-        if (count % 10 == 0)
+        if (count % 30 == 0 && !y_player.Settlementflg)
         {
             PushPlayer(1);
         }
@@ -67,11 +81,17 @@ public class y_game : MonoBehaviour {
         
         EnemyAttack();
     }
+    //テキストを表示
+    public void TextActive(bool flg)
+    {
+        text.SetActive(flg);
+    }
 
+    //ボタンを押すとキャラを押す
     public void PushPlayer(int num)
     {
         if (!readylflg[num]) return;
-        float push = 10f;
+        float push = PUSH_POWWER;
         if (num == 1) push = push * -1;
         Vector3 force = new Vector3(push, 0.0f, 0.0f);
         rb[num].AddForce(force);  

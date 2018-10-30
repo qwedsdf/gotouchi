@@ -322,6 +322,48 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 243652258}
+--- !u!1001 &315308994
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4766760758713136, guid: 0dc989b13a0dfc94b8b5a1124701ecb6, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4766760758713136, guid: 0dc989b13a0dfc94b8b5a1124701ecb6, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4766760758713136, guid: 0dc989b13a0dfc94b8b5a1124701ecb6, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4766760758713136, guid: 0dc989b13a0dfc94b8b5a1124701ecb6, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4766760758713136, guid: 0dc989b13a0dfc94b8b5a1124701ecb6, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4766760758713136, guid: 0dc989b13a0dfc94b8b5a1124701ecb6, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4766760758713136, guid: 0dc989b13a0dfc94b8b5a1124701ecb6, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4766760758713136, guid: 0dc989b13a0dfc94b8b5a1124701ecb6, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 0dc989b13a0dfc94b8b5a1124701ecb6, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &354829892
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,7 +562,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2036375050}
-        m_MethodName: bt_GetChar
+        m_MethodName: bt_PushCharButton
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1464,7 +1506,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2036375050}
-        m_MethodName: bt_GetChar
+        m_MethodName: bt_PushCharButton
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1585,7 +1627,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2036375050}
-        m_MethodName: bt_GetChar
+        m_MethodName: bt_PushCharButton
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1854,7 +1896,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2036375050}
-        m_MethodName: bt_GetChar
+        m_MethodName: bt_PushCharButton
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2049,7 +2091,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2036375050}
-        m_MethodName: bt_GetChar
+        m_MethodName: bt_PushCharButton
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2450,7 +2492,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2036375050}
-        m_MethodName: bt_GetChar
+        m_MethodName: bt_PushCharButton
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3137,7 +3179,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2036375050}
-        m_MethodName: bt_GetChar
+        m_MethodName: bt_PushCharButton
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3942,7 +3984,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2036375050}
-        m_MethodName: bt_GetChar
+        m_MethodName: bt_PushCharButton
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4064,7 +4106,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2036375050}
-        m_MethodName: LoadsScean_Picture_Book
+        m_MethodName: LoadScean_Picture_Book
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5019,7 +5061,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2036375050}
-        m_MethodName: bt_GetChar
+        m_MethodName: bt_PushCharButton
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
