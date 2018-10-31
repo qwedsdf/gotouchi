@@ -48,7 +48,6 @@ public class y_player : MonoBehaviour {
     void SetPlayerCharImage()
     {
         Sprite sp = DataBaseScript.save_data_all.playerdata.use_char;
-        Debug.Log(DataBaseScript.save_data_all.playerdata.use_char);
         if (name == "Player1")
         {
             nametext.text = DataBaseScript.save_data_all.playerdata.player_name;

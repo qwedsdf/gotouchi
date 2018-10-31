@@ -408,6 +408,7 @@ public class y_pictures : MonoBehaviour
         }
     }
 
+    //使うキャラのイメージを入れる
     public void SetPlayerChar()
     {
         dataScript.save_data_all.playerdata.use_char = picture.GetComponent<SpriteRenderer>().sprite;

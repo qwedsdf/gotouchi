@@ -30,6 +30,8 @@ public class Savedata
 public class Playerdata
 {
     public string player_name = "NO NAME";
+    public int prefecture_num;
+    public int char_num;
     public Sprite use_char;
 }
 
@@ -294,7 +296,6 @@ public class y_Database : MonoBehaviour {
         }
         save_data_all = JsonUtility.FromJson<SavedataAll>(lstr);
         Debug.Log(lstr);
-        Debug.Log(save_data_all.playerdata.use_char);
         LoadDataAll();
         //get_data = JsonUtility.FromJson<Serialization<Savedata>>(lstr).ToList();
 

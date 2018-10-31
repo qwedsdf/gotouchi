@@ -30,6 +30,7 @@ public class y_SetProfile : MonoBehaviour {
     public void LoadScean_SelectArea()
     {
         PushOk();
+        DataBaseScript.save_data_all.playerdata.use_char = null;
         SceneManager.LoadScene("select_area");
     }
 }

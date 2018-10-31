@@ -14,6 +14,7 @@ public class y_game : MonoBehaviour {
     static public GameObject game_mastar;
     public GameObject[] player;
     static public AudioSource audiosouce;
+    public AudioSource bgm;
     int count;
     bool[] readylflg = new bool[2];
 
@@ -62,7 +63,7 @@ public class y_game : MonoBehaviour {
 
     void EnemyAttack()
     {
-        if (count % 30 == 0 && !y_player.Settlementflg)
+        if (count % 3 == 0 && !y_player.Settlementflg)
         {
             PushPlayer(1);
         }
@@ -71,6 +72,10 @@ public class y_game : MonoBehaviour {
 
     void Battle()
     {
+        if (y_player.Settlementflg)
+        {
+            bgm.Stop();
+        }
         for(int i=0; i<readylflg.Length; i++){
 
             if (!readylflg[i])
