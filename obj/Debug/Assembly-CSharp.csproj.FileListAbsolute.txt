@@ -129,3 +129,4 @@ C:\Users\HarukaGoto\Documents\github\gotouchi\Temp\bin\Debug\UnityEngine.Spatial
 C:\Users\HarukaGoto\Documents\github\gotouchi\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 C:\Users\HarukaGoto\Documents\github\gotouchi\obj\Debug\Assembly-CSharp.dll
 C:\Users\HarukaGoto\Documents\github\gotouchi\obj\Debug\Assembly-CSharp.pdb
+C:\Users\HarukaGoto\Documents\github\gotouchi\Temp\bin\Debug\UUebView.dll

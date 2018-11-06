@@ -1,0 +1,255 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee4bc21567f434b598a3c96ba4946372, type: 3}
+  m_Name: AssetReferenceDB
+  m_EditorClassIdentifier: 
+  m_assets:
+  - m_assetDatabaseId: 7e73406419bf54a50a1b5faf24749c6c
+    m_importFrom: Assets/AutoyaTests/RuntimeData/AssetBundles/MainResources/PrefabHolder.cs
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  - m_assetDatabaseId: ec5ec1496f4ed40b9a67e5b76a534e22
+    m_importFrom: Assets/AutoyaTests/RuntimeData/AssetBundles/MainResources/nestedPrefab.prefab
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 1a61fb3505d794f81916042f7653c12e
+    m_importFrom: Assets/AutoyaTests/RuntimeData/AssetBundles/MainResources/textureName.png
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 24cb3b158b39942228bd6cd6f969b036
+    m_importFrom: Assets/AutoyaTests/RuntimeData/AssetBundles/MainResources/textureName1.prefab
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: e6582ecf1a0cd414d898ca6887ba4a62
+    m_importFrom: Assets/AutoyaTests/RuntimeData/AssetBundles/MainResources/textureName2.prefab
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 44197a9e9fe0f4bae9fefc4e38cf2db7
+    m_importFrom: Assets/AutoyaTests/RuntimeData/AssetBundles/MainResources/updatableTex.prefab
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 
+    m_importFrom: Assets/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/f22a6572-de57-46ab-beeb-057fa48e8205/OSX/nestedprefab
+    m_exportTo: /Users/passepied/Desktop/autoya/AssetBundles/main_assets/OSX/nestedprefab
+    m_variantName: 
+    m_assetTypeString: UnityEngine.AssetBundles.GraphTool.AssetBundleReference, Assembly-CSharp-Editor,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 
+    m_importFrom: Assets/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/f22a6572-de57-46ab-beeb-057fa48e8205/OSX/nestedprefab.manifest
+    m_exportTo: /Users/passepied/Desktop/autoya/AssetBundles/main_assets/OSX/nestedprefab.manifest
+    m_variantName: 
+    m_assetTypeString: UnityEngine.AssetBundles.GraphTool.AssetBundleReference, Assembly-CSharp-Editor,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 
+    m_importFrom: Assets/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/f22a6572-de57-46ab-beeb-057fa48e8205/OSX/texturename
+    m_exportTo: /Users/passepied/Desktop/autoya/AssetBundles/main_assets/OSX/texturename
+    m_variantName: 
+    m_assetTypeString: UnityEngine.AssetBundles.GraphTool.AssetBundleReference, Assembly-CSharp-Editor,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 
+    m_importFrom: Assets/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/f22a6572-de57-46ab-beeb-057fa48e8205/OSX/texturename.manifest
+    m_exportTo: /Users/passepied/Desktop/autoya/AssetBundles/main_assets/OSX/texturename.manifest
+    m_variantName: 
+    m_assetTypeString: UnityEngine.AssetBundles.GraphTool.AssetBundleReference, Assembly-CSharp-Editor,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 
+    m_importFrom: Assets/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/f22a6572-de57-46ab-beeb-057fa48e8205/OSX/texturename1
+    m_exportTo: /Users/passepied/Desktop/autoya/AssetBundles/main_assets/OSX/texturename1
+    m_variantName: 
+    m_assetTypeString: UnityEngine.AssetBundles.GraphTool.AssetBundleReference, Assembly-CSharp-Editor,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 
+    m_importFrom: Assets/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/f22a6572-de57-46ab-beeb-057fa48e8205/OSX/texturename1.manifest
+    m_exportTo: /Users/passepied/Desktop/autoya/AssetBundles/main_assets/OSX/texturename1.manifest
+    m_variantName: 
+    m_assetTypeString: UnityEngine.AssetBundles.GraphTool.AssetBundleReference, Assembly-CSharp-Editor,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 
+    m_importFrom: Assets/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/f22a6572-de57-46ab-beeb-057fa48e8205/OSX/texturename2
+    m_exportTo: /Users/passepied/Desktop/autoya/AssetBundles/main_assets/OSX/texturename2
+    m_variantName: 
+    m_assetTypeString: UnityEngine.AssetBundles.GraphTool.AssetBundleReference, Assembly-CSharp-Editor,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 
+    m_importFrom: Assets/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/f22a6572-de57-46ab-beeb-057fa48e8205/OSX/texturename2.manifest
+    m_exportTo: /Users/passepied/Desktop/autoya/AssetBundles/main_assets/OSX/texturename2.manifest
+    m_variantName: 
+    m_assetTypeString: UnityEngine.AssetBundles.GraphTool.AssetBundleReference, Assembly-CSharp-Editor,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 
+    m_importFrom: Assets/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/f22a6572-de57-46ab-beeb-057fa48e8205/OSX/updatabletex
+    m_exportTo: /Users/passepied/Desktop/autoya/AssetBundles/main_assets/OSX/updatabletex
+    m_variantName: 
+    m_assetTypeString: UnityEngine.AssetBundles.GraphTool.AssetBundleReference, Assembly-CSharp-Editor,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 
+    m_importFrom: Assets/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/f22a6572-de57-46ab-beeb-057fa48e8205/OSX/updatabletex.manifest
+    m_exportTo: /Users/passepied/Desktop/autoya/AssetBundles/main_assets/OSX/updatabletex.manifest
+    m_variantName: 
+    m_assetTypeString: UnityEngine.AssetBundles.GraphTool.AssetBundleReference, Assembly-CSharp-Editor,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 
+    m_importFrom: Assets/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/f22a6572-de57-46ab-beeb-057fa48e8205/OSX/OSX
+    m_exportTo: /Users/passepied/Desktop/autoya/AssetBundles/main_assets/OSX/OSX
+    m_variantName: 
+    m_assetTypeString: UnityEngine.AssetBundles.GraphTool.AssetBundleReference, Assembly-CSharp-Editor,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 
+    m_importFrom: Assets/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/f22a6572-de57-46ab-beeb-057fa48e8205/OSX/OSX.manifest
+    m_exportTo: /Users/passepied/Desktop/autoya/AssetBundles/main_assets/OSX/OSX.manifest
+    m_variantName: 
+    m_assetTypeString: UnityEngine.AssetBundles.GraphTool.AssetBundleReference, Assembly-CSharp-Editor,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 68632dd44bbfd2d40966dc2def7b281b
+    m_importFrom: Assets/Resources/Prefabs/ArmCol.prefab
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: f2053dda414e1ee4a84b6426a71404a2
+    m_importFrom: Assets/Resources/Prefabs/CPU.prefab
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 0c7125679e98398498e98c01a94d43ca
+    m_importFrom: Assets/Resources/Prefabs/MessageBox.prefab
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 4772f0ddf5d38344dbaa91e670cbfc67
+    m_importFrom: Assets/Resources/Prefabs/Player.prefab
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: fc7195393961d514ab0c67812ef5576b
+    m_importFrom: Assets/Resources/Textures/character001.PNG
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: d9ff36374407cc2449dc5bd60bf6e102
+    m_importFrom: Assets/Resources/Textures/character001.prefab
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: ca8a7ba6dff7590419bad58178ab0956
+    m_importFrom: Assets/Resources/Textures/character002.PNG
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 889b7f4282d566346a5991c5b5dac568
+    m_importFrom: Assets/Resources/Textures/character002_.prefab
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 410bb338e1b3d2e4480a685836ded202
+    m_importFrom: Assets/Resources/human006h4_face001.prefab
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 4b0842e69f16edc4d813c015232063be
+    m_importFrom: Assets/Resources/human006h4_fashion001_baseball_cap.prefab
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 206a1838dc160a34098564975cfaa0b4
+    m_importFrom: Assets/Resources/human006h4_fashion001_baseball_shose.prefab
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 5678ce6bcb7bb324498cacf5a33ee0e2
+    m_importFrom: Assets/Resources/human006h4_fashion001_baseball_wear.prefab
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: a21b1aafbf8a6a34091e77d0be3b8ca9
+    m_importFrom: Assets/Resources/human006h4_fashion002_body.prefab
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: ff1d1291bd43cb84d83dbae8c801001b
+    m_importFrom: Assets/Resources/human006h4_fashion002_helmet.prefab
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: a2eb8b36bbe65ab44870b298def85c2e
+    m_importFrom: Assets/Resources/human006h4_fashion002_leg.prefab
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 40266a6b40a13ff49b051424c6dadeff
+    m_importFrom: Assets/Resources/human1.prefab
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: cc9a54fca3a626142b8b2400df9e1328
+    m_importFrom: Assets/Resources/human2.prefab
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 
+    m_importFrom: Assets/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/5dbe1593-e433-48d9-a421-d1b9a2bf18a6/Android/bundle_unitychan
+    m_exportTo: C:/Users/PROUSER01/Desktop/handpush/AssetBundles/unitychan_prefab/Android/bundle_unitychan
+    m_variantName: 
+    m_assetTypeString: UnityEngine.AssetBundles.GraphTool.AssetBundleReference, Assembly-CSharp-Editor,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 
+    m_importFrom: Assets/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/5dbe1593-e433-48d9-a421-d1b9a2bf18a6/Android/bundle_unitychan.manifest
+    m_exportTo: C:/Users/PROUSER01/Desktop/handpush/AssetBundles/unitychan_prefab/Android/bundle_unitychan.manifest
+    m_variantName: 
+    m_assetTypeString: UnityEngine.AssetBundles.GraphTool.AssetBundleReference, Assembly-CSharp-Editor,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 
+    m_importFrom: Assets/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/5dbe1593-e433-48d9-a421-d1b9a2bf18a6/Android/Android
+    m_exportTo: C:/Users/PROUSER01/Desktop/handpush/AssetBundles/unitychan_prefab/Android/Android
+    m_variantName: 
+    m_assetTypeString: UnityEngine.AssetBundles.GraphTool.AssetBundleReference, Assembly-CSharp-Editor,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 
+    m_importFrom: Assets/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/5dbe1593-e433-48d9-a421-d1b9a2bf18a6/Android/Android.manifest
+    m_exportTo: C:/Users/PROUSER01/Desktop/handpush/AssetBundles/unitychan_prefab/Android/Android.manifest
+    m_variantName: 
+    m_assetTypeString: UnityEngine.AssetBundles.GraphTool.AssetBundleReference, Assembly-CSharp-Editor,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 047003c59e5b3489a98c3fb64b3d84e8
+    m_importFrom: Assets/AssetBundle/arm_1.asset
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: Anima2D.SpriteMesh, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  m_version: 2

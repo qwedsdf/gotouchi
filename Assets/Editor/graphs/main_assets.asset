@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec4882d68a9346b3b5f8ecf1e38a534, type: 3}
+  m_Name: main_assets
+  m_EditorClassIdentifier: 
+  m_allNodes:
+  - m_name: Load Main Assets From Directory
+    m_id: eabd4be9-4957-42c8-88fa-a4babb2cb934
+    m_x: 56
+    m_y: 68
+    m_nodeInstance:
+      m_className: UnityEngine.AssetBundles.GraphTool.Loader, Assembly-CSharp-Editor,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      m_instanceData: B64|eyJtX2xvYWRQYXRoIjp7Im1fdmFsdWVzIjpbeyJ0YXJnZXRHcm91cCI6MCwidmFsdWUiOiJBdXRveWFUZXN0cy9SdW50aW1lRGF0YS9Bc3NldEJ1bmRsZXMvTWFpblJlc291cmNlcyJ9XX19
+    m_inputPoints: []
+    m_outputPoints:
+    - id: c464bc37-88e7-4e5c-990d-7caffcb13ae4
+      label: +
+      parentId: eabd4be9-4957-42c8-88fa-a4babb2cb934
+      isInput: 0
+      buttonRect:
+        x: 231
+        y: 32.5
+        width: 10
+        height: 23
+  - m_name: Build Asset Bundles
+    m_id: f22a6572-de57-46ab-beeb-057fa48e8205
+    m_x: 148
+    m_y: 184
+    m_nodeInstance:
+      m_className: UnityEngine.AssetBundles.GraphTool.BundleBuilder, Assembly-CSharp-Editor,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      m_instanceData: B64|eyJtX2VuYWJsZWRCdW5kbGVPcHRpb25zIjp7Im1fdmFsdWVzIjpbeyJ0YXJnZXRHcm91cCI6MCwidmFsdWUiOjB9XX0sIm1fb3V0cHV0RGlyIjp7Im1fdmFsdWVzIjpbeyJ0YXJnZXRHcm91cCI6MCwidmFsdWUiOiIifV19LCJtX291dHB1dE9wdGlvbiI6eyJtX3ZhbHVlcyI6W3sidGFyZ2V0R3JvdXAiOjAsInZhbHVlIjowfV19LCJtX292ZXJ3cml0ZUltcG9ydGVyU2V0dGluZyI6ZmFsc2V9
+    m_inputPoints:
+    - id: 625b2b1d-bbba-4e44-ac6c-12ff46a244d0
+      label: '-'
+      parentId: f22a6572-de57-46ab-beeb-057fa48e8205
+      isInput: 1
+      buttonRect:
+        x: 0
+        y: 29.5
+        width: 21
+        height: 29
+    m_outputPoints:
+    - id: ec172b29-dfa9-4dd6-9a82-74955e31417a
+      label: +
+      parentId: f22a6572-de57-46ab-beeb-057fa48e8205
+      isInput: 0
+      buttonRect:
+        x: 155
+        y: 32.5
+        width: 10
+        height: 23
+  - m_name: Configure Bundle From Group
+    m_id: cb1c976e-e411-4b73-b3c8-2fa47d007ed6
+    m_x: 532
+    m_y: 64
+    m_nodeInstance:
+      m_className: UnityEngine.AssetBundles.GraphTool.BundleConfigurator, Assembly-CSharp-Editor,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      m_instanceData: B64|eyJtX2J1bmRsZU5hbWVUZW1wbGF0ZSI6eyJtX3ZhbHVlcyI6W3sidGFyZ2V0R3JvdXAiOjAsInZhbHVlIjoiKiJ9XX0sIm1fdmFyaWFudHMiOltdLCJtX3VzZUdyb3VwQXNWYXJpYW50cyI6ZmFsc2V9
+    m_inputPoints:
+    - id: 35055c3b-f225-4263-80ce-b3dbdc01893d
+      label: '-'
+      parentId: cb1c976e-e411-4b73-b3c8-2fa47d007ed6
+      isInput: 1
+      buttonRect:
+        x: 0
+        y: 29.5
+        width: 21
+        height: 29
+    m_outputPoints:
+    - id: 9060086d-e12f-4dc9-abb9-3fbc3292708d
+      label: +
+      parentId: cb1c976e-e411-4b73-b3c8-2fa47d007ed6
+      isInput: 0
+      buttonRect:
+        x: 214
+        y: 32.5
+        width: 10
+        height: 23
+  - m_name: Export To Directory Then Generate List In PostProcess
+    m_id: 048d3451-4f80-4880-a990-7ba65cfa7e27
+    m_x: 376
+    m_y: 184
+    m_nodeInstance:
+      m_className: UnityEngine.AssetBundles.GraphTool.Exporter, Assembly-CSharp-Editor,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      m_instanceData: B64|eyJtX2V4cG9ydFBhdGgiOnsibV92YWx1ZXMiOlt7InRhcmdldEdyb3VwIjowLCJ2YWx1ZSI6IkFzc2V0QnVuZGxlcy9tYWluX2Fzc2V0cy8ifV19LCJtX2V4cG9ydE9wdGlvbiI6eyJtX3ZhbHVlcyI6W3sidGFyZ2V0R3JvdXAiOjAsInZhbHVlIjowfV19LCJtX2ZsYXR0ZW5EaXIiOnsibV92YWx1ZXMiOlt7InRhcmdldEdyb3VwIjowLCJ2YWx1ZSI6MH1dfX0=
+    m_inputPoints:
+    - id: 9ef67ef8-50b7-44f6-b266-ee89c93e5e07
+      label: '-'
+      parentId: 048d3451-4f80-4880-a990-7ba65cfa7e27
+      isInput: 1
+      buttonRect:
+        x: 0
+        y: 29.5
+        width: 21
+        height: 29
+    m_outputPoints: []
+  - m_name: Flatten
+    m_id: 471ad008-2e00-4351-b75d-5526a5712995
+    m_x: 364
+    m_y: 64
+    m_nodeInstance:
+      m_className: Flatten, Assembly-CSharp-Editor, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      m_instanceData: B64|eyJtX215VmFsdWUiOnsibV92YWx1ZXMiOlt7InRhcmdldEdyb3VwIjowLCJ2YWx1ZSI6IiJ9XX19
+    m_inputPoints:
+    - id: 8ab4ce56-44e0-4f8a-a062-efd161564be4
+      label: '-'
+      parentId: 471ad008-2e00-4351-b75d-5526a5712995
+      isInput: 1
+      buttonRect:
+        x: 0
+        y: 29.5
+        width: 21
+        height: 29
+    m_outputPoints:
+    - id: b3e7ff30-99df-4811-8f9f-0605ad5b7e09
+      label: +
+      parentId: 471ad008-2e00-4351-b75d-5526a5712995
+      isInput: 0
+      buttonRect:
+        x: 111
+        y: 32.5
+        width: 10
+        height: 23
+  m_allConnections:
+  - m_id: ab29efd0-bbc8-4fde-a3e9-8dc556795fe2
+    m_fromNodeId: cb1c976e-e411-4b73-b3c8-2fa47d007ed6
+    m_fromNodeConnectionPointId: 9060086d-e12f-4dc9-abb9-3fbc3292708d
+    m_toNodeId: f22a6572-de57-46ab-beeb-057fa48e8205
+    m_toNodeConnectionPoiontId: 625b2b1d-bbba-4e44-ac6c-12ff46a244d0
+    m_label: +
+  - m_id: 8de9a871-0e4b-427b-8992-e8a6bcaf68f6
+    m_fromNodeId: f22a6572-de57-46ab-beeb-057fa48e8205
+    m_fromNodeConnectionPointId: ec172b29-dfa9-4dd6-9a82-74955e31417a
+    m_toNodeId: 048d3451-4f80-4880-a990-7ba65cfa7e27
+    m_toNodeConnectionPoiontId: 9ef67ef8-50b7-44f6-b266-ee89c93e5e07
+    m_label: +
+  - m_id: 506998bc-6f8a-4135-a225-8acc81b17b97
+    m_fromNodeId: eabd4be9-4957-42c8-88fa-a4babb2cb934
+    m_fromNodeConnectionPointId: c464bc37-88e7-4e5c-990d-7caffcb13ae4
+    m_toNodeId: 471ad008-2e00-4351-b75d-5526a5712995
+    m_toNodeConnectionPoiontId: 8ab4ce56-44e0-4f8a-a062-efd161564be4
+    m_label: +
+  - m_id: 34eeb5e8-ab51-4d9a-b1ab-024f3a03cbcf
+    m_fromNodeId: 471ad008-2e00-4351-b75d-5526a5712995
+    m_fromNodeConnectionPointId: b3e7ff30-99df-4811-8f9f-0605ad5b7e09
+    m_toNodeId: cb1c976e-e411-4b73-b3c8-2fa47d007ed6
+    m_toNodeConnectionPoiontId: 35055c3b-f225-4263-80ce-b3dbdc01893d
+    m_label: +
+  m_lastModified: 131648295465232972
+  m_version: 2
+  m_graphDescription: 
+  m_useAsAssetPostprocessor: 0

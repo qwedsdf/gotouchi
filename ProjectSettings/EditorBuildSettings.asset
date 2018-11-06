@@ -5,21 +5,36 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/01_Splash.unity
+    guid: 94641fac494ef7c40a90961373a591d5
   - enabled: 1
-    path: Assets/Scenes/Loading.unity
+    path: Assets/Scenes/02_title.unity
+    guid: f8b8984533783c3408e8aab566a11c5a
+  - enabled: 1
+    path: Assets/Scenes/03_Home.unity
+    guid: 2e23d4a3d491eee46ab3c261f39210f0
+  - enabled: 1
+    path: Assets/Scenes/04_Avatar.unity
+    guid: ca31971556845e746a146d208528b830
+  - enabled: 1
+    path: Assets/Scenes/05_Battle.unity
+    guid: 8983ed4713b55a74aa4ff4568a03987a
+  - enabled: 1
+    path: Assets/Scenes/00_Manager.unity
+    guid: 8f43b5834973b4447bd3b219225102a6
+  - enabled: 0
+    path: Assets/Scenes/101_Loading.unity
     guid: 78dd0737712f8304982c62e17c58ca80
-  - enabled: 1
-    path: Assets/Scenes/profile.unity
+  - enabled: 0
+    path: Assets/Scenes/102_Profile.unity
     guid: b92edbdc0b17a964baf57f57957622c8
   - enabled: 1
-    path: Assets/Scenes/select_area.unity
+    path: Assets/Scenes/103_SelectArea.unity
     guid: 396504488acb5aa47bcb6d4d1176c79b
   - enabled: 1
-    path: Assets/Scenes/select.unity
+    path: Assets/Scenes/104_Select.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/game.unity
-    guid: a7e757b99313040488427ebc19c77b36
-  - enabled: 1
-    path: Assets/Scenes/picture_book.unity
+    path: Assets/Scenes/105_PictureBook.unity
     guid: a273d573613829d4180c9aabd9b55470
