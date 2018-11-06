@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class y_button : MonoBehaviour {
     const int BUTTON_MAX = 9;
-    GameObject[] buttom = new GameObject[BUTTON_MAX];
+    GameObject[] button = new GameObject[BUTTON_MAX];
     static public int PrefectureNumber;
     int start_num;
     public int PrefectureVolum;
@@ -21,6 +21,7 @@ public class y_button : MonoBehaviour {
     static public int area_num = 1;
     static public int char_num;
     int larea_num;
+	int push_button_num;
 
     //アスペクト比固定のまま画像を載せるために使う変数
     Vector2 button_size;
@@ -55,12 +56,12 @@ public class y_button : MonoBehaviour {
         for (int i = 0; i < BUTTON_MAX; i++)
         {
             string name=BUTTON_CHAR_COMMON_NAME + i;
-            buttom[i] = GameObject.Find(name);
-            buttom[i].GetComponent<Image>().preserveAspect = true;
+            button[i] = GameObject.Find(name);
+            button[i].GetComponent<Image>().preserveAspect = true;
         }
         //ボタンの大きさを検知
-        button_size.x = buttom[BUTTON_MAX - 1].GetComponent<RectTransform>().sizeDelta.x;
-        button_size.y = buttom[BUTTON_MAX - 1].GetComponent<RectTransform>().sizeDelta.y;
+        button_size.x = button[BUTTON_MAX - 1].GetComponent<RectTransform>().sizeDelta.x;
+        button_size.y = button[BUTTON_MAX - 1].GetComponent<RectTransform>().sizeDelta.y;
 
         //////////都道府県用のボタン//////////
         start_num = 0;
@@ -91,7 +92,7 @@ public class y_button : MonoBehaviour {
     {
         for (int i = 0; i < BUTTON_MAX; i++)
         {
-            buttom[i].SetActive(false);
+            button[i].SetActive(false);
         }
     }
 
@@ -133,8 +134,8 @@ public class y_button : MonoBehaviour {
         //都道府県別のデータを参照し、ボタンにイメージを配置
         for (int i = 0; i < PrefectureCharDate.Count; i++)
         {
-            buttom[i].SetActive(true);
-            buttom[i].GetComponent<Image>().sprite = PrefectureCharDate[i].img;
+            button[i].SetActive(true);
+            button[i].GetComponent<Image>().sprite = PrefectureCharDate[i].img;
         }
     }
     public void bt_PushCharButton(int num)
@@ -144,7 +145,42 @@ public class y_button : MonoBehaviour {
         //SceneManager.LoadScene("game"); // 渡邊変更
     }
 
-    public void bt_GetChar(int num) {
+
+	////////////////////////////変更（ヨハ）/////////////////////////
+	//使うキャラのイメージを入れる
+	public void SetPlayerChar(int num)
+	{
+		// 渡邊変更
+		GameObject msgBox = (GameObject)Instantiate((GameObject)Resources.Load("Prefabs/MessageBox"));
+		msgBox.GetComponent<MessageBoxManager>().Initialize_YesNo("このキャラクターで\nいいですか？", SaveUserChara, null);
+
+		push_button_num = num;
+
+		//dataScript.save_data_all.playerdata.use_char = picture.GetComponent<SpriteRenderer>().sprite;
+		//dataScript.Save();
+	}
+
+	/// <summary>
+	/// 渡邊変更
+	/// 使用キャラクターを確定する
+	/// </summary>
+	public void SaveUserChara()
+	{
+		// to do yoha
+		GameData.UserData.UserCharacter = button[push_button_num].GetComponent<Image>().sprite.name;
+		SaveData.SetString(SaveKey.UserCharacter, GameData.UserData.UserCharacter);
+		//SaveData.SetClass(SaveKey.UserCharacter, GameData.UserData);
+		SaveData.Save();
+
+		DataBaseScript.save_data_all.playerdata.use_char = button[push_button_num].GetComponent<Image>().sprite;
+		DataBaseScript.Save();
+
+		SceneFadeManager.Instance.Load(GameData.Scene_Home, GameData.FadeSpeed);
+	}
+
+
+
+	public void bt_GetChar(int num) {
         DataBaseScript.GetChar(PrefectureNumber, num);
     }
 

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3007225387
+CRC: 3053340819
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f485cd174149a1b856382516d8a0b811
+    Hash: e4adfdae5408bfca4788da750917e64e
   TypeTreeHash:
     serializedVersion: 2
     Hash: e8214c69729ed7b4e0f89bad6e44781a
@@ -16,10 +16,10 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 Assets:
-- "Assets/Resources/DataChar/area0/03/\u30DF\u30E4\u3061\u3083\u3093/test.txt"
-- "Assets/Resources/DataChar/area0/03/\u3079\u3063\u3074\u3087\u3093/\u3079\u3063\u3074\u3087\u3093.png"
-- "Assets/Resources/DataChar/area0/03/\u3042\u5B98\u5175\u885B/\u3042\u5B98\u5175\u885B.png"
-- "Assets/Resources/DataChar/area0/03/\u30DF\u30E4\u3061\u3083\u3093/\u30DF\u30E4\u3061\u3083\u3093.png"
-- "Assets/Resources/DataChar/area0/03/\u3042\u5B98\u5175\u885B/test.txt"
-- "Assets/Resources/DataChar/area0/03/\u3079\u3063\u3074\u3087\u3093/test.txt"
+- Assets/Resources/DataChar/area1/03/13/test.txt
+- Assets/Resources/DataChar/area1/03/12/12.png
+- Assets/Resources/DataChar/area1/03/11/11.png
+- Assets/Resources/DataChar/area1/03/13/13.png
+- Assets/Resources/DataChar/area1/03/11/test.txt
+- Assets/Resources/DataChar/area1/03/12/test.txt
 Dependencies: []

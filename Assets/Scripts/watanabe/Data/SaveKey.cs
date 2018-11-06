@@ -21,4 +21,9 @@ public class SaveKey : SingletonMonoBehaviour<SaveKey>
     /// ユーザーが使用しているキャラクターデータを取得、保存するキー
     /// </summary>
     public const string UserCharacter = "UserCharacter";
+
+	/// <summary>
+	/// ユーザーが獲得しているキャラクターデータを取得、保存するキー
+	/// </summary>
+	public const string GetCharData = "GetCharData";//変更（ヨハ）
 }

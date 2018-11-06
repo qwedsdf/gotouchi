@@ -10,7 +10,8 @@ public class data
 {
     public Sprite img;//画像
     public string place_name;//場所
-    public string area;//所属地方
+	public int place_num;//都道府県番号表示
+	public int area;//所属地方
     public string description;//説明文章
     public string name;//名前
     public bool getflg;//手に入れたかどうか
@@ -20,8 +21,8 @@ public class data
 [Serializable]
 public class Savedata
 {
-    public string area;//所属地方
-    public string prefecture_name;//場所
+    public int area;//所属地方
+    //public string prefecture_name;//場所
     public int prefecture_num;//都道府県番号
     public string char_name;//名前
     public int char_num;//キャラの番号
@@ -42,18 +43,18 @@ public class SavedataAll
     public List<Savedata> savedata;
 }
 
-//[Serializable]
-//public class Serialization<T>
-//{
-//    [SerializeField]
-//    List<T> data;
-//    public List<T> ToList() { return data; }
+[Serializable]
+public class Serialization<T>
+{
+	[SerializeField]
+	List<T> data;
+	public List<T> ToList() { return data; }
 
-//    public Serialization(List<T> target)
-//    {
-//        data = target;
-//    }
-//}
+	public Serialization(List<T> target)
+	{
+		data = target;
+	}
+}
 
 enum Prefecture
 {
@@ -75,8 +76,6 @@ public class y_Database : MonoBehaviour {
     public static string[] Prefecture_names = { "長崎", "佐賀", "福岡", "大分", "熊本", "宮崎", "鹿児島", "沖縄",
                                 "鳥取","島根","岡山","広島","山口","香川","愛媛","高知","高知","高知","高知","高知","高知","高知","高知","高知","高知","高知","高知" };
 
-    public static string[] SCENES_NAME = { "Loading", "profile","select_area","select","picture_book"};
-
     public static int AREA_VOLUME = 8;
     const int VOLUME_KYUSH = 1;
     const int VOLUME_SHIKOKU = 2;
@@ -92,7 +91,7 @@ public class y_Database : MonoBehaviour {
     public static int[] AreaLenth = { VOLUME_HOKKAIDOU, VOLUME_TOUHOKU, VOLUME_KANTOU, VOLUME_TYUBU, VOLUME_KINKI, VOLUME_TYUGOKU, VOLUME_SHIKOKU, VOLUME_KYUSH };
 
     //出身県ごとにデータを分ける
-    List<data>[] Prefecturedata = new List<data>[PrefectureDataSize];
+    static public List<data>[] Prefecturedata = new List<data>[PrefectureDataSize];
 
     //このなかに1都道府県ごとにキャラのデータを入れる（１都道府県のデータを全て入れる）
     List<data> dataBase = new List<data>();
@@ -102,7 +101,7 @@ public class y_Database : MonoBehaviour {
     //一キャラにつき必要な素材数
     const int MAX_ITEM = 2;
 
-    const string SaveKey = "UserID";
+    const string lSaveKey = "UserID";
 
     static private GameObject obj = null;
 
@@ -121,7 +120,7 @@ public class y_Database : MonoBehaviour {
 
     void Awake()
     {
-        if (obj != null)
+		if (obj != null)
         {
             Destroy(this.gameObject);
             return;
@@ -203,9 +202,9 @@ public class y_Database : MonoBehaviour {
                 for (int k = 0; k < tmp_sprite.Length; k++)
                 {
                     data dt = new data();
-                    dt.area = AREA_FOLDER_NAME + i.ToString();
+					dt.area = i;
                     dt.getflg = false;
-                    dt.place_name = Prefecture_names[loadcount];
+					dt.place_num = loadcount;
                     dt.img = tmp_sprite[k];
                     dt.description = tmp_text[k].text;
                     dt.name = dt.img.name;
@@ -245,7 +244,7 @@ public class y_Database : MonoBehaviour {
         {
             Savedata savedata = new Savedata();
             savedata.area = dt.area;
-            savedata.prefecture_name = dt.place_name;
+			savedata.prefecture_num = dt.place_num;
             savedata.prefecture_num = PreNumber;
             savedata.char_name = dt.name;
             savedata.char_num = number;
@@ -260,18 +259,20 @@ public class y_Database : MonoBehaviour {
 
     //セーブする
     public void Save() {
-        //string json = JsonUtility.ToJson(new Serialization<Savedata>(get_data),true);
-        //Debug.Log("json使ったやつ\n" + json);
-        ////textSave(json);
+		string json = JsonUtility.ToJson(new Serialization<Savedata>(get_data),true);
+		//Debug.Log("json使ったやつ\n" + json);
+		textSave(json);
 
-        //データ構造変更
-        save_data_all.savedata = get_data;
-        string json = JsonUtility.ToJson(save_data_all, true);
-        Debug.Log("json使ったやつ\n" + json);
-        //textSave(json);//アンドロイドで通らなくなる
+		//データ変更
+		SaveData.SetList(SaveKey.GetCharData, get_data);//変更（ヨハ）
+		SaveData.Save();//変更（ヨハ）
+		//save_data_all.savedata = get_data;
+		//string json = JsonUtility.ToJson(save_data_all, true);
+		//Debug.Log("json使ったやつ\n" + json);
+		//textSave(json);//アンドロイドで通らなくなる
 
-        PlayerPrefs.SetString(SaveKey, json);
-    }
+		//PlayerPrefs.SetString(lSaveKey, json);
+	}
 
     //ロードする
     public void Load()
@@ -288,30 +289,41 @@ public class y_Database : MonoBehaviour {
             Prefecturedata[i] = list;
         }
 
-        string lstr = PlayerPrefs.GetString(SaveKey);
-        if (lstr == "")
-        {
-            save_data_all = new SavedataAll();
-            get_data = new List<Savedata>();
-            Debug.Log("セーブデータはないよ");
-            return;
-        }
-        save_data_all = JsonUtility.FromJson<SavedataAll>(lstr);
-        Debug.Log(lstr);
-        LoadDataAll();
-        //get_data = JsonUtility.FromJson<Serialization<Savedata>>(lstr).ToList();
+		get_data = SaveData.GetList(SaveKey.GetCharData,new List<Savedata>());
 
-        ////jsonからデータを読み取り、ロード
-        //for (int i = 0; i < get_data.Count; i++)
-        //{
-        //    List<data> list = Prefecturedata[get_data[i].prefecture_num];
-        //    list[get_data[i].char_num].getflg = true;
-        //    Prefecturedata[get_data[i].prefecture_num] = list;
-        //}
-    }
+		for (int i = 0; i < get_data.Count; i++)
+		{
+			List<data> list = Prefecturedata[get_data[i].prefecture_num];
+			list[get_data[i].char_num].getflg = true;
+			Prefecturedata[get_data[i].prefecture_num] = list;
+		}
 
-    //キャラ取得データを全て消す
-    public void ResetGetChar()
+#region 統合前のセーブ処理
+		//string lstr = PlayerPrefs.GetString(lSaveKey);
+		//if (lstr == "")
+		//{
+		//    save_data_all = new SavedataAll();
+		//    get_data = new List<Savedata>();
+		//    Debug.Log("セーブデータはないよ");
+		//    return;
+		//}
+		//save_data_all = JsonUtility.FromJson<SavedataAll>(lstr);
+		//Debug.Log(lstr);
+		//LoadDataAll();
+		//get_data = JsonUtility.FromJson<Serialization<Savedata>>(lstr).ToList();
+
+		////jsonからデータを読み取り、ロード
+		//for (int i = 0; i < get_data.Count; i++)
+		//{
+		//    List<data> list = Prefecturedata[get_data[i].prefecture_num];
+		//    list[get_data[i].char_num].getflg = true;
+		//    Prefecturedata[get_data[i].prefecture_num] = list;
+		//}
+#endregion
+	}
+
+	//キャラ取得データを全て消す
+	public void ResetGetChar()
     {
         get_data.Clear();
         Save();

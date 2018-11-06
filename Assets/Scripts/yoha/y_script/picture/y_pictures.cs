@@ -6,11 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class y_pictures : MonoBehaviour
 {
-
-    y_Database dataScript;
-
-    //説明で使うオブジェクトの親
-    public GameObject Description;
+	y_Database dataScript;
+	//説明で使うオブジェクトの親
+	public GameObject Description;
 
     //説明に乗るキャラの写真
     GameObject picture;
@@ -63,7 +61,8 @@ public class y_pictures : MonoBehaviour
     {
         //once_push = false;
         init();
-        scroll_stop_flg = false;
+		dataScript= GameObject.Find("Master").GetComponent<y_Database>();
+		scroll_stop_flg = false;
         LoadPicture(0);
         Description.SetActive(false);
     }
@@ -76,10 +75,9 @@ public class y_pictures : MonoBehaviour
 
     void init()
     {
-        first_content_pos = content.GetComponent<RectTransform>().offsetMax;
+		first_content_pos = content.GetComponent<RectTransform>().offsetMax;
 
         page_num = 0;
-        dataScript = GameObject.Find("Master").GetComponent<y_Database>();
         picture = GameObject.Find("Description/picture");
         text_name = GameObject.Find("Description/Canvas/Text_name").GetComponent<Text>();
 
@@ -112,8 +110,6 @@ public class y_pictures : MonoBehaviour
     //エリア選択した後に図鑑の画面に配置する画像をロード
     public void LoadPicture(int areanum)
     {
-        string area = "area" + areanum.ToString();
-
         //ノードとコンテントの場所を初期化
         content.GetComponent<RectTransform>().offsetMax = first_content_pos;
 
@@ -129,11 +125,11 @@ public class y_pictures : MonoBehaviour
         //エリアを参照し、画像を抽出・表示
         for (int i = 0; i < y_Database.PrefectureDataSize; i++)
         {
-            List<data> list = dataScript.GetPrefectureData(i);
+            List<data> list = y_Database.Prefecturedata[i];
             if (list == null) continue;
             for (int f = 0; f < list.Count; f++)
             {
-                if (list[f].area != area) continue;
+                if (list[f].area != areanum) continue;
                 AddChardata(list[f]);
                 if (count == MAX_BUTTON_NUM) continue;
                 button[count].SetActive(true);
@@ -392,7 +388,7 @@ public class y_pictures : MonoBehaviour
         SetAspect(num);
 
         text_name.text = "名前　" + chardata[num].name;
-        text_name.text += "\n出身地　" + chardata[num].place_name;
+        text_name.text += "\n出身地　" + y_Database.Prefecture_names[chardata[num].place_num];
         text_profile.text = chardata[num].description;
     }
 
@@ -426,7 +422,6 @@ public class y_pictures : MonoBehaviour
     /// </summary>
     public void SaveUserChara()
     {
-		// to do yoha
         GameData.UserData.UserCharacter = picture.GetComponent<SpriteRenderer>().sprite.name;
 		SaveData.SetString(SaveKey.UserCharacter,GameData.UserData.UserCharacter);//変更（ヨハ）
         //SaveData.SetClass(SaveKey.UserCharacter, GameData.UserData);

@@ -52,7 +52,7 @@ public class TouchScreen : MonoBehaviour
     public void Screen_OnTouch()
     {
         AudioManager.Instance.PlaySE("touch");
-        //SaveData.Clear();
+        SaveData.Clear();
         // セーブデータからプレイヤーIDを取得
         this.userId = SaveData.GetInt(SaveKey.UserId, 0);
 
