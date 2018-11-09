@@ -79,10 +79,10 @@ public class Database : MonoBehaviour
     public static string[] SCENES_NAME = { "Loading", "profile", "select_area", "select", "picture_book" };
 
     public static int AREA_VOLUME = 8;
-	const int VOLUME_HOKKAIDOU = 1;
-	const int VOLUME_TOUHOKU = 6;
-	const int VOLUME_KYUSH = 1;
+    const int VOLUME_KYUSH = 1;
     const int VOLUME_SHIKOKU = 2;
+    const int VOLUME_HOKKAIDOU = 8;
+    const int VOLUME_TOUHOKU = 8;
     const int VOLUME_KANTOU = 2;
     const int VOLUME_TYUBU = 3;
     const int VOLUME_KINKI = 1;
@@ -200,8 +200,8 @@ public class Database : MonoBehaviour
                 AssetBundleCreateRequest request = AssetBundle.LoadFromFileAsync(bundleUrl);
                 AssetBundle assetBundle = request.assetBundle;
 
-				tmp_text = assetBundle.LoadAllAssets<TextAsset>();
-				tmp_sprite = assetBundle.LoadAllAssets<Sprite>();
+                tmp_sprite = assetBundle.LoadAllAssets<Sprite>();
+                tmp_text = assetBundle.LoadAllAssets<TextAsset>();
 
                 List<data> tmp_data = new List<data>();
                 //キャラごと

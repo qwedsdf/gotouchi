@@ -9,7 +9,7 @@ public class button : MonoBehaviour
     const int BUTTON_MAX = 9;
     GameObject[] buttonObj = new GameObject[BUTTON_MAX];
     static public int PrefectureNumber;
-    int offset_num;
+    int start_num;
     public int PrefectureVolum;
     GameObject[] bt_prefecture;
     public Text txt;
@@ -67,18 +67,18 @@ public class button : MonoBehaviour
         button_size.y = buttonObj[BUTTON_MAX - 1].GetComponent<RectTransform>().sizeDelta.y;
 
         //////////都道府県用のボタン//////////
-        offset_num = 0;
+        start_num = 0;
 
         for (int i = 0; i < area_num; i++)
         {
-            offset_num += Database.AreaLenth[i];
+            start_num += Database.AreaLenth[i];
         }
 
         for (int i = 0; i < Database.AreaLenth[area_num]; i++)
         {
             string name = BUTTON_PREFECTURE_COMMON_NAME + i;
             bt_prefecture[i] = GameObject.Find(name);
-            bt_prefecture[i].transform.Find("Text").GetComponent<Text>().text = Database.Prefecture_names[i + offset_num];
+            bt_prefecture[i].transform.Find("Text").GetComponent<Text>().text = Database.Prefecture_names[i + start_num];
         }
 
         for (int i = Database.AreaLenth[area_num]; i < PrefectureVolum; i++)
@@ -125,16 +125,16 @@ public class button : MonoBehaviour
     public void bt_Prefecture(int lPrefectureNumber)
     {
         Debug.Log("押したよ");
-        int tmp_num = offset_num + lPrefectureNumber;
+        int tmp_num = start_num + lPrefectureNumber;
         RefreshButtonChar();
         RefreshButtonPrefecture(lPrefectureNumber);
         PrefectureNumber = tmp_num;
         List<data> PrefectureCharDate = new List<data>();
-        PrefectureCharDate = DataBaseScript.GetPrefectureData(tmp_num);
+		GameData.UserData.PrefecturesId = tmp_num+1;
+		PrefectureCharDate = DataBaseScript.GetPrefectureData(tmp_num);
 
-		GameData.UserData.PrefecturesId = lPrefectureNumber + 1 + offset_num;//ヨハ（変更）
-
-		if (PrefectureCharDate == null)
+		
+        if (PrefectureCharDate == null)
         {
             txt.text += "エラーでてますね";
         }
@@ -178,17 +178,17 @@ public class button : MonoBehaviour
         SaveData.SetString(SaveKey.UserCharacter, GameData.UserData.CharacterTexName);
         //SaveData.SetClass(SaveKey.UserCharacter, GameData.UserData);
         SaveData.Save();
+		GameData.UserData.CharacterId = push_button_num+1;
+		GameData.UserData.CharacterTexName = string.Format("{0:00}", GameData.UserData.RegionId) + "_" + string.Format("{0:00}", GameData.UserData.PrefecturesId) + "_" + string.Format("{0:00}", GameData.UserData.CharacterId);
 
-        DataBaseScript.save_data_all.playerdata.use_char = buttonObj[push_button_num].GetComponent<Image>().sprite;
+
+		DataBaseScript.save_data_all.playerdata.use_char = buttonObj[push_button_num].GetComponent<Image>().sprite;
         DataBaseScript.Save();
 
-		GameData.UserData.CharacterId = push_button_num + 1;
-		GameData.UserData.CharacterTexName = string.Format("{0:00}", GameData.UserData.RegionId) + "_" + string.Format("{0:00}", GameData.UserData.PrefecturesId) + "_" + string.Format("{0:00}", GameData.UserData.CharacterId);
-		Debug.Log(GameData.UserData.CharacterTexName);
-
-
-		SceneFadeManager.Instance.Load(GameData.Scene_Home, GameData.FadeSpeed);
+        SceneFadeManager.Instance.Load(GameData.Scene_Home, GameData.FadeSpeed);
     }
+
+
 
     public void bt_GetChar(int num)
     {

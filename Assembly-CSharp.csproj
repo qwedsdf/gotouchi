@@ -131,6 +131,7 @@
      <Compile Include="Assets\Scripts\Character\Player2D.cs" />
      <Compile Include="Assets\Scripts\Character\SmartphoneInput.cs" />
      <Compile Include="Assets\Scripts\Character\StateMachine.cs" />
+     <Compile Include="Assets\Scripts\CheckUserChara.cs" />
      <Compile Include="Assets\Scripts\Data\Database.cs" />
      <Compile Include="Assets\Scripts\Data\DirtyWordData.cs" />
      <Compile Include="Assets\Scripts\Data\EquipData.cs" />
@@ -173,7 +174,6 @@
      <Compile Include="Assets\Scripts\Utility\TextureScale.cs" />
      <Compile Include="Assets\Scripts\Utility\Timer.cs" />
      <Compile Include="Assets\Scripts\Utility\Utility.cs" />
-     <Compile Include="Assets\Scripts\yoha\CheckCharaText.cs" />
      <Compile Include="Assets\SimpleParticlePack\Scripts\ParticleTester.cs" />
      <None Include="Assets\Resources\DataChar\area4\20\がくとくん\test.txt" />
      <None Include="Assets\Resources\DataChar\area6\22\らとちゃん\test.txt" />
@@ -233,7 +233,6 @@
      <None Include="Assets\Resources\DataChar\area4\20\はながたベニちゃん\test.txt" />
      <None Include="Assets\Resources\DataChar\area2\15\安田朗\test.txt" />
      <None Include="Assets\Resources\DataChar\area7\24\むきぱんだ\test.txt" />
-     <None Include="Assets\Resources\Prefabs\PrefectureName.txt" />
      <None Include="Assets\Resources\DataChar\area2\14\バリィさん\test.txt" />
      <None Include="Assets\Anima2D\Examples\Shaders\VertexLitOneDirectional.shader" />
      <None Include="Assets\Resources\DataChar\area1\04\ふねまる\test.txt" />
