@@ -131,7 +131,8 @@
      <Compile Include="Assets\Scripts\Character\Player2D.cs" />
      <Compile Include="Assets\Scripts\Character\SmartphoneInput.cs" />
      <Compile Include="Assets\Scripts\Character\StateMachine.cs" />
-     <Compile Include="Assets\Scripts\CheckUserChara.cs" />
+     <Compile Include="Assets\Scripts\Check\CheckUserChara.cs" />
+     <Compile Include="Assets\Scripts\Check\LoadText.cs" />
      <Compile Include="Assets\Scripts\Data\Database.cs" />
      <Compile Include="Assets\Scripts\Data\DirtyWordData.cs" />
      <Compile Include="Assets\Scripts\Data\EquipData.cs" />
@@ -176,6 +177,7 @@
      <Compile Include="Assets\Scripts\Utility\Utility.cs" />
      <Compile Include="Assets\SimpleParticlePack\Scripts\ParticleTester.cs" />
      <None Include="Assets\Resources\DataChar\area4\20\がくとくん\test.txt" />
+     <None Include="Assets\Resources\PrefectureName.txt" />
      <None Include="Assets\Resources\DataChar\area6\22\らとちゃん\test.txt" />
      <None Include="Assets\Resources\DataChar\area6\22\しまねっこ\test.txt" />
      <None Include="Assets\Resources\DataChar\area2\10\でんちゅうくん\test.txt" />

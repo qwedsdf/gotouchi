@@ -21,7 +21,7 @@ public class LoadSelect : MonoBehaviour
     public void LoadScene(int num)
     {
         button.area_num = num;
-        GameData.UserData.RegionId = num+1;
+        GameData.UserData.RegionId = num + 1;
 
         SceneFadeManager.Instance.Load(GameData.Scene_Select, GameData.FadeSpeed);
         //SceneManager.LoadScene(SCENE_NAME_SELECT);

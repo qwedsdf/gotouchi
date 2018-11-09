@@ -69,26 +69,35 @@ enum Prefecture
 public class Database : MonoBehaviour
 {
 
-    //エリア判別用変数
-    public static int area_num = 1;
+	//エリア判別用変数
+	public static int area_num = 1;
 
-    //キャラのデータ
-    public static string[] Prefecture_names = { "長崎", "佐賀", "福岡", "大分", "熊本", "宮崎", "鹿児島", "沖縄",
-                                "鳥取","島根","岡山","広島","山口","香川","愛媛","高知","高知","高知","高知","高知","高知","高知","高知","高知","高知","高知","高知" };
+	//キャラのデータ
+	public static string[] Prefecture_names = { "長崎", "佐賀", "福岡", "大分", "熊本", "宮崎", "鹿児島", "沖縄",
+								"鳥取","島根","岡山","広島","山口","香川","愛媛","高知","高知","高知","高知","高知","高知","高知","高知","高知","高知","高知","高知" };
 
-    public static string[] SCENES_NAME = { "Loading", "profile", "select_area", "select", "picture_book" };
 
-    public static int AREA_VOLUME = 8;
-    const int VOLUME_KYUSH = 1;
-    const int VOLUME_SHIKOKU = 2;
-    const int VOLUME_HOKKAIDOU = 8;
-    const int VOLUME_TOUHOKU = 8;
-    const int VOLUME_KANTOU = 2;
-    const int VOLUME_TYUBU = 3;
-    const int VOLUME_KINKI = 1;
-    const int VOLUME_TYUGOKU = 2;
+	public static string[] SCENES_NAME = { "Loading", "profile", "select_area", "select", "picture_book" };
 
-    public static int PrefectureDataSize = 47;
+	public static int AREA_VOLUME = 8;
+	const int VOLUME_HOKKAIDOU = 1;
+	const int VOLUME_TOUHOKU = 6;
+	const int VOLUME_KANTOU = 7;
+	const int VOLUME_TYUBU = 9;
+	const int VOLUME_KINKI = 7;
+	const int VOLUME_TYUGOKU = 5;
+	const int VOLUME_SHIKOKU = 4;
+	const int VOLUME_KYUSH = 8;
+
+
+
+
+
+
+	List<string>[] PrefectureNmaesByArea = new List<string>[AREA_VOLUME];
+
+
+	public static int PrefectureDataSize = 47;
     public static int MaxAreaLenth = 8;
     public static int[] AreaLenth = { VOLUME_HOKKAIDOU, VOLUME_TOUHOKU, VOLUME_KANTOU, VOLUME_TYUBU, VOLUME_KINKI, VOLUME_TYUGOKU, VOLUME_SHIKOKU, VOLUME_KYUSH };
 
@@ -134,11 +143,13 @@ public class Database : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //checkpath();
-        //LoadDataAndroid();
-        //LoadData();
-        BundleLoadData();
-    }
+		//checkpath();
+		//LoadDataAndroid();
+		//LoadData();
+		//BundleLoadData();
+		LoadPrefectureNmaeByText();
+
+	}
 
     // Updata is called once per frame
     void Update()
@@ -146,8 +157,8 @@ public class Database : MonoBehaviour
 
     }
 
-    //入れる配列の番号を検索
-    int SearchNumer(string flie_parent)
+	//入れる配列の番号を検索
+	int SearchNumer(string flie_parent)
     {
 
         for (int i = 0; i < Prefecture_names.Length; i++)
@@ -177,59 +188,75 @@ public class Database : MonoBehaviour
         }
     }
 
-    //データベースを作成する
-    public void BundleLoadData()
-    {
-        int loadcount = 0;
-        //エリアごとに分ける
-        for (int i = 0; i < MaxAreaLenth; i++)
-        {
-            //都道府県ごと
-            for (int f = 0; f < AreaLenth[i]; f++)
-            {
-                string number = loadcount.ToString();
-                int tmp = i + 1;
-                string path = ANDROID_FOLDER_NAME + "/" + DATE_FOLDER_NAME + "/" + AREA_FOLDER_NAME + tmp.ToString();
-                if (loadcount < 10) number = "0" + number;
-                path += "/" + number;
+	/// <summary>
+	/// 都道府県名をテキストから取得
+	/// </summary>
+	void LoadPrefectureNmaeByText()
+	{
+		List<string> list = new List<string>();
+		TextAsset text = Resources.Load("PrefectureName") as TextAsset;
+		string AllPrefectureName = text.text;
 
-                //アセットバンドルからアセットをとってくる
-                Sprite[] tmp_sprite;
-                TextAsset[] tmp_text;
-                string bundleUrl = Application.streamingAssetsPath + "/" + path;
-                AssetBundleCreateRequest request = AssetBundle.LoadFromFileAsync(bundleUrl);
-                AssetBundle assetBundle = request.assetBundle;
+		Prefecture_names = AllPrefectureName.Split('\n');
+		foreach (string str in Prefecture_names)
+		{
+			Debug.Log(str);
+		}
+	}
 
-                tmp_sprite = assetBundle.LoadAllAssets<Sprite>();
-                tmp_text = assetBundle.LoadAllAssets<TextAsset>();
+	//データベースを作成する
+	//public void BundleLoadData()
+	//{
+	//    int loadcount = 0;
+	//    //エリアごとに分ける
+	//    for (int i = 0; i < MaxAreaLenth; i++)
+	//    {
+	//        //都道府県ごと
+	//        for (int f = 0; f < AreaLenth[i]; f++)
+	//        {
+	//            string number = loadcount.ToString();
+	//            int tmp = i + 1;
+	//            string path = ANDROID_FOLDER_NAME + "/" + DATE_FOLDER_NAME + "/" + AREA_FOLDER_NAME + tmp.ToString();
+	//            if (loadcount < 10) number = "0" + number;
+	//            path += "/" + number;
 
-                List<data> tmp_data = new List<data>();
-                //キャラごと
-                for (int k = 0; k < tmp_sprite.Length; k++)
-                {
-                    data dt = new data();
-                    dt.area = AREA_FOLDER_NAME + i.ToString();
-                    dt.getflg = false;
-                    dt.place_name = Prefecture_names[loadcount];
-                    dt.img = tmp_sprite[k];
-                    dt.description = tmp_text[k].text;
-                    dt.name = dt.img.name;
+	//            //アセットバンドルからアセットをとってくる
+	//            Sprite[] tmp_sprite;
+	//            TextAsset[] tmp_text;
+	//            string bundleUrl = Application.streamingAssetsPath + "/" + path;
+	//            AssetBundleCreateRequest request = AssetBundle.LoadFromFileAsync(bundleUrl);
+	//            AssetBundle assetBundle = request.assetBundle;
 
-                    tmp_data.Add(dt);
-                }
-                Prefecturedata[loadcount] = tmp_data;
-                //次の都道府県に移動
-                loadcount++;
-            }
-        }
-        //セーブデータをロードする
-        Load();
-    }
+	//            tmp_sprite = assetBundle.LoadAllAssets<Sprite>();
+	//            tmp_text = assetBundle.LoadAllAssets<TextAsset>();
 
-    public List<data> GetPrefectureData(int num)
-    {
-        return Prefecturedata[num];
-    }
+	//            List<data> tmp_data = new List<data>();
+	//            //キャラごと
+	//            for (int k = 0; k < tmp_sprite.Length; k++)
+	//            {
+	//                data dt = new data();
+	//                dt.area = AREA_FOLDER_NAME + i.ToString();
+	//                dt.getflg = false;
+	//                dt.place_name = Prefecture_names[loadcount];
+	//                dt.img = tmp_sprite[k];
+	//                dt.description = tmp_text[k].text;
+	//                dt.name = dt.img.name;
+
+	//                tmp_data.Add(dt);
+	//            }
+	//            Prefecturedata[loadcount] = tmp_data;
+	//            //次の都道府県に移動
+	//            loadcount++;
+	//        }
+	//    }
+	//    //セーブデータをロードする
+	//    Load();
+	//}
+
+	//public List<data> GetPrefectureData(int num)
+ //   {
+ //       return Prefecturedata[num];
+ //   }
 
     public data GetCharData(int PreNumber, int number)
     {

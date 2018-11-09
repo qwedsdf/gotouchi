@@ -53,6 +53,9 @@ public class button : MonoBehaviour
 
     }
 
+	/// <summary>
+	/// ボタンオブジェクトを読み込む
+	/// </summary>
     void LoadButton()
     {
         ////////キャラが乗る用のボタン//////////
@@ -79,7 +82,7 @@ public class button : MonoBehaviour
             string name = BUTTON_PREFECTURE_COMMON_NAME + i;
             bt_prefecture[i] = GameObject.Find(name);
             bt_prefecture[i].transform.Find("Text").GetComponent<Text>().text = Database.Prefecture_names[i + start_num];
-        }
+		}
 
         for (int i = Database.AreaLenth[area_num]; i < PrefectureVolum; i++)
         {
@@ -90,8 +93,10 @@ public class button : MonoBehaviour
 
     }
 
-    //キャラクターのボタンを初期化
-    void RefreshButtonChar()
+	/// <summary>
+	/// キャラクターのボタンを初期化
+	/// </summary>
+	void RefreshButtonChar()
     {
         for (int i = 0; i < BUTTON_MAX; i++)
         {
@@ -99,8 +104,11 @@ public class button : MonoBehaviour
         }
     }
 
-    //都道府県用ボタンを初期化と押したボタンの色を変える
-    void RefreshButtonPrefecture(int num)
+	/// <summary>
+	/// 都道府県用ボタンを初期化と押したボタンの色を変える
+	/// </summary>
+	/// <param name="num">都道府県ボタンの番号</param>
+	void RefreshButtonPrefecture(int num)
     {
         Button button;
         ColorBlock colors;
@@ -122,40 +130,62 @@ public class button : MonoBehaviour
 
 
     //////////////////////ボタン処理///////////////////////
-    public void bt_Prefecture(int lPrefectureNumber)
+
+	/// <summary>
+	/// 都道府県ボタンを押したときにキャラボタンに画像を貼る
+	/// </summary>
+	/// <param name="lPrefectureNumber">都道府県ボタンの番号</param>
+    public void bt_Prefecture(int num)
     {
-        Debug.Log("押したよ");
-        int tmp_num = start_num + lPrefectureNumber;
-        RefreshButtonChar();
-        RefreshButtonPrefecture(lPrefectureNumber);
-        PrefectureNumber = tmp_num;
-        List<data> PrefectureCharDate = new List<data>();
-		GameData.UserData.PrefecturesId = tmp_num+1;
-		PrefectureCharDate = DataBaseScript.GetPrefectureData(tmp_num);
-
-		
-        if (PrefectureCharDate == null)
-        {
-            txt.text += "エラーでてますね";
-        }
-        //都道府県別のデータを参照し、ボタンにイメージを配置
-        for (int i = 0; i < PrefectureCharDate.Count; i++)
-        {
-            buttonObj[i].SetActive(true);
-            buttonObj[i].GetComponent<Image>().sprite = PrefectureCharDate[i].img;
-        }
-    }
-    public void bt_PushCharButton(int num)
-    {
-        now_battle_chardate = DataBaseScript.GetCharData(PrefectureNumber, num);
-        char_num = num;
-        //SceneManager.LoadScene("game"); // 渡邊変更
-    }
+		Debug.Log("押したよ");
+		GameData.UserData.PrefecturesId = start_num + num + 1;
+		//RefreshButtonChar();
+		//RefreshButtonPrefecture(lPrefectureNumber);
+		//PrefectureNumber = tmp_num;
+		//List<data> PrefectureCharDate = new List<data>();
+		//PrefectureCharDate = DataBaseScript.GetPrefectureData(tmp_num);
 
 
-    ////////////////////////////変更（ヨハ）/////////////////////////
-    //使うキャラのイメージを入れる
-    public void SetPlayerChar(int num)
+		//if (PrefectureCharDate == null)
+		//{
+		//    txt.text += "エラーでてますね";
+		//}
+
+		//都道府県別のデータを参照し、ボタンにイメージを配置
+		//for (int i = 0; i < PrefectureCharDate.Count; i++)
+		//{
+		//    buttonObj[i].SetActive(true);
+		//    buttonObj[i].GetComponent<Image>().sprite = PrefectureCharDate[i].img;
+		//}
+
+		//テスト
+		//都道府県別のデータを参照し、ボタンにイメージを配置
+		for (int i = 0; i < BUTTON_MAX; i++)
+		{
+			UserData userData = GameData.UserData;
+			string str = "Textures/" + string.Format("{0:00}", GameData.UserData.RegionId) + "_" + string.Format("{0:00}", GameData.UserData.PrefecturesId) + "_" + string.Format("{0:00}", (i+1));
+			Debug.Log(str);
+			Sprite sp = Resources.Load(str, typeof(Sprite)) as Sprite;
+			if (sp == null) break;
+			buttonObj[i].SetActive(true);
+			buttonObj[i].GetComponent<Image>().sprite = sp;
+		}
+	}
+	//public void bt_PushCharButton(int num)
+	//{
+	//    now_battle_chardate = DataBaseScript.GetCharData(PrefectureNumber, num);
+	//    char_num = num;
+	//    //SceneManager.LoadScene("game"); // 渡邊変更
+	//}
+
+
+	////////////////////////////変更（ヨハ）/////////////////////////
+
+	/// <summary>
+	/// 使うキャラのイメージを入れる
+	/// </summary>
+	/// <param name="num">キャラボタンの番号</param>
+	public void SetPlayerChar(int num)
     {
         // 渡邊変更
         GameObject msgBox = (GameObject)Instantiate((GameObject)Resources.Load("Prefabs/MessageBox"));
@@ -189,16 +219,24 @@ public class button : MonoBehaviour
     }
 
 
-
+	/// <summary>
+	/// キャラをゲットした時の処理
+	/// </summary>
+	/// <param name="num"></param>
     public void bt_GetChar(int num)
     {
         DataBaseScript.GetChar(PrefectureNumber, num);
     }
 
+	/// <summary>
+	/// 確認したい文字列を画面に表示
+	/// </summary>
+	/// <param name="str">表示したい文字</param>
     public void check(string str)
     {
         txt.text += str + "\n";
     }
+
 
     public void LoadAreaSelectScene()
     {

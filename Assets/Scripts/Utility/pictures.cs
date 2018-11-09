@@ -120,8 +120,6 @@ public class pictures : MonoBehaviour
         int count = 0;
         RefreshButtonAll();
 
-        //once_push = true;
-
         ParentPosInit();
 
         //エリアを参照し、画像を抽出・表示
@@ -147,6 +145,26 @@ public class pictures : MonoBehaviour
                 count++;
             }
         }
+
+		////////////テスト用（キャラの名前の表示とかはどーするか聞く）/////////
+		int PrefectureNumber=0;
+		for(int i = 0; i < areanum; i++)
+		{
+			PrefectureNumber += Database.AreaLenth[i];
+		}
+
+		int chara_num_count = 0;
+		while (chara_num_count != 1)
+		{
+			Sprite sp = null;
+			do
+			{
+				string str = "Textures/" + string.Format("{0:00}", area) + "_" + string.Format("{0:00}", PrefectureNumber) + "_" + string.Format("{0:00}", chara_num_count);
+				sp = Resources.Load(str,typeof(Sprite)) as Sprite;
+			} while (sp == null);
+			
+		}
+		
 
         //キャラの数をみてスクロールをするかを決める
         if (chardata.Count < MAX_BUTTON_NUM)
