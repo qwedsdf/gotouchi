@@ -24,7 +24,7 @@ namespace AutoyaFramework.AppManifest
         /// <summary>
         /// Android用アセットバンドルURL(渡邊変更)
         /// </summary>
-        private const string URL_Android = "http://www.sub0000545829.hmk-temp.com/HandPush/AssetBundles";
+        private const string URL_Android = "http://www.sub0000545829.hmk-temp.com/HandPush/OutPutAssetBundle";
 
         //渡邊変更
         public RuntimeManifestObject()

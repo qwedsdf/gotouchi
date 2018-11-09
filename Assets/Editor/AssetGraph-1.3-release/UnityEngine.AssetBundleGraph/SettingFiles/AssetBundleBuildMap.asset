@@ -11,5 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7cfce4400474688aa803f13d8eb448, type: 3}
   m_Name: AssetBundleBuildMap
   m_EditorClassIdentifier: 
-  m_assetBundles: []
+  m_assetBundles:
+  - m_assetBundleName: bundle_atlas
+    m_assetBundleVariantName: 
+    m_fullName: bundle_atlas
+    m_assets:
+    - original: Assets/AssetBundle/atlas.png
+      lower: assets/assetbundle/atlas.png
+    m_registererId: 313ac24b-e5a6-4dae-965c-70a96a2b71d1
   m_version: 1

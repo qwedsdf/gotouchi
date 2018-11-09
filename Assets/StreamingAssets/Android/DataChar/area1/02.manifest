@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1913643449
+CRC: 3964642765
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: cdd676104ee154bdc57eec3fa83b65d4
+    Hash: 11f488f06eeb9ca3c69fd81f305026bf
   TypeTreeHash:
     serializedVersion: 2
     Hash: e8214c69729ed7b4e0f89bad6e44781a
@@ -16,12 +16,12 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 Assets:
-- Assets/Resources/DataChar/area1/02/09/test.txt
-- Assets/Resources/DataChar/area1/02/10/10.png
-- Assets/Resources/DataChar/area1/02/08/test.txt
-- Assets/Resources/DataChar/area1/02/07/07.png
-- Assets/Resources/DataChar/area1/02/09/09.png
-- Assets/Resources/DataChar/area1/02/08/08.png
-- Assets/Resources/DataChar/area1/02/10/test.txt
-- Assets/Resources/DataChar/area1/02/07/test.txt
+- Assets/Resources/DataChar/area0/02/momommaru/test.txt
+- Assets/Resources/DataChar/area0/02/oonojo/oonojo.png
+- Assets/Resources/DataChar/area0/02/ji-mo/test.txt
+- Assets/Resources/DataChar/area0/02/ja-bou/ja-bou.png
+- Assets/Resources/DataChar/area0/02/momommaru/momomarukun.png
+- Assets/Resources/DataChar/area0/02/ji-mo/zi-mo.png
+- Assets/Resources/DataChar/area0/02/oonojo/test.txt
+- Assets/Resources/DataChar/area0/02/ja-bou/test.txt
 Dependencies: []

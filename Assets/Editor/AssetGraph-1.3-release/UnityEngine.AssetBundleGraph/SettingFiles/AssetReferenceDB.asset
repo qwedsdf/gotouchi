@@ -247,9 +247,51 @@ MonoBehaviour:
     m_assetTypeString: UnityEngine.AssetBundles.GraphTool.AssetBundleReference, Assembly-CSharp-Editor,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   - m_assetDatabaseId: 047003c59e5b3489a98c3fb64b3d84e8
-    m_importFrom: Assets/AssetBundle/arm_1.asset
+    m_importFrom: Assets/Anima2D/Examples/UnityChan/SpriteMeshes/arm_1.asset
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: Anima2D.SpriteMesh, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  - m_assetDatabaseId: 
+    m_importFrom: Assets/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/adc840cd-c008-40ef-95fc-b65af2ed70ac/Android/bundle_arm_1
+    m_exportTo: C:/Users/PROUSER01/Desktop/handpush/OutPutAssetBundle/AssetBundleTest/Android/bundle_arm_1
+    m_variantName: 
+    m_assetTypeString: UnityEngine.AssetBundles.GraphTool.AssetBundleReference, Assembly-CSharp-Editor,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 
+    m_importFrom: Assets/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/adc840cd-c008-40ef-95fc-b65af2ed70ac/Android/bundle_arm_1.manifest
+    m_exportTo: C:/Users/PROUSER01/Desktop/handpush/OutPutAssetBundle/AssetBundleTest/Android/bundle_arm_1.manifest
+    m_variantName: 
+    m_assetTypeString: UnityEngine.AssetBundles.GraphTool.AssetBundleReference, Assembly-CSharp-Editor,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 
+    m_importFrom: Assets/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/adc840cd-c008-40ef-95fc-b65af2ed70ac/Android/Android
+    m_exportTo: C:/Users/PROUSER01/Desktop/handpush/OutPutAssetBundle/AssetBundleTest/Android/Android
+    m_variantName: 
+    m_assetTypeString: UnityEngine.AssetBundles.GraphTool.AssetBundleReference, Assembly-CSharp-Editor,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 
+    m_importFrom: Assets/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/adc840cd-c008-40ef-95fc-b65af2ed70ac/Android/Android.manifest
+    m_exportTo: C:/Users/PROUSER01/Desktop/handpush/OutPutAssetBundle/AssetBundleTest/Android/Android.manifest
+    m_variantName: 
+    m_assetTypeString: UnityEngine.AssetBundles.GraphTool.AssetBundleReference, Assembly-CSharp-Editor,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: dd105a39e474c4706aba36b8be4febd9
+    m_importFrom: Assets/AssetBundle/atlas.png
+    m_exportTo: 
+    m_variantName: 
+    m_assetTypeString: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 
+    m_importFrom: Assets/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/adc840cd-c008-40ef-95fc-b65af2ed70ac/Android/bundle_atlas
+    m_exportTo: C:/Users/PROUSER01/Desktop/handpush/OutPutAssetBundle/AssetBundleTest/Android/bundle_atlas
+    m_variantName: 
+    m_assetTypeString: UnityEngine.AssetBundles.GraphTool.AssetBundleReference, Assembly-CSharp-Editor,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_assetDatabaseId: 
+    m_importFrom: Assets/Editor/AssetGraph-1.3-release/UnityEngine.AssetBundleGraph/Cache/AssetBundles/adc840cd-c008-40ef-95fc-b65af2ed70ac/Android/bundle_atlas.manifest
+    m_exportTo: C:/Users/PROUSER01/Desktop/handpush/OutPutAssetBundle/AssetBundleTest/Android/bundle_atlas.manifest
+    m_variantName: 
+    m_assetTypeString: UnityEngine.AssetBundles.GraphTool.AssetBundleReference, Assembly-CSharp-Editor,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   m_version: 2

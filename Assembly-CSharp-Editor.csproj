@@ -306,8 +306,6 @@
      <Compile Include="Assets\Editor\AssetGraph-1.3-release\UnityEngine.AssetBundleGraph\Generated\Editor\Flatten.cs" />
      <Compile Include="Assets\Editor\AssetGraph-1.3-release\UnityEngine.AssetBundleGraph\Integration\Editor\AssetBundles-Browser\GraphToolABDataSource.cs" />
      <Compile Include="Assets\Editor\AutoyaEditorTool.cs" />
-     <Compile Include="Assets\Scripts\yoha\y_script\Editor\ExportAssetBundle.cs" />
-     <Compile Include="Assets\Scripts\yoha\y_script\Editor\y_MenuItem.cs" />
      <None Include="Assets\Autoya\Editor\Libs\YamlDotNet\derivedfrom.txt" />
      <None Include="Assets\Editor\AssetGraph-1.3-release\UnityEngine.AssetBundleGraph\Editor\SettingTemplate\readme.txt" />
      <None Include="Assets\Editor\AssetGraph-1.3-release\UnityEngine.AssetBundleGraph\Editor\GUI\GraphicResources\LineDraw.shader" />

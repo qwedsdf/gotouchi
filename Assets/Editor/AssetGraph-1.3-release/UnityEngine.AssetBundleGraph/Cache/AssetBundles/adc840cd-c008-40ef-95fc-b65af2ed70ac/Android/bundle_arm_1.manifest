@@ -1,0 +1,24 @@
+ManifestFileVersion: 0
+CRC: 142620894
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: aa70e0b2c7f15d535c36dd505547bd7e
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 8ac1fc66a8436243706a1e070a5bbacf
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: c10c0be6d28fe4d539c4a39822fe301c, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundle/arm_1.asset
+Dependencies: []

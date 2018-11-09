@@ -1,3 +1,66 @@
 {
-    "data": []
+    "playerdata": {
+        "player_name": "tarou",
+        "use_char": {
+            "instanceID": 221698
+        }
+    },
+    "savedata": [
+        {
+            "area": "area0",
+            "prefecture_name": "長崎",
+            "prefecture_num": 0,
+            "char_name": "おむらんちゃん",
+            "char_num": 0
+        },
+        {
+            "area": "area0",
+            "prefecture_name": "大分",
+            "prefecture_num": 3,
+            "char_name": "べっぴょん",
+            "char_num": 1
+        },
+        {
+            "area": "area1",
+            "prefecture_name": "広島",
+            "prefecture_num": 11,
+            "char_name": "呉氏",
+            "char_num": 1
+        },
+        {
+            "area": "area1",
+            "prefecture_name": "広島",
+            "prefecture_num": 11,
+            "char_name": "やっさだるマン",
+            "char_num": 0
+        },
+        {
+            "area": "area1",
+            "prefecture_name": "鳥取",
+            "prefecture_num": 8,
+            "char_name": "むきぱんだ",
+            "char_num": 0
+        },
+        {
+            "area": "area4",
+            "prefecture_name": "高知",
+            "prefecture_num": 21,
+            "char_name": "トリピー",
+            "char_num": 1
+        },
+        {
+            "area": "area1",
+            "prefecture_name": "山口",
+            "prefecture_num": 12,
+            "char_name": "ちょるる",
+            "char_num": 0
+        },
+        {
+            "area": "area0",
+            "prefecture_name": "大分",
+            "prefecture_num": 3,
+            "char_name": "ミヤちゃん",
+            "char_num": 2
+        }
+    ]
 }

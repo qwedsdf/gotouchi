@@ -1,0 +1,7 @@
+ManifestFileVersion: 0
+CRC: 2464143241
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: bundle_atlas
+      Dependencies: {}

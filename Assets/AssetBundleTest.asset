@@ -11,29 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec4882d68a9346b3b5f8ecf1e38a534, type: 3}
   m_Name: AssetBundleTest
   m_EditorClassIdentifier: 
-  m_allNodes:
-  - m_name: Load from AssetBundle
-    m_id: cda2c403-6a61-4056-ae7a-cc62b16fccae
-    m_x: 48
-    m_y: 168
-    m_nodeInstance:
-      m_className: UnityEngine.AssetBundles.GraphTool.Loader, Assembly-CSharp-Editor,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_instanceData: B64|eyJtX2xvYWRQYXRoIjp7Im1fdmFsdWVzIjpbeyJ0YXJnZXRHcm91cCI6MCwidmFsdWUiOiJBc3NldEJ1bmRsZSJ9XX19
-    m_inputPoints: []
-    m_outputPoints:
-    - id: c6ba0b3a-4185-471b-bf66-b5953dcc4d7c
-      label: +
-      parentId: cda2c403-6a61-4056-ae7a-cc62b16fccae
-      isInput: 0
-      buttonRect:
-        serializedVersion: 2
-        x: 175
-        y: 32.5
-        width: 10
-        height: 23
+  m_allNodes: []
   m_allConnections: []
-  m_lastModified: 131858551551794287
+  m_lastModified: 131859642411102173
   m_version: 2
   m_graphDescription: 
   m_useAsAssetPostprocessor: 0
