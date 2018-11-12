@@ -147,7 +147,7 @@ public class pictures : MonoBehaviour
         }
 
 		////////////テスト用（キャラの名前の表示とかはどーするか聞く）/////////
-		int PrefectureNumber=0;
+		int PrefectureNumber = 1;
 		for(int i = 0; i < areanum; i++)
 		{
 			PrefectureNumber += Database.AreaLenth[i];

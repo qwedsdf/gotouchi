@@ -35,7 +35,6 @@ public class button : MonoBehaviour
     void Start()
     {
         //今押されているボタンを探すためにボタンを配列に格納してる
-        //まずはボタンを配列に格納する関数作って
         bt_prefecture = new GameObject[PrefectureVolum];
         DataBaseScript = GameObject.Find("Managers/Master").GetComponent<Database>();
         //if (y_game.winflg)
@@ -84,14 +83,13 @@ public class button : MonoBehaviour
             bt_prefecture[i].transform.Find("Text").GetComponent<Text>().text = Database.Prefecture_names[i + start_num];
 		}
 
-        for (int i = Database.AreaLenth[area_num]; i < PrefectureVolum; i++)
-        {
-            string name = BUTTON_PREFECTURE_COMMON_NAME + i;
-            bt_prefecture[i] = GameObject.Find(name);
-            bt_prefecture[i].SetActive(false);
-        }
-
-    }
+		for (int i = Database.AreaLenth[area_num]; i < PrefectureVolum; i++)
+		{
+			string name = BUTTON_PREFECTURE_COMMON_NAME + i;
+			bt_prefecture[i] = GameObject.Find(name);
+			bt_prefecture[i].SetActive(false);
+		}
+	}
 
 	/// <summary>
 	/// キャラクターのボタンを初期化
@@ -158,7 +156,8 @@ public class button : MonoBehaviour
 		//    buttonObj[i].GetComponent<Image>().sprite = PrefectureCharDate[i].img;
 		//}
 
-		//テスト
+		RefreshButtonChar();
+
 		//都道府県別のデータを参照し、ボタンにイメージを配置
 		for (int i = 0; i < BUTTON_MAX; i++)
 		{
@@ -208,7 +207,7 @@ public class button : MonoBehaviour
         SaveData.SetString(SaveKey.UserCharacter, GameData.UserData.CharacterTexName);
         //SaveData.SetClass(SaveKey.UserCharacter, GameData.UserData);
         SaveData.Save();
-		GameData.UserData.CharacterId = push_button_num+1;
+		GameData.UserData.CharacterId = push_button_num + 1;
 		GameData.UserData.CharacterTexName = string.Format("{0:00}", GameData.UserData.RegionId) + "_" + string.Format("{0:00}", GameData.UserData.PrefecturesId) + "_" + string.Format("{0:00}", GameData.UserData.CharacterId);
 
 
@@ -243,10 +242,5 @@ public class button : MonoBehaviour
         SceneFadeManager.Instance.Load(GameData.Scene_SelectArea, GameData.FadeSpeed);
         //SceneManager.LoadScene("select_area");
     }
-
-    public void LoadScean_Picture_Book()
-    {
-        SceneFadeManager.Instance.Load(GameData.Scene_PictureBook, GameData.FadeSpeed);
-        //SceneManager.LoadScene("picture_book");
-    }
+	//ここ消した
 }

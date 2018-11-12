@@ -90,10 +90,6 @@ public class Database : MonoBehaviour
 	const int VOLUME_KYUSH = 8;
 
 
-
-
-
-
 	List<string>[] PrefectureNmaesByArea = new List<string>[AREA_VOLUME];
 
 

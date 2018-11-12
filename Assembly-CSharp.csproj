@@ -122,6 +122,7 @@
      <Compile Include="Assets\Scripts\Button\button.cs" />
      <Compile Include="Assets\Scripts\Button\ButtonInfo.cs" />
      <Compile Include="Assets\Scripts\Button\Buttons.cs" />
+     <Compile Include="Assets\Scripts\Button\GoToPicture.cs" />
      <Compile Include="Assets\Scripts\Button\GoToScene.cs" />
      <Compile Include="Assets\Scripts\Button\LoadSelect.cs" />
      <Compile Include="Assets\Scripts\Button\TouchScreen.cs" />
